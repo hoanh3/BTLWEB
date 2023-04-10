@@ -1,13 +1,13 @@
-create database demo;
-use demo;
+CREATE DATABASE btl;
+USE btl;
 
 CREATE TABLE `role` (
-  `id` int PRIMARY KEY,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(10)
 );
 
 CREATE TABLE `user` (
-  `id` int PRIMARY KEY,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `first_name` nvarchar(50),
   `last_name` nvarchar(50),
   `email` nvarchar(150),
@@ -20,15 +20,14 @@ CREATE TABLE `user` (
 );
 
 CREATE TABLE `category` (
-  `id` int PRIMARY KEY,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `title` nvarchar(100)
 );
 
 CREATE TABLE `product` (
-  `id` int PRIMARY KEY,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `title` nvarchar(100),
   `rate` float,
-  `size` int,
   `price` int,
   `discount` int,
   `thumbnail` nvarchar(500),
@@ -38,14 +37,26 @@ CREATE TABLE `product` (
   `category_id` int
 );
 
+CREATE TABLE `product_size` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `size_id` int,
+  `size_availability` int,
+  `product_id` int
+);
+
+CREATE TABLE `size` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `size_name` nvarchar(4)
+);
+
 CREATE TABLE `galery` (
-  `id` int PRIMARY KEY,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `product_id` int,
   `thumbnail` nvarchar(500)
 );
 
 CREATE TABLE `review` (
-  `id` int PRIMARY KEY,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `rate` float,
   `content` nvarchar(500),
   `user_id` int,
@@ -53,7 +64,7 @@ CREATE TABLE `review` (
 );
 
 CREATE TABLE `feedback` (
-  `id` int PRIMARY KEY,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `first_name` nvarchar(50),
   `last_name` nvarchar(50),
   `email` nvarchar(150),
@@ -63,7 +74,7 @@ CREATE TABLE `feedback` (
 );
 
 CREATE TABLE `orders` (
-  `id` int PRIMARY KEY,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `first_name` nvarchar(50),
   `last_name` nvarchar(50),
   `email` nvarchar(150),
@@ -79,9 +90,10 @@ CREATE TABLE `orders` (
 );
 
 CREATE TABLE `order_details` (
-  `id` int PRIMARY KEY,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `order_id` int,
   `product_id` int,
+  `product_size_id` int,
   `price` int,
   `num` int
 );
@@ -99,3 +111,7 @@ ALTER TABLE `galery` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 ALTER TABLE `order_details` ADD FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 
 ALTER TABLE `order_details` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+
+ALTER TABLE `product_size` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+
+ALTER TABLE `product_size` ADD FOREIGN KEY (`size_id`) REFERENCES `size` (`id`);

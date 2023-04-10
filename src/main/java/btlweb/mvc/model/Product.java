@@ -6,7 +6,6 @@ public class Product {
 	private int id;
 	private String title;
 	private float rate;
-	private int size;
 	private int price;
 	private int discount;
 	private String thumbnail;
@@ -19,13 +18,12 @@ public class Product {
 		super();
 	}
 
-	public Product(int id, String title, float rate, int size, int price, int discount, String thumbnail,
+	public Product(int id, String title, float rate, int price, int discount, String thumbnail,
 			String description, Date createdAt, Date updatedAt, Category category) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.rate = rate;
-		this.size = size;
 		this.price = price;
 		this.discount = discount;
 		this.thumbnail = thumbnail;
@@ -57,14 +55,6 @@ public class Product {
 
 	public void setRate(float rate) {
 		this.rate = rate;
-	}
-
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
 	}
 
 	public int getPrice() {
@@ -125,7 +115,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", title=" + title + ", rate=" + rate + ", size=" + size + ", price=" + price
+		return "Product [id=" + id + ", title=" + title + ", rate=" + rate + ", price=" + price
 				+ ", discount=" + discount + ", thumbnail=" + thumbnail + ", description=" + description
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", category=" + category + "]";
 	}
