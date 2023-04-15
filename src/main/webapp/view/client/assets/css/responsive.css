@@ -86,6 +86,9 @@
 
 /* Mobile */
 @media (max-width: 739px) {
+    body {
+        contain: paint;
+    }
     /* Header */
     .header {
         height: 74px;

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:url value="/view/client/assets" var="url" />
         <!-- header begin -->
-        <jsp:include page="./header/mainHeader.jsp" flush="true" />
+        <jsp:include page="./header/mainHeader.jsp" flush="true"/>
         <!-- header end -->
 
         <div class="slider">
