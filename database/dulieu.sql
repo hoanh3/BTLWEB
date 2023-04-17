@@ -6,13 +6,25 @@ VALUES
 ('ADMIN'),
 ('USER');
 
+INSERT INTO `btl`.`size`
+(`size_name`)
+VALUES
+('M'),
+('L'),
+('XL');
+
 INSERT INTO `btl`.`category`
 (`title`)
 VALUES
-('T-SHIRT'),
+('T-SHIRTS'),
 ('SHIRTS'),
-('SWEATER'),
-('POLO');
+('SWEATERS'),
+('POLO'),
+('HOODIES'),
+('SHORTS'),
+('BAGS'),
+('JACKET'),
+('ACCESSORIES');
 
 INSERT INTO `btl`.`product`
 (`title`,
