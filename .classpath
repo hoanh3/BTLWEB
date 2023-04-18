@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="C:/Users/hoant/Documents/jarweb/jakarta.servlet.jsp.jstl-api-2.0.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/hoant/Documents/jarweb/mysql-connector.jar"/>
 	<classpathentry kind="lib" path="C:/Users/hoant/Documents/jarweb/mysql-connector-j-8.0.32.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hoant/Documents/jarweb/gson-2.2.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

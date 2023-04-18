@@ -1,0 +1,7 @@
+category api {
+	url: '/category/'
+	desc: lấy tất cả category có trong db
+	
+	url: '/category/{id}'
+	desc: lấy category có id = {id}
+}
