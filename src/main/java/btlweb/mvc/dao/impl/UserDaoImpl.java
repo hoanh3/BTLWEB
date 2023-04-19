@@ -30,10 +30,14 @@ public class UserDaoImpl implements UserDao{
 		      if (rs.next()) {
 		         user = new User();
 		         user.setId(rs.getInt("id"));
-		         user.setEmail(rs.getString("email"));
 		         user.setFirstName(rs.getString("firstName"));
 		         user.setLastName(rs.getString("lastName"));
+		         user.setEmail(rs.getString("email"));
 		         user.setPassword(rs.getString("password"));
+		         user.setPhoneNumber(rs.getString("phoneNumber"));
+		         user.setCity(rs.getString("city"));
+		         user.setDistrict(rs.getString("district"));
+		         user.setStreetAddress(rs.getString("streetAddress"));
 		      }
 		   } catch (SQLException e) {
 		      e.printStackTrace();
@@ -58,7 +62,12 @@ public class UserDaoImpl implements UserDao{
 		         user.setId(rs.getInt("id"));
 		         user.setFirstName(rs.getString("firstName"));
 		         user.setLastName(rs.getString("lastName"));
+		         user.setEmail(rs.getString("email"));
 		         user.setPassword(rs.getString("password"));
+		         user.setPhoneNumber(rs.getString("phoneNumber"));
+		         user.setCity(rs.getString("city"));
+		         user.setDistrict(rs.getString("district"));
+		         user.setStreetAddress(rs.getString("streetAddress"));
 		      }
 		   } catch (SQLException e) {
 		      e.printStackTrace();
@@ -147,6 +156,7 @@ public class UserDaoImpl implements UserDao{
 	            user.setLastName(rs.getString("lastName"));
 	            user.setEmail(rs.getString("email"));
 	            user.setPassword(rs.getString("password"));
+	            user.setPhoneNumber(rs.getString("phoneNumber"));
 	            user.setCity(rs.getString("city"));
 	            user.setDistrict(rs.getString("district"));
 	            user.setStreetAddress(rs.getString("streetAddress"));
@@ -176,4 +186,3 @@ public class UserDaoImpl implements UserDao{
 	    return count;
 	}
 }
-
