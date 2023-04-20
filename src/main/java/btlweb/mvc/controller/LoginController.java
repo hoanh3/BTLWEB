@@ -30,18 +30,19 @@ public class LoginController extends HttpServlet{
 		
 		try {
 			User user = _userService.findUserByEmail(username);
+			System.out.println(user);
 			if(user != null && BCrypt.checkpw(password, user.getPassword())) {
-//				HttpSession session = req.getSession();
-//				session.setAttribute("user", user);
+				HttpSession session = req.getSession();
+				session.setAttribute("user", user);
 
 				resp.sendRedirect(req.getContextPath() + "/home");
 			} else {
-				
+				System.out.println("dang nhap that bai");
 				RequestDispatcher dispatcher = req.getRequestDispatcher("/view/client/login.jsp");
 				dispatcher.forward(req, resp);
 			}
 		} catch (Exception e) {
-			System.out.println("loi login controller");
+			e.printStackTrace();
 		}
 	}
 }

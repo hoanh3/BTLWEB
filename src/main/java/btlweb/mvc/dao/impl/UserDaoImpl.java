@@ -23,21 +23,22 @@ public class UserDaoImpl implements UserDao{
 		User user = null;
 		   try {
 		      conn = MySQLConnect.getConnection();
-		      String sql = "SELECT * FROM user WHERE id = ?";
+		      String sql = "SELECT U.*, R.name FROM user as U, role as R where email = ? and U.role_id = R.id;";
 		      ps = conn.prepareStatement(sql);
 		      ps.setString(1, email);
 		      rs = ps.executeQuery();
 		      if (rs.next()) {
 		         user = new User();
 		         user.setId(rs.getInt("id"));
-		         user.setFirstName(rs.getString("firstName"));
-		         user.setLastName(rs.getString("lastName"));
+		         user.setFirstName(rs.getString("first_name"));
+		         user.setLastName(rs.getString("last_name"));
 		         user.setEmail(rs.getString("email"));
 		         user.setPassword(rs.getString("password"));
 		         user.setPhoneNumber(rs.getString("phoneNumber"));
 		         user.setCity(rs.getString("city"));
 		         user.setDistrict(rs.getString("district"));
-		         user.setStreetAddress(rs.getString("streetAddress"));
+		         user.setStreetAddress(rs.getString("street_address"));
+		         user.setRole(new Role(rs.getInt("role_id"), rs.getString("name")));
 		      }
 		   } catch (SQLException e) {
 		      e.printStackTrace();
@@ -53,21 +54,22 @@ public class UserDaoImpl implements UserDao{
 		   User user = null;
 		   try {
 		      conn = MySQLConnect.getConnection();
-		      String sql = "SELECT * FROM user WHERE id = ?";
+		      String sql = "SELECT U.*, R.name FROM user as U, role as R where id = ? and U.role_id = R.id;";
 		      ps = conn.prepareStatement(sql);
 		      ps.setInt(1, id);
 		      rs = ps.executeQuery();
 		      if (rs.next()) {
 		         user = new User();
 		         user.setId(rs.getInt("id"));
-		         user.setFirstName(rs.getString("firstName"));
-		         user.setLastName(rs.getString("lastName"));
+		         user.setFirstName(rs.getString("first_name"));
+		         user.setLastName(rs.getString("last_name"));
 		         user.setEmail(rs.getString("email"));
 		         user.setPassword(rs.getString("password"));
 		         user.setPhoneNumber(rs.getString("phoneNumber"));
 		         user.setCity(rs.getString("city"));
 		         user.setDistrict(rs.getString("district"));
-		         user.setStreetAddress(rs.getString("streetAddress"));
+		         user.setStreetAddress(rs.getString("street_address"));
+		         user.setRole(new Role(rs.getInt("role_id"), rs.getString("name")));
 		      }
 		   } catch (SQLException e) {
 		      e.printStackTrace();
@@ -81,7 +83,7 @@ public class UserDaoImpl implements UserDao{
 		int rows = 0;
 		try {
 		      conn = MySQLConnect.getConnection();
-		      String sql = "INSERT INTO user (firstName, lastName, email, password, phoneNumber, city, district, streetAddress, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		      String sql = "INSERT INTO user (first_name, last_name, email, password, phonenumber, city, district, street_address, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		      ps = conn.prepareStatement(sql);
 		      ps.setString(1, user.getFirstName());
 		      ps.setString(2, user.getLastName());
@@ -91,6 +93,7 @@ public class UserDaoImpl implements UserDao{
 		      ps.setString(6, user.getCity());
 		      ps.setString(7, user.getDistrict());
 		      ps.setString(8, user.getStreetAddress());
+		      ps.setInt(9, 2);
 		      rows = ps.executeUpdate();
 		   } catch (SQLException e) {
 		      e.printStackTrace();
@@ -119,7 +122,7 @@ public class UserDaoImpl implements UserDao{
 		int rows = 0;
 	    try {
 	        conn = MySQLConnect.getConnection();
-	        String sql = "UPDATE user SET firstName = ?, lastName = ?, email = ?, password = ?, phoneNumber = ?, city = ?, district = ?, streetAddress = ? WHERE id = ?";
+	        String sql = "UPDATE user SET first_name = ?, last_name = ?, email = ?, password = ?, phoneNumber = ?, city = ?, district = ?, street_address = ? WHERE id = ?";
 	        ps = conn.prepareStatement(sql);
 	        ps.setString(1, user.getFirstName());
 		    ps.setString(2, user.getLastName());
@@ -152,14 +155,14 @@ public class UserDaoImpl implements UserDao{
 	        while (rs.next()) {
 	            User user = new User();
 	            user.setId(rs.getInt("id"));
-	            user.setFirstName(rs.getString("firstName"));
-	            user.setLastName(rs.getString("lastName"));
+	            user.setFirstName(rs.getString("first_name"));
+	            user.setLastName(rs.getString("last_name"));
 	            user.setEmail(rs.getString("email"));
 	            user.setPassword(rs.getString("password"));
 	            user.setPhoneNumber(rs.getString("phoneNumber"));
 	            user.setCity(rs.getString("city"));
 	            user.setDistrict(rs.getString("district"));
-	            user.setStreetAddress(rs.getString("streetAddress"));
+	            user.setStreetAddress(rs.getString("street_address"));
 	            userList.add(user);
 	        }
 	    } catch (SQLException e) {
@@ -184,5 +187,11 @@ public class UserDaoImpl implements UserDao{
 	        e.printStackTrace();
 	    }
 	    return count;
+	}
+	
+	public static void main(String[] args) {
+		UserDao userDao = new UserDaoImpl();
+		int status = userDao.insertUser(new User(0, "test", "test", "test@gmail.com", "123456", "0123424134", "Hanoi", "Hadong", "Nguyentrai", new Role()));
+		System.out.println(status);
 	}
 }

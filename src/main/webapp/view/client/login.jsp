@@ -70,7 +70,7 @@
                             </form>
                 
                             <!-- Form register -->
-                            <form action="" method="POST" class="form-register" id="form-register">
+                            <form action="${pageContext.request.contextPath}/register" method="POST" class="form-register" id="form-register">
                                 <h3 class="heading">Đăng ký</h3>
                                 <p class="description">Welcome to Vergency</p>
                     
