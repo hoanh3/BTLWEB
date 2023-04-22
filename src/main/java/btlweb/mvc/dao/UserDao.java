@@ -6,6 +6,8 @@ import btlweb.mvc.model.User;
 
 public interface UserDao {
 	
+	List<User> getAll();
+	
 	int insertUser(User user); // return ve status. != 0: thanhcong, == 0: that bai
 	int update(User user); // 	return ve status. != 0: thanhcong, == 0: that bai
 	User findUserByEmail(String email);

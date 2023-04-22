@@ -5,6 +5,30 @@
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   
+  <!--API begin-->
+  <servlet>
+  	<servlet-name>Category API Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.api.CategoryApi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Category API Servlet</servlet-name>
+  	<url-pattern>/category/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>User API Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.api.UserApi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>User API Servlet</servlet-name>
+  	<url-pattern>/user/*</url-pattern>
+  </servlet-mapping>
+  <!--API end-->
+  
+  <!--Admin Begin-->
+  <!--Admin End-->
+  
+  <!--Client begin-->
   <servlet>
   	<servlet-name>Home Servlet</servlet-name>
   	<servlet-class>btlweb.mvc.controller.HomeController</servlet-class>
@@ -13,7 +37,6 @@
   	<servlet-name>Home Servlet</servlet-name>
   	<url-pattern>/home/*</url-pattern>
   </servlet-mapping>
-  
   <servlet>
   	<servlet-name>Login Servlet</servlet-name>
   	<servlet-class>btlweb.mvc.controller.LoginController</servlet-class>
@@ -30,4 +53,5 @@
   	<servlet-name>Register Servlet</servlet-name>
   	<url-pattern>/register</url-pattern>
   </servlet-mapping>
+  <!--Client End-->
 </web-app>

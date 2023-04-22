@@ -20,12 +20,16 @@ public class RegisterController extends HttpServlet{
 		String password = req.getParameter("password");
 		
 		try {
-			int status = _userService.insertUser(username, BCrypt.hashpw(password, BCrypt.gensalt(12)));
-			if(status != 0) {
-				System.out.println("thanh cong");
-				resp.sendRedirect(req.getContextPath() + "/login?success");
+			if(_userService.findUserByEmail(username) == null) {
+				int status = _userService.insertUser(username, BCrypt.hashpw(password, BCrypt.gensalt(12)));
+				if(status != 0) {
+					System.out.println("thanh cong");
+					resp.sendRedirect(req.getContextPath() + "/login?success");
+				} else {
+					System.out.println("that bai");
+					resp.sendRedirect(req.getContextPath() + "/login?error");
+				}				
 			} else {
-				System.out.println("that bai");
 				resp.sendRedirect(req.getContextPath() + "/login?error");
 			}
 		} catch (Exception e) {

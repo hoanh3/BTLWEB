@@ -16,6 +16,35 @@ public class UserDaoImpl implements UserDao{
 	private Connection conn = null;
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
+	
+
+	@Override
+	public List<User> getAll() {
+		List<User> userList = new ArrayList<>();
+	    try {
+	        conn = MySQLConnect.getConnection();
+	        String sql = "SELECT U.*, R.name FROM user as U, role as R WHERE U.role_id = R.id";
+	        ps = conn.prepareStatement(sql);
+	        rs = ps.executeQuery();
+	        while (rs.next()) {
+	            User user = new User();
+	            user.setId(rs.getInt("id"));
+	            user.setFirstName(rs.getString("first_name"));
+	            user.setLastName(rs.getString("last_name"));
+	            user.setEmail(rs.getString("email"));
+	            user.setPassword(rs.getString("password"));
+	            user.setPhoneNumber(rs.getString("phoneNumber"));
+	            user.setCity(rs.getString("city"));
+	            user.setDistrict(rs.getString("district"));
+	            user.setStreetAddress(rs.getString("street_address"));
+		        user.setRole(new Role(rs.getInt("role_id"), rs.getString("name")));
+	            userList.add(user);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return userList;
+	}
 	   
 	@Override
 	public User findUserByEmail(String email) {
@@ -54,7 +83,7 @@ public class UserDaoImpl implements UserDao{
 		   User user = null;
 		   try {
 		      conn = MySQLConnect.getConnection();
-		      String sql = "SELECT U.*, R.name FROM user as U, role as R where id = ? and U.role_id = R.id;";
+		      String sql = "SELECT U.*, R.name FROM user as U, role as R where U.id = ? and U.role_id = R.id;";
 		      ps = conn.prepareStatement(sql);
 		      ps.setInt(1, id);
 		      rs = ps.executeQuery();
@@ -147,7 +176,7 @@ public class UserDaoImpl implements UserDao{
 	        conn = MySQLConnect.getConnection();
 	        int pageSize = 8; // Số lượng user trong một trang
 	        int offset = (pageId - 1) * pageSize; // Vị trí bắt đầu lấy user
-	        String sql = "SELECT * FROM users LIMIT ? OFFSET ?";
+	        String sql = "SELECT U.*, R.name FROM user as U, role as R WHERE U.role_id = R.id LIMIT ? OFFSET ?";
 	        ps = conn.prepareStatement(sql);
 	        ps.setInt(1, pageSize);
 	        ps.setInt(2, offset);
@@ -163,6 +192,7 @@ public class UserDaoImpl implements UserDao{
 	            user.setCity(rs.getString("city"));
 	            user.setDistrict(rs.getString("district"));
 	            user.setStreetAddress(rs.getString("street_address"));
+		        user.setRole(new Role(rs.getInt("role_id"), rs.getString("name")));
 	            userList.add(user);
 	        }
 	    } catch (SQLException e) {
@@ -191,7 +221,8 @@ public class UserDaoImpl implements UserDao{
 	
 	public static void main(String[] args) {
 		UserDao userDao = new UserDaoImpl();
-		int status = userDao.insertUser(new User(0, "test", "test", "test@gmail.com", "123456", "0123424134", "Hanoi", "Hadong", "Nguyentrai", new Role()));
-		System.out.println(status);
+		System.out.println(userDao.delete(1));
 	}
+
+
 }

@@ -1,7 +1,7 @@
 category api {
-	url: '/category/'
-	desc: lấy tất cả category có trong db
-	
-	url: '/category/{id}'
-	desc: lấy category có id = {id}
+	GET		/category				:lấy danh sách các category có trong db
+	GET		/category/{id}			:lấy category theo id
+	POST 	/category				:gửi category lên server
+	PUT 	/category/{id}			:cập nhật category theo id
+	DELETE 	/category/{id}			:xóa category theo id
 }
