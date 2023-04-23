@@ -1,11 +1,11 @@
-package btlweb.mvc.dao.impl;
+package btlweb.mvc.service.impl;
 
 import java.util.List;
 
-import btlweb.mvc.dao.GaleryDao;
 import btlweb.mvc.model.Galery;
+import btlweb.mvc.service.GaleryService;
 
-public class GaleryDaoImpl implements GaleryDao{
+public class GaleryServiceImpl implements GaleryService{
 
 	@Override
 	public List<Galery> getGaleryByProductId(int productId) {

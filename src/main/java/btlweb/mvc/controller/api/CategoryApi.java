@@ -10,6 +10,7 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import btlweb.mvc.model.Category;
+import btlweb.mvc.model.User;
 import btlweb.mvc.service.CategoryService;
 import btlweb.mvc.service.impl.CategoryServiceImpl;
 import jakarta.servlet.ServletException;
@@ -19,15 +20,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class CategoryApi extends HttpServlet{
-	// du lieu test
-	public static List<Category> categories = new ArrayList<>();
-	
-	static {
-		categories.add(new Category(1, "shirts"));
-		categories.add(new Category(2, "t-shirts"));
-		categories.add(new Category(3, "polo"));
-		categories.add(new Category(4, "hoodies"));
-	}
 	
 	private CategoryService _categoryService = new CategoryServiceImpl();
 	private Gson _gson = new Gson();
@@ -49,8 +41,13 @@ public class CategoryApi extends HttpServlet{
 		String pathInfo = req.getPathInfo();
 		
 		if(pathInfo == null || pathInfo.equals("/")) {
-			List<Category> categories = CategoryApi.categories;
-//			List<Category> categories = _categoryService.getAll();
+			String pageId = req.getParameter("pageId");
+			if(pageId != null) {
+				List<Category> categories = _categoryService.getCategoryInPage(Integer.parseInt(pageId));
+				sendAsJson(resp, categories);
+				return ;
+			}
+			List<Category> categories = _categoryService.getAll();
 			sendAsJson(resp, categories);
 			return ;
 		}
@@ -62,8 +59,7 @@ public class CategoryApi extends HttpServlet{
 		}
 		
 		int categoryId = Integer.parseInt(args[1]);
-		Category category = CategoryApi.categories.get(categoryId - 1);
-//		Category category = _categoryService.getCategoryById(categoryId);
+		Category category = _categoryService.getCategoryById(categoryId);
 		if(category == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return ;
@@ -88,13 +84,12 @@ public class CategoryApi extends HttpServlet{
 			String payload = buffer.toString();
 			Category category = _gson.fromJson(payload, Category.class);
 			
-			CategoryApi.categories.add(category);
-//			int status = _categoryService.insertCategory(category);
-//			if(status == 0) {
-//				System.out.println("luu category khong thanh cong");
-//			} else {
+			int status = _categoryService.insertCategory(category);
+			if(status == 0) {
+				System.out.println("luu category khong thanh cong");
+			} else {
 				sendAsJson(resp, category);
-//			}
+			}
 		} else {
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
@@ -145,7 +140,7 @@ public class CategoryApi extends HttpServlet{
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 			System.out.println("cap nhat category khong thanh cong");
 		}
-		
+		return;
 	}
 	
 	@Override
@@ -166,19 +161,21 @@ public class CategoryApi extends HttpServlet{
 		
 		int catId = Integer.parseInt(splits[1]);
 		
+		Category category = _categoryService.getCategoryById(catId);
 		
-		if(CategoryApi.categories.get(catId - 1) == null) {
+		if(category == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
-		CategoryApi.categories.remove(catId - 1);
 		
-//		int status = _categoryService.deleteCategory(catId);
-//		if(status == 0) {
-//			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-//			System.out.println("xoa category khong thanh cong");
-//			return;
-//		}
+		int status = _categoryService.deleteCategory(catId);
+		if(status == 0) {
+			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+			System.out.println("xoa category khong thanh cong");
+			return;
+		} else {
+			sendAsJson(resp, category);
+		}
 		return;
 	}
 }

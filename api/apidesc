@@ -1,7 +1,23 @@
 category api {
 	GET		/category				:lấy danh sách các category có trong db
+	GET		/category?pageId=tt		:lấy danh sách các category có trong trang tt
 	GET		/category/{id}			:lấy category theo id
 	POST 	/category				:gửi category lên server
 	PUT 	/category/{id}			:cập nhật category theo id
 	DELETE 	/category/{id}			:xóa category theo id
+}
+
+user api {
+	GET 	/user					:lấy danh sách tất cả các user trong db
+	GET 	/user?pageId={id}		:lấy danh sách các user ở trang thứ {id}
+	GET 	/user/{id}				:lấy user có id = {id}
+	PUT		/user					:cập nhật user
+	DELETE	/user/{id}				:xóa user có id = {id}
+}
+
+product api {
+	GET 	/product					:lấy danh sách tất cả các product trong db
+	GET 	/product?pageId={id}		:lấy danh sách các product ở trang thứ {id}
+	GET 	/product/{id}				:lấy product có id = {id}
+	DELETE	/product/{id}				:xóa product có id = {id}
 }

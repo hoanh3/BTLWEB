@@ -1,6 +1,7 @@
 package btlweb.mvc.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Product {
 	private int id;
@@ -13,13 +14,14 @@ public class Product {
 	private Date createdAt;
 	private Date updatedAt;
 	private Category category;
+	private List<Galery> galeries;
 	
 	public Product() {
 		super();
 	}
 
-	public Product(int id, String title, float rate, int price, int discount, String thumbnail,
-			String description, Date createdAt, Date updatedAt, Category category) {
+	public Product(int id, String title, float rate, int price, int discount, String thumbnail, String description,
+			Date createdAt, Date updatedAt, Category category, List<Galery> galeries) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -31,6 +33,7 @@ public class Product {
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.category = category;
+		this.galeries = galeries;
 	}
 
 	public int getId() {
@@ -113,10 +116,18 @@ public class Product {
 		this.category = category;
 	}
 
+	public List<Galery> getGaleries() {
+		return galeries;
+	}
+
+	public void setGaleries(List<Galery> galeries) {
+		this.galeries = galeries;
+	}
+
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", title=" + title + ", rate=" + rate + ", price=" + price
-				+ ", discount=" + discount + ", thumbnail=" + thumbnail + ", description=" + description
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", category=" + category + "]";
+		return "Product [id=" + id + ", title=" + title + ", rate=" + rate + ", price=" + price + ", discount="
+				+ discount + ", thumbnail=" + thumbnail + ", description=" + description + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", category=" + category + ", galeries=" + galeries + "]";
 	}
 }

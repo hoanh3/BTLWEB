@@ -6,19 +6,19 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
-import btlweb.mvc.model.Category;
+import btlweb.mvc.model.Galery;
 import btlweb.mvc.model.Product;
 import btlweb.mvc.model.User;
-import btlweb.mvc.service.ProductService;
-import btlweb.mvc.service.impl.ProductServiceImpl;
+import btlweb.mvc.service.GaleryService;
+import btlweb.mvc.service.impl.GaleryServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class ProductApi extends HttpServlet{
+public class GaleryApi extends HttpServlet{
 	
-	private ProductService _productService = new ProductServiceImpl();
+	private GaleryService _galeryService = new GaleryServiceImpl();
 	private Gson _gson = new Gson();
 	
 	private void sendAsJson(HttpServletResponse response, Object object) throws IOException {
@@ -36,17 +36,14 @@ public class ProductApi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-
+		
 		if(pathInfo == null || pathInfo.equals("/")) {
 			String pageId = req.getParameter("pageId");
 			if(pageId != null) {
-				List<Product> products = _productService.getProductInPage(Integer.parseInt(pageId));
-				sendAsJson(resp, products);
+				List<Galery> galeries = _galeryService.getGaleryInPage(Integer.parseInt(pageId));
+				sendAsJson(resp, galeries);
 				return ;
 			}
-			List<Product> products = _productService.getAll();
-			sendAsJson(resp, products);
-			return ;
 		}
 		
 		String[] args = pathInfo.split("/");
@@ -55,13 +52,13 @@ public class ProductApi extends HttpServlet{
 			return ;
 		}
 		
-		int productId = Integer.parseInt(args[1]);
-		Product product = _productService.getProductById(productId);
-		if(product == null) {
+		int galeryId = Integer.parseInt(args[1]);
+		Galery galery = _galeryService.getGaleryById(galeryId);
+		if(galery == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return ;
 		}
-		sendAsJson(resp, product);
+		sendAsJson(resp, galery);
 		return ;
 	}
 	
@@ -81,22 +78,22 @@ public class ProductApi extends HttpServlet{
 			return;
 		}
 
-		int productId = Integer.parseInt(splits[1]);
+		int galeryId = Integer.parseInt(splits[1]);
 		
 		
-		Product product = _productService.getProductById(productId);
+		Galery galery = _galeryService.getGaleryById(galeryId);
 		
-		if(product == null) {
+		if(galery == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 		
-		int status = _productService.deleteProduct(productId);
+		int status = _galeryService.deleteGalery(galeryId);
 		if(status == 0) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		} else {
-			sendAsJson(resp, product);
+			sendAsJson(resp, galery);
 		}
 		return;
 	}

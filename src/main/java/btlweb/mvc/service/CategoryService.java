@@ -11,4 +11,8 @@ public interface CategoryService {
 	int insertCategory(Category category);
 	int updateCategory(Category category);
 	int deleteCategory(int id);
+	
+
+	int getNumOfCategory();
+	List<Category> getCategoryInPage(int pageId);
 }
