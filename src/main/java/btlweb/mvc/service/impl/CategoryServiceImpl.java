@@ -12,40 +12,28 @@ public class CategoryServiceImpl implements CategoryService{
 	
 	private CategoryDao _categoryDao = new CategoryDaoImpl();
 	
-	// du lieu test
-	public static List<Category> categories = new ArrayList<>();
-	
-	static {
-		categories.add(new Category(1, "shirts"));
-		categories.add(new Category(2, "t-shirts"));
-		categories.add(new Category(3, "polo"));
-		categories.add(new Category(4, "hoodies"));
-	}
-
 	@Override
 	public List<Category> getAll() {
 		// TODO Auto-generated method stub
-		return CategoryServiceImpl.categories;
+		return _categoryDao.getAll();
 	}
 
 	@Override
 	public Category getCategoryById(int id) {
 		// TODO Auto-generated method stub
-		return CategoryServiceImpl.categories.get(id - 1);
+		return _categoryDao.getCategoryById(id);
 	}
 
 	@Override
 	public int insertCategory(Category category) {
 		// TODO Auto-generated method stub
-		CategoryServiceImpl.categories.add(category);
-		return 1;
+		return _categoryDao.insertCategory(category);
 	}
 
 	@Override
 	public int deleteCategory(int id) {
 		// TODO Auto-generated method stub
-		CategoryServiceImpl.categories.remove(id - 1);
-		return 1;
+		return _categoryDao.deleteCategory(id);
 	}
 
 	@Override

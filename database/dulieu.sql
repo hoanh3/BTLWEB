@@ -136,3 +136,54 @@ VALUES
  SIZE: M / L / XL
 
  MATERIAL: PREMIUM COTTON.', '2023-04-15 18:00:00', '2023-04-15 18:00:00', 2);
+ 
+ 
+INSERT INTO `btl`.`galery`
+(`product_id`,
+`thumbnail`)
+VALUES
+(
+1,
+'galery1.jpg'),
+(
+1,
+'galery2.jpg'),
+(
+1,
+'galery3.jpg'),
+(
+1,
+'galery4.jpg'),
+(
+1,
+'galery5.jpg'),
+(
+2,
+'galery7.jpg'),
+(
+2,
+'galery8.jpg'),
+(
+2,
+'galery9.jpg'),
+(
+2,
+'galery10.jpg'),
+(
+2,
+'galery11.jpg'),
+(
+3,
+'galery12.jpg'),
+(
+3,
+'galery13.jpg'),
+(
+3,
+'galery14.jpg'),
+(
+3,
+'galery15.jpg'),
+(
+3,
+'galery16.jpg');

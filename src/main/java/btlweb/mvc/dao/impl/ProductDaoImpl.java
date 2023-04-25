@@ -10,11 +10,14 @@ import java.util.List;
 import java.sql.Date;
 
 import btlweb.mvc.dbconnect.MySQLConnect;
+import btlweb.mvc.dao.GaleryDao;
 import btlweb.mvc.dao.ProductDao;
 import btlweb.mvc.model.Product;
 import btlweb.mvc.model.Category;
 
 public class ProductDaoImpl implements ProductDao{
+	private GaleryDao _galeryDao = new GaleryDaoImpl();
+	
 	Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
@@ -40,6 +43,7 @@ public class ProductDaoImpl implements ProductDao{
 	            product.setCreatedAt(rs.getDate("create_at"));
 	            product.setUpdatedAt(rs.getDate("update_at"));
 	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
@@ -52,11 +56,10 @@ public class ProductDaoImpl implements ProductDao{
 	public List<Product> getTopSale() {
 		// TODO Auto-generated method stub
 		 List<Product> productList = new ArrayList<>();
-		String sql = "SELECT P.*, C.title " +
-                "FROM product AS P, category AS C " +
-				"WHERE P.category_id = C.id " +
-                "ORDER BY rate DESC " +
-                "LIMIT 10";
+		String sql = "SELECT P.*, C.title FROM product AS P, category AS C\r\n"
+				+ "WHERE P.category_id = C.id \r\n"
+				+ "ORDER BY ROUND((P.price - P.discount) / P.price * 100, 0) DESC\r\n"
+				+ "LIMIT 10";
    try {
        conn = MySQLConnect.getConnection();
        stmt = conn.prepareStatement(sql);
@@ -73,6 +76,7 @@ public class ProductDaoImpl implements ProductDao{
            product.setCreatedAt(rs.getDate("create_at"));
            product.setUpdatedAt(rs.getDate("update_at"));
            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+           product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
            productList.add(product);
        }
    } catch (SQLException e) {
@@ -105,6 +109,7 @@ public class ProductDaoImpl implements ProductDao{
 	            product.setCreatedAt(rs.getDate("create_at"));
 	            product.setUpdatedAt(rs.getDate("update_at"));
 	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
@@ -135,6 +140,7 @@ public class ProductDaoImpl implements ProductDao{
 	            product.setCreatedAt(rs.getDate("create_at"));
 	            product.setUpdatedAt(rs.getDate("update_at"));
 	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            products.add(product);
 	        }
 	    } catch (SQLException ex) {
@@ -167,6 +173,7 @@ public class ProductDaoImpl implements ProductDao{
 		            product.setCreatedAt(rs.getDate("create_at"));
 		            product.setUpdatedAt(rs.getDate("update_at"));
 		            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+		            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            
 	        }
 	    }
@@ -201,6 +208,7 @@ public class ProductDaoImpl implements ProductDao{
 	            product.setCreatedAt(rs.getDate("create_at"));
 	            product.setUpdatedAt(rs.getDate("update_at"));
 	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
@@ -252,6 +260,7 @@ public class ProductDaoImpl implements ProductDao{
 	            product.setCreatedAt(rs.getDate("create_at"));
 	            product.setUpdatedAt(rs.getDate("update_at"));
 	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
@@ -324,10 +333,10 @@ public class ProductDaoImpl implements ProductDao{
 	}
 	
 	public static void main(String[] args) {
-		ProductDaoImpl abc = new ProductDaoImpl();
-		List<Product> productList = abc.getAll();
+		ProductDao abc = new ProductDaoImpl();
+		List<Product> productList = abc.getTopSale();
 		for (Product i : productList) {
-		    System.out.println(abc);
+		    System.out.println(i);
 		}
 	}
 }
