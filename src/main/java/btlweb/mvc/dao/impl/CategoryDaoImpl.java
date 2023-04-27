@@ -66,15 +66,15 @@ public class CategoryDaoImpl implements CategoryDao{
 	public List<Category> getCategoryInPage(int pageId) {
 		// TODO Auto-generated method stub
 		List<Category> categoryList = new ArrayList<>();
-	    Connection conn = MySQLConnect.getConnection();
-	    int recordsPerPage = 8;
-	    int startRecord = (pageId - 1) * recordsPerPage;
+		String query = "SELECT * FROM category ORDER BY id ASC LIMIT ? OFFSET ?";
 
 	    try {
-	        String query = "SELECT * FROM category ORDER BY id ASC LIMIT ? OFFSET ?";
+		    Connection conn = MySQLConnect.getConnection();
+		    int recordsPerPage = 8;
+		    int startRecord = (pageId - 1) * recordsPerPage;
 	        PreparedStatement stmt = conn.prepareStatement(query);
-	        stmt.setInt(1, startRecord);
-	        stmt.setInt(2, recordsPerPage);
+	        stmt.setInt(1, recordsPerPage);
+	        stmt.setInt(2, startRecord);
 	        ResultSet rs = stmt.executeQuery();
 
 	        while (rs.next()) {
@@ -83,12 +83,9 @@ public class CategoryDaoImpl implements CategoryDao{
 	            category.setTitle(rs.getString("title"));
 	            categoryList.add(category);
 	        }
-
-	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-
 	    return categoryList;
 	}
 
@@ -166,4 +163,13 @@ public class CategoryDaoImpl implements CategoryDao{
 	    return result;
 	}
 
+	public static void main(String[] args) {
+		CategoryDao categoryDao = new CategoryDaoImpl();
+		System.out.println(categoryDao.getCategoryById(1));
+		List<Category> categories = categoryDao.getCategoryInPage(1);
+		System.out.println(categories.size());
+		for(Category category : categories) {
+			System.out.println(category);
+		}
+	}
 }
