@@ -16,8 +16,6 @@ import btlweb.mvc.model.Product;
 import btlweb.mvc.model.Category;
 
 public class ProductDaoImpl implements ProductDao{
-	private GaleryDao _galeryDao = new GaleryDaoImpl();
-	
 	Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
@@ -43,7 +41,6 @@ public class ProductDaoImpl implements ProductDao{
 	            product.setCreatedAt(rs.getDate("create_at"));
 	            product.setUpdatedAt(rs.getDate("update_at"));
 	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
-	            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
@@ -76,7 +73,6 @@ public class ProductDaoImpl implements ProductDao{
            product.setCreatedAt(rs.getDate("create_at"));
            product.setUpdatedAt(rs.getDate("update_at"));
            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
-           product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
            productList.add(product);
        }
    } catch (SQLException e) {
@@ -109,7 +105,6 @@ public class ProductDaoImpl implements ProductDao{
 	            product.setCreatedAt(rs.getDate("create_at"));
 	            product.setUpdatedAt(rs.getDate("update_at"));
 	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
-	            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
@@ -140,7 +135,6 @@ public class ProductDaoImpl implements ProductDao{
 	            product.setCreatedAt(rs.getDate("create_at"));
 	            product.setUpdatedAt(rs.getDate("update_at"));
 	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
-	            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            products.add(product);
 	        }
 	    } catch (SQLException ex) {
@@ -173,8 +167,6 @@ public class ProductDaoImpl implements ProductDao{
 		            product.setCreatedAt(rs.getDate("create_at"));
 		            product.setUpdatedAt(rs.getDate("update_at"));
 		            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
-		            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
-	            
 	        }
 	    }
 	     catch (SQLException e) {
@@ -208,7 +200,6 @@ public class ProductDaoImpl implements ProductDao{
 	            product.setCreatedAt(rs.getDate("create_at"));
 	            product.setUpdatedAt(rs.getDate("update_at"));
 	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
-	            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
@@ -260,7 +251,6 @@ public class ProductDaoImpl implements ProductDao{
 	            product.setCreatedAt(rs.getDate("create_at"));
 	            product.setUpdatedAt(rs.getDate("update_at"));
 	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
-	            product.setGaleries(_galeryDao.getGaleryByProductId(product.getId()));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {

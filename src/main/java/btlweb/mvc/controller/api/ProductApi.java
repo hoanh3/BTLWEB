@@ -37,25 +37,28 @@ public class ProductApi extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
 		String path = req.getContextPath() + "/view/client/assets/images/products/";
+		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 
 		if(pathInfo == null || pathInfo.equals("/")) {
 			String pageId = req.getParameter("pageId");
 			if(pageId != null) {
-				List<Product> products = _productService.getProductInPage(Integer.parseInt(pageId), path);
+				List<Product> products = _productService.getProductInPage(Integer.parseInt(pageId), path, galeryPath);
 				sendAsJson(resp, products);
 				return ;
 			}
 			String filter = req.getParameter("filter");
-			if(filter.equals("topsale")) {
-				List<Product> products = _productService.getTopSale(path);
-				sendAsJson(resp, products);
-				return ;
-			} else if(filter.equals("bestseller")) {
-				List<Product> products = _productService.getBestSeller(path);
-				sendAsJson(resp, products);
-				return ;
+			if(filter != null ) {
+				if(filter.equals("topsale")) {
+					List<Product> products = _productService.getTopSale(path, galeryPath);
+					sendAsJson(resp, products);
+					return ;
+				} else if(filter.equals("bestseller")) {
+					List<Product> products = _productService.getBestSeller(path, galeryPath);
+					sendAsJson(resp, products);
+					return ;
+				}				
 			}
-			List<Product> products = _productService.getAll(path);
+			List<Product> products = _productService.getAll(path, galeryPath);
 			sendAsJson(resp, products);
 			return ;
 		}
@@ -67,7 +70,7 @@ public class ProductApi extends HttpServlet{
 		}
 		
 		int productId = Integer.parseInt(args[1]);
-		Product product = _productService.getProductById(productId, path);
+		Product product = _productService.getProductById(productId, path, galeryPath);
 		if(product == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return ;
@@ -80,6 +83,7 @@ public class ProductApi extends HttpServlet{
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
 		String path = req.getContextPath() + "/view/client/assets/images/products/";
+		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 
 		if(pathInfo == null || pathInfo.equals("/")){
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
@@ -96,7 +100,7 @@ public class ProductApi extends HttpServlet{
 		int productId = Integer.parseInt(splits[1]);
 		
 		
-		Product product = _productService.getProductById(productId, path);
+		Product product = _productService.getProductById(productId, path, galeryPath);
 		
 		if(product == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);

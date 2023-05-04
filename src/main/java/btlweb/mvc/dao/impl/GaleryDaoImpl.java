@@ -56,8 +56,8 @@ public class GaleryDaoImpl implements GaleryDao{
 	        int pageSize = 8; 
 		    int offset = (pageId - 1) * pageSize;
 	        stmt = conn.prepareStatement("SELECT * FROM galery LIMIT ? OFFSET ?");
-	        stmt.setInt(1, offset);
-	        stmt.setInt(2, pageSize);
+	        stmt.setInt(1, pageSize);
+	        stmt.setInt(2, offset);
 	        rs = stmt.executeQuery();
 
 	        while (rs.next()) {
