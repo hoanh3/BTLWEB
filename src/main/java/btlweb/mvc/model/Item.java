@@ -5,16 +5,18 @@ public class Item {
 	private Product product;
 	private int num;
 	private int price;
+	private int size;
 	
 	public Item() {
 		super();
 	}
 
-	public Item(Product product, int num, int price) {
+	public Item(Product product, int num, int price, int size) {
 		super();
 		this.product = product;
 		this.num = num;
 		this.price = price;
+		this.size = size;
 	}
 
 	public Product getProduct() {
@@ -41,8 +43,12 @@ public class Item {
 		this.price = price;
 	}
 
-	@Override
-	public String toString() {
-		return "Item [product=" + product + ", num=" + num + ", price=" + price + "]";
+	public int getSize() {
+		return size;
 	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
 }

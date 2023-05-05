@@ -36,9 +36,10 @@ public class CartController extends HttpServlet{
 		}
 		String num = req.getParameter("num");
 		String pid = req.getParameter("pid");
+		int size = Integer.parseInt(req.getParameter("size"));
 		try {
 			Product product = _productService.getProductById(Integer.parseInt(pid), path, galeryPath);
-			Item item = new Item(product, Integer.parseInt(num), product.getDiscount());
+			Item item = new Item(product, Integer.parseInt(num), product.getDiscount(), size);
 			cart.addItem(item);
 		} catch (Exception e) {
 			num = "1";
