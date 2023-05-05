@@ -23,3 +23,9 @@ product api {
 	GET 	/product/{id}				:lấy product có id = {id}
 	DELETE	/product/{id}				:xóa product có id = {id}
 }
+
+cart api {
+	GET 	/cart?uid=					:lấy giỏ hàng của user có id = uid
+	POST 	/cart/pid?size=&num=&uid=	:thêm sản phẩm id = pid với số lượng num, kích thước size vào giỏ hàng của user có id = uid
+	DELETE	/cart/id					:xóa item trong giỏ hàng có id = id
+}

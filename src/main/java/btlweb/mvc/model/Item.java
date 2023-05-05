@@ -2,29 +2,50 @@ package btlweb.mvc.model;
 
 
 public class Item {
-	private Product product;
+	private int id;
+	private int userId;
+	private int productId;
+	private int size;
 	private int num;
 	private int price;
-	private int size;
 	
 	public Item() {
 		super();
 	}
 
-	public Item(Product product, int num, int price, int size) {
+	public Item(int id, int userId, int productId, int size, int num, int price) {
 		super();
-		this.product = product;
+		this.id = id;
+		this.userId = userId;
+		this.productId = productId;
+		this.size = size;
 		this.num = num;
 		this.price = price;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
 		this.size = size;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
 	}
 
 	public int getNum() {
@@ -43,17 +64,12 @@ public class Item {
 		this.price = price;
 	}
 
-	public int getSize() {
-		return size;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setSize(int size) {
-		this.size = size;
-	}
-
-	@Override
-	public String toString() {
-		return "Item [product=" + product + ", num=" + num + ", price=" + price + ", size=" + size + "]";
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	
 	

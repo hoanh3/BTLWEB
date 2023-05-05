@@ -98,6 +98,15 @@ CREATE TABLE `order_details` (
   `num` int
 );
 
+CREATE TABLE `cart_item` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int,
+  `product_id` int,
+  `size_id` int,
+  `num` int,
+  `price` int
+);
+
 ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
 
 ALTER TABLE `review` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
@@ -115,3 +124,5 @@ ALTER TABLE `order_details` ADD FOREIGN KEY (`product_id`) REFERENCES `product` 
 ALTER TABLE `product_size` ADD FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 ALTER TABLE `product_size` ADD FOREIGN KEY (`size_id`) REFERENCES `size` (`id`);
+
+ALTER TABLE `cart_item` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);

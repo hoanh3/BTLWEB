@@ -3,13 +3,15 @@ package btlweb.mvc.controller.api;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.CollationKey;
+import java.util.List;
 
 import com.google.gson.Gson;
 
-import btlweb.mvc.model.Cart;
 import btlweb.mvc.model.Item;
 import btlweb.mvc.model.Product;
+import btlweb.mvc.service.CartItemService;
 import btlweb.mvc.service.ProductService;
+import btlweb.mvc.service.impl.CartItemServiceImpl;
 import btlweb.mvc.service.impl.ProductServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -19,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 public class CartApi extends HttpServlet{
-	
+	private CartItemService _cartItemService = new CartItemServiceImpl();
 	private ProductService _productService = new ProductServiceImpl();
 	
 	private Gson _gson = new Gson();
@@ -41,26 +43,13 @@ public class CartApi extends HttpServlet{
 		String pathInfo = req.getPathInfo();
 		
 		if(pathInfo == null || pathInfo.equals("/")) {
-			String cartData = null;
-			Cookie[] cookies = req.getCookies();
-			if(cookies != null) {
-				for(Cookie cookie : cookies) {
-					if(cookie.getName().equals("cart")) {
-						cartData = cookie.getValue();
-						break;
-					}
-				}
+			String uid = req.getParameter("uid");
+			if(uid != null) {
+				int userId = Integer.parseInt(uid);
+				List<Item> items = _cartItemService.getCart(userId);
+				sendAsJson(resp, items);
+				return;				
 			}
-			Cart cart = null;
-			if(cartData == null) {
-				cart = new Cart();
-			} else {
-				cart = _gson.fromJson(cartData, Cart.class);				
-			}				
-			Cookie cookie = new Cookie("cart", _gson.toJson(cart));
-			resp.addCookie(cookie);
-			sendAsJson(resp, cart);
-			return;
 		} else {
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}
@@ -78,37 +67,22 @@ public class CartApi extends HttpServlet{
 			return;
 		}
 		try {
-			String pSize = req.getParameter("size");
+			String sid = req.getParameter("sid");
 			String pNum = req.getParameter("num");
+			String uid = req.getParameter("uid");
 			String[] splits = pathInfo.split("/");
 			
-			int size = Integer.parseInt(pSize);
+			int size = Integer.parseInt(sid);
 			int num = Integer.parseInt(pNum);
+			int userId = Integer.parseInt(uid);
 			int pid = Integer.parseInt(splits[1]);
 			
 			Product product = _productService.getProductById(pid, path, galeryPath);
 			
-			Item item = new Item(product, num, product.getPrice(), size);
+			Item item = new Item(0, userId, pid, size, num, product.getPrice());
 			
-			Cookie[] cookies = req.getCookies();
-			String cartData = null;
-			for(Cookie cookie : cookies) {
-				if(cookie.getName().equals("cart")) {
-					cartData = cookie.getValue();
-					break;
-				}
-			}
-			Cart cart = null;
-			if(cartData == null) {
-				cart = new Cart();
-			} else {
-				cart = _gson.fromJson(cartData, Cart.class);				
-			}
-			cart.addItem(item);
-			Cookie cookie = new Cookie("cart", _gson.toJson(cart));
-			resp.addCookie(cookie);
-			System.out.println(cart);
-			sendAsJson(resp, cart);
+			_cartItemService.addItem(item);
+			sendAsJson(resp, item);
 			return;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -130,25 +104,9 @@ public class CartApi extends HttpServlet{
 		try {
 			String[] splits = pathInfo.split("/");
 			
-			int pid = Integer.parseInt(splits[1]);
+			int id = Integer.parseInt(splits[1]);
+			_cartItemService.removeItem(id);
 			
-			Cookie[] cookies = req.getCookies();
-			String cartData = null;
-			for(Cookie cookie : cookies) {
-				if(cookie.getName().equals("cart")) {
-					cartData = cookie.getValue();
-					break;
-				}
-			}
-			Cart cart = null;
-			if(cartData == null) {
-				cart = new Cart();
-			} else {
-				cart = _gson.fromJson(cartData, Cart.class);				
-			}
-			cart.removeItem(pid);
-			Cookie cookie = new Cookie("cart", _gson.toJson(cart));
-			resp.addCookie(cookie);
 			return;
 		} catch (Exception e) {
 			// TODO: handle exception
