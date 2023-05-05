@@ -51,4 +51,10 @@ public class Item {
 		this.size = size;
 	}
 
+	@Override
+	public String toString() {
+		return "Item [product=" + product + ", num=" + num + ", price=" + price + ", size=" + size + "]";
+	}
+	
+	
 }

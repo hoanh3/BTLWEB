@@ -148,7 +148,7 @@ public class ProductDaoImpl implements ProductDao{
 	public Product getProductById(int productId) {
 		// TODO Auto-generated method stub
 		Product product = null;
-	    String query = "SELECT P.*, C.title FROM product AS P, category AS C WHERE id = ? AND P.category_id = C.id";
+	    String query = "SELECT P.*, C.title FROM product AS P, category AS C WHERE P.id = ? AND P.category_id = C.id";
 	    try {	
 	    	conn = MySQLConnect.getConnection();
 	    	stmt = conn.prepareStatement(query); 

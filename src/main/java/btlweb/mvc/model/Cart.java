@@ -76,4 +76,11 @@ public class Cart {
 	public int getCartSize() {
 		return items.size();
 	}
+
+	@Override
+	public String toString() {
+		return "Cart [items=" + items + "]";
+	}
+	
+	
 }
