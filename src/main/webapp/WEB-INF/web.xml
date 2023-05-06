@@ -83,5 +83,15 @@
   	<servlet-name>Register Servlet</servlet-name>
   	<url-pattern>/register</url-pattern>
   </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>Checkout Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.CheckoutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Checkout Servlet</servlet-name>
+  	<url-pattern>/checkout</url-pattern>
+  </servlet-mapping>
   <!--Client End-->
 </web-app>

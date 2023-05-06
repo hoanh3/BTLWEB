@@ -11,4 +11,6 @@ public interface CartItemDao {
 	void updateItem(Item item);
 	
 	int getTotalMoney(int userId);
+	
+	void checkOutComplete(int userId);
 }

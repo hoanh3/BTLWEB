@@ -38,6 +38,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao{
 			_connection.commit();
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("loi orderDetailDao");
 		}
 		return;

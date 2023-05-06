@@ -43,4 +43,10 @@ public class CartItemServiceImpl implements CartItemService{
 		return _cartItemDao.getTotalMoney(userId);
 	}
 
+	@Override
+	public void checkOutComplete(int userId) {
+		// TODO Auto-generated method stub
+		_cartItemDao.checkOutComplete(userId);
+	}
+
 }

@@ -17,15 +17,16 @@ public class OrderDaoImpl implements OrderDao{
 	private ResultSet _resultSet = null;
 
 	@Override
-	public void addOrder(Order order) {
+	public int addOrder(Order order) {
 		// TODO Auto-generated method stub
+		int oid = 0;
 		String query = "INSERT INTO `orders`\r\n"
 				+ "(`first_name`,`last_name`,`email`,`phonenumber`,`city`,`district`,`street_address`,`note`,`order_date`,`status`,`total_money`,`user_id`)\r\n"
 				+ "VALUES\r\n"
 				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query);
+			_pStatement = _connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			_pStatement.setString(1, order.getFirstName());
 			_pStatement.setString(2, order.getLastName());
 			_pStatement.setString(3, order.getEmail());
@@ -40,21 +41,6 @@ public class OrderDaoImpl implements OrderDao{
 			_pStatement.setInt(12, order.getUserId());
 			
 			_pStatement.execute();
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("loi orderDao");
-		}
-		return;
-	}
-
-	@Override
-	public int getLastOrderId() {
-		// TODO Auto-generated method stub
-		int oid = 0;
-		String query = "SELECT * FROM orders;";
-		try {
-			_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			
 			_resultSet = _pStatement.getGeneratedKeys();
 			while(_resultSet.next()) {
@@ -69,6 +55,6 @@ public class OrderDaoImpl implements OrderDao{
 
 	public static void main(String[] args) {
 		OrderDao orderDao = new OrderDaoImpl();
-		System.out.println(orderDao.getLastOrderId());
+		System.out.println(orderDao.addOrder(new Order(0, "test", "test", "test", "test", "test", "test", "test", "test", new Date(1200000), 0, 10, 2)));
 	}
 }

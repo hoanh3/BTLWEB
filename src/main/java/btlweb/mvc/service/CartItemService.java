@@ -11,4 +11,5 @@ public interface CartItemService {
 	void updateItem(Item item);
 	
 	int getTotalMoney(int userId);
+	void checkOutComplete(int userId);
 }

@@ -1,5 +1,6 @@
 package btlweb.mvc.controller.api;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.CollationKey;
@@ -90,6 +91,27 @@ public class CartApi extends HttpServlet{
 		}
 		
 		return;
+	}
+	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String pathInfo = req.getPathInfo();
+		
+		StringBuilder buffer = new StringBuilder();
+		BufferedReader reader = req.getReader();
+		
+		String line = "";
+		while((line = reader.readLine()) != null) {
+			buffer.append(line);
+		}
+		
+		String payload = buffer.toString();
+		Item item = _gson.fromJson(payload, Item.class);
+		
+		_cartItemService.updateItem(item);
+		
+		sendAsJson(resp, item);
 	}
 	
 	@Override

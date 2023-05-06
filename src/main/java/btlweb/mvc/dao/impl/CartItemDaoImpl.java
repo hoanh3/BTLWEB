@@ -129,4 +129,21 @@ public class CartItemDaoImpl implements CartItemDao{
 		return totalMoney;
 	}
 
+	@Override
+	public void checkOutComplete(int userId) {
+		String query = "DELETE FROM `cart_item`\r\n"
+				+ "WHERE `user_id` = ?;";
+		try {
+			_connection = MySQLConnect.getConnection();
+			_pStatement = _connection.prepareStatement(query);
+			_pStatement.setInt(1, userId);
+			
+			_pStatement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("loi CartItemDao");
+		}
+		return;
+	}
+
 }
