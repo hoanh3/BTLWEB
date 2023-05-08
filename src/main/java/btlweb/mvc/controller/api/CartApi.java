@@ -60,15 +60,16 @@ public class CartApi extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String path = req.getContextPath() + "/view/client/assets/images/products/";
-		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
+		String serverUrl = req.getLocalAddr() + ":" + req.getLocalPort();
+		String path = serverUrl + "/" + req.getContextPath() + "/view/client/assets/images/products/";
+		String galeryPath = serverUrl + "/" + req.getContextPath() + "/view/client/assets/images/galery/";
 		
 		if(pathInfo == null || pathInfo.equals("/")) {
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
 		try {
-			String sid = req.getParameter("sid");
+			String sid = req.getParameter("size");
 			String pNum = req.getParameter("num");
 			String uid = req.getParameter("uid");
 			String[] splits = pathInfo.split("/");
@@ -79,6 +80,8 @@ public class CartApi extends HttpServlet{
 			int pid = Integer.parseInt(splits[1]);
 			
 			Product product = _productService.getProductById(pid, path, galeryPath);
+			
+			System.out.println(product);
 			
 			Item item = new Item(0, userId, pid, size, num, product.getPrice());
 			

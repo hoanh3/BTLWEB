@@ -36,10 +36,17 @@ public class ProductApi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String path = req.getContextPath() + "/view/client/assets/images/products/";
-		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
+		String serverUrl = req.getLocalAddr() + ":" + req.getLocalPort();
+		String path = serverUrl + req.getContextPath() + "/view/client/assets/images/products/";
+		String galeryPath = serverUrl + req.getContextPath() + "/view/client/assets/images/galery/";
 
 		if(pathInfo == null || pathInfo.equals("/")) {
+			String search = req.getParameter("search");
+			if(search != null) {
+				List<Product> products = _productService.searchProductByName(search, path, galeryPath);
+				sendAsJson(resp, products);
+				return;
+			}
 			String pageId = req.getParameter("pageId");
 			if(pageId != null) {
 				List<Product> products = _productService.getProductInPage(Integer.parseInt(pageId), path, galeryPath);
@@ -54,6 +61,9 @@ public class ProductApi extends HttpServlet{
 					return ;
 				} else if(filter.equals("bestseller")) {
 					List<Product> products = _productService.getBestSeller(path, galeryPath);
+					if(products.size() < 10) {
+						products = _productService.getTopSale(path, galeryPath);
+					}
 					sendAsJson(resp, products);
 					return ;
 				}				
@@ -82,8 +92,9 @@ public class ProductApi extends HttpServlet{
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String path = req.getContextPath() + "/view/client/assets/images/products/";
-		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
+		String serverUrl = req.getLocalAddr() + ":" + req.getLocalPort();
+		String path = serverUrl + req.getContextPath() + "/view/client/assets/images/products/";
+		String galeryPath = serverUrl + req.getContextPath() + "/view/client/assets/images/galery/";
 
 		if(pathInfo == null || pathInfo.equals("/")){
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);

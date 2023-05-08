@@ -84,11 +84,12 @@ public class ProductDaoImpl implements ProductDao{
 	public List<Product> getBestSeller() {
 		// TODO Auto-generated method stub
 		List<Product> productList = new ArrayList<>();
-	    String sql = "SELECT P.*, C.title " +
-	                 "FROM product AS P, category AS C " +
-	                 "WHERE P.category_id = C.id " +
-	                 "ORDER BY sales DESC " +
-	                 "LIMIT 10";
+	    String sql = "SELECT P.*, SUM(OD.num), C.title\r\n"
+	    		+ "FROM `product` as P, `order_details` as OD, `category` as C\r\n"
+	    		+ "WHERE p.id = OD.product_id AND C.id = P.category_id\r\n"
+	    		+ "GROUP BY p.id\r\n"
+	    		+ "ORDER BY SUM(OD.num) DESC\r\n"
+	    		+ "LIMIT 10;";
 	    try {
 	        conn = MySQLConnect.getConnection();
 	        stmt = conn.prepareStatement(sql);
@@ -324,7 +325,7 @@ public class ProductDaoImpl implements ProductDao{
 	
 	public static void main(String[] args) {
 		ProductDao abc = new ProductDaoImpl();
-		List<Product> productList = abc.getTopSale();
+		List<Product> productList = abc.getBestSeller();
 		for (Product i : productList) {
 		    System.out.println(i);
 		}

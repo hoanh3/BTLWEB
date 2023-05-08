@@ -18,6 +18,7 @@ user api {
 product api {
 	GET 	/product					:lấy danh sách tất cả các product trong db
 	GET 	/product?pageId={id}		:lấy danh sách các product ở trang thứ {id}
+	GET 	/product?search=			:lấy danh sách các product có tên chứa từ khóa
 	GET 	/product?filter=topsale		:lấy danh sách các product sắp xếp theo thứ tự giảm giá nhiều nhất
 	GET 	/product?filter=bestseller	:lấy danh sách các product sắp xếp theo thứ tự bán ra nhiều nhất
 	GET 	/product/{id}				:lấy product có id = {id}
