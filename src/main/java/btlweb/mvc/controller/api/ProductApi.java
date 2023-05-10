@@ -36,9 +36,8 @@ public class ProductApi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String serverUrl = req.getLocalAddr() + ":" + req.getLocalPort();
-		String path = serverUrl + req.getContextPath() + "/view/client/assets/images/products/";
-		String galeryPath = serverUrl + req.getContextPath() + "/view/client/assets/images/galery/";
+		String path = req.getContextPath() + "/view/client/assets/images/products/";
+		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 
 		if(pathInfo == null || pathInfo.equals("/")) {
 			String search = req.getParameter("search");
@@ -92,9 +91,8 @@ public class ProductApi extends HttpServlet{
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String serverUrl = req.getLocalAddr() + ":" + req.getLocalPort();
-		String path = serverUrl + req.getContextPath() + "/view/client/assets/images/products/";
-		String galeryPath = serverUrl + req.getContextPath() + "/view/client/assets/images/galery/";
+		String path = req.getContextPath() + "/view/client/assets/images/products/";
+		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 
 		if(pathInfo == null || pathInfo.equals("/")){
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);

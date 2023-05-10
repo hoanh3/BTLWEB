@@ -12,7 +12,6 @@ public class HomeController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		System.out.println(req.getLocalAddr() + req.getLocalPort());
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/client/index.jsp");
 		dispatcher.forward(req, resp);
