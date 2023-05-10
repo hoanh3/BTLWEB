@@ -11,6 +11,7 @@ import btlweb.mvc.dao.CartItemDao;
 import btlweb.mvc.dbconnect.MySQLConnect;
 import btlweb.mvc.model.Category;
 import btlweb.mvc.model.Item;
+import btlweb.mvc.model.Product;
 
 public class CartItemDaoImpl implements CartItemDao{
 	private Connection _connection = null;
@@ -38,7 +39,7 @@ public class CartItemDaoImpl implements CartItemDao{
 	        	int num = _resultSet.getInt(5);
 	        	int price = _resultSet.getInt(6);
 	        	
-	        	items.add(new Item(id, userId, productId, size, num, price));
+	        	items.add(new Item(id, userId, new Product(productId), size, num, price));
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -56,7 +57,7 @@ public class CartItemDaoImpl implements CartItemDao{
 			_connection = MySQLConnect.getConnection();
 			_pStatement = _connection.prepareStatement(query);
 			_pStatement.setInt(1, item.getUserId());
-			_pStatement.setInt(2, item.getProductId());
+			_pStatement.setInt(2, item.getProduct().getId());
 			_pStatement.setInt(3, item.getSize());
 			_pStatement.setInt(4, item.getNum());
 			_pStatement.setInt(5, item.getPrice());

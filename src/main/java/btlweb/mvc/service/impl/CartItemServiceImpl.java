@@ -6,14 +6,20 @@ import btlweb.mvc.dao.CartItemDao;
 import btlweb.mvc.dao.impl.CartItemDaoImpl;
 import btlweb.mvc.model.Item;
 import btlweb.mvc.service.CartItemService;
+import btlweb.mvc.service.ProductService;
 
 public class CartItemServiceImpl implements CartItemService{
 	private CartItemDao _cartItemDao = new CartItemDaoImpl();
+	private ProductService _productService = new ProductServiceImpl();
 
 	@Override
-	public List<Item> getCart(int userId) {
+	public List<Item> getCart(int userId, String path, String pathGalery) {
 		// TODO Auto-generated method stub
-		return _cartItemDao.getCart(userId);
+		List<Item> items = _cartItemDao.getCart(userId);
+		for(Item item : items) {
+			item.setProduct(_productService.getProductById(item.getProduct().getId(), path, pathGalery));
+		}
+		return items;
 	}
 
 	@Override

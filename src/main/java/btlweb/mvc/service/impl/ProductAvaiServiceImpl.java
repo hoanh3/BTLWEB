@@ -14,7 +14,7 @@ public class ProductAvaiServiceImpl implements ProductAvaiService{
 	public void updateProductAvailiability(List<Item> items) {
 		// TODO Auto-generated method stub
 		for(Item item : items) {
-			item.setNum(_proProductSizeAvaliabitityDao.getSizeAvaiability(item.getProductId(), item.getSize()) - item.getNum());
+			item.setNum(_proProductSizeAvaliabitityDao.getSizeAvaiability(item.getProduct().getId(), item.getSize()) - item.getNum());
 		}
 		_proProductSizeAvaliabitityDao.updateProductAvailiability(items);
 		return;

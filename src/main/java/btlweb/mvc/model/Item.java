@@ -4,7 +4,7 @@ package btlweb.mvc.model;
 public class Item {
 	private int id;
 	private int userId;
-	private int productId;
+	private Product product;
 	private int size;
 	private int num;
 	private int price;
@@ -13,11 +13,11 @@ public class Item {
 		super();
 	}
 
-	public Item(int id, int userId, int productId, int size, int num, int price) {
+	public Item(int id, int userId, Product product, int size, int num, int price) {
 		super();
 		this.id = id;
 		this.userId = userId;
-		this.productId = productId;
+		this.product = product;
 		this.size = size;
 		this.num = num;
 		this.price = price;
@@ -32,12 +32,12 @@ public class Item {
 		this.id = id;
 	}
 
-	public int getProductId() {
-		return productId;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public int getSize() {

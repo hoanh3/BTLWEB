@@ -28,7 +28,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao{
 			_connection.setAutoCommit(false);
 			for(Item item : items) {
 				_pStatement.setInt(1, oid);
-				_pStatement.setInt(2, item.getProductId());
+				_pStatement.setInt(2, item.getProduct().getId());
 				_pStatement.setInt(3, item.getSize());
 				_pStatement.setInt(4, item.getPrice());
 				_pStatement.setInt(5, item.getNum());

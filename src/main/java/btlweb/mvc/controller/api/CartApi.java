@@ -42,12 +42,14 @@ public class CartApi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
+		String path = req.getContextPath() + "/view/client/assets/images/products/";
+		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 		
 		if(pathInfo == null || pathInfo.equals("/")) {
 			String uid = req.getParameter("uid");
 			if(uid != null) {
 				int userId = Integer.parseInt(uid);
-				List<Item> items = _cartItemService.getCart(userId);
+				List<Item> items = _cartItemService.getCart(userId, path, galeryPath);
 				sendAsJson(resp, items);
 				return;				
 			}
@@ -82,7 +84,7 @@ public class CartApi extends HttpServlet{
 			
 			System.out.println(product);
 			
-			Item item = new Item(0, userId, pid, size, num, product.getPrice());
+			Item item = new Item(pid, userId, product, size, num, pid);
 			
 			_cartItemService.addItem(item);
 			sendAsJson(resp, item);

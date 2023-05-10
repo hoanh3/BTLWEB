@@ -20,6 +20,13 @@ public class Product {
 		super();
 	}
 
+	
+		
+	public Product(int id) {
+		super();
+		this.id = id;
+	}
+
 	public Product(int id, String title, float rate, int price, int discount, String thumbnail, String description,
 			Date createdAt, Date updatedAt, Category category, List<Galery> galeries) {
 		super();

@@ -30,7 +30,7 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 			_connection.setAutoCommit(false);
 			for(Item item : items) {
 				_pStatement.setInt(1, item.getNum());
-				_pStatement.setInt(2, item.getProductId());
+				_pStatement.setInt(2, item.getProduct().getId());
 				_pStatement.setInt(3, item.getSize());
 				_pStatement.addBatch();
 			}
