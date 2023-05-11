@@ -40,6 +40,12 @@ public class ProductApi extends HttpServlet{
 		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 
 		if(pathInfo == null || pathInfo.equals("/")) {
+			String cateId = req.getParameter("cart-id");
+			if(cateId != null) {
+				List<Product> products = _productService.getProductByCatId(cateId, path, galeryPath);
+				sendAsJson(resp, products);
+				return;
+			}
 			String search = req.getParameter("search");
 			if(search != null) {
 				List<Product> products = _productService.searchProductByName(search, path, galeryPath);
