@@ -23,9 +23,8 @@ public class CartItemDaoImpl implements CartItemDao{
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		List<Item> items = new ArrayList<>();
-		String query = "SELECT `user_id`, `product_id`, count(`num`), `size_id`, `price` * count(`num`) FROM `cart_item`\r\n"
-				+ "where `user_id` = ?\r\n"
-				+ "group by `product_id`, `size_id`, `price`;";
+		String query = "SELECT *  FROM `cart_item`"
+				+ "where `user_id` = ?;";
 
 	    try {
 	    	_connection = MySQLConnect.getConnection();
@@ -34,13 +33,14 @@ public class CartItemDaoImpl implements CartItemDao{
 			_resultSet = _pStatement.executeQuery();
 
 	        while (_resultSet.next()) {
-	        	int nuserId = _resultSet.getInt(1);
-	        	int productId = _resultSet.getInt(2);
+	        	int id = _resultSet.getInt(1);
+	        	int nuserId = _resultSet.getInt(2);
+	        	int productId = _resultSet.getInt(3);
 	        	int size = _resultSet.getInt(4);
-	        	int num = _resultSet.getInt(3);
-	        	int price = _resultSet.getInt(5);
+	        	int num = _resultSet.getInt(5);
+	        	int price = _resultSet.getInt(6);
 	        	
-	        	items.add(new Item(0, userId, new Product(productId), size, num, price));
+	        	items.add(new Item(id, userId, new Product(productId), size, num, price));
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -91,20 +91,23 @@ public class CartItemDaoImpl implements CartItemDao{
 	@Override
 	public void updateItem(Item item) {
 		// TODO Auto-generated method stub
-		String query = "UPDATE `cart_item`"
-				+ "SET"
-				+ "`num` = ?,"
-				+ "WHERE `id` = ?;";
+		String query = "UPDATE `btl`.`cart_item`\r\n"
+				+ "SET\r\n"
+				+ "`num` = ?\r\n"
+				+ "WHERE `user_id` = ? AND  `product_id` = ? AND `size_id` = ?;\r\n";
 		try {
 			_connection = MySQLConnect.getConnection();
 			_pStatement = _connection.prepareStatement(query);
 			_pStatement.setInt(1, item.getNum());
-			_pStatement.setInt(2, item.getId());
+			_pStatement.setInt(2, item.getUserId());
+			_pStatement.setInt(3, item.getProduct().getId());
+			_pStatement.setInt(4, item.getSize());
 			
 			_pStatement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("loi CartItemDao");
+			e.printStackTrace();
+			System.out.println("loi CartItemDao update");
 		}
 		return;
 	}
@@ -150,9 +153,35 @@ public class CartItemDaoImpl implements CartItemDao{
 
 	public static void main(String[] args) {
 		CartItemDao cartItemDao = new CartItemDaoImpl();
-		List<Item> items = cartItemDao.getCart(2);
-		for(Item item : items) {
-			System.out.println(item);
-		}
+		cartItemDao.updateItem(new Item(0, 2, new Product(2), 1, 1, 59000));
+	}
+
+	@Override
+	public Item getItem(int userId, int productId) {
+		Item item = null;
+		String query = "SELECT *  FROM `cart_item`"
+				+ "where `user_id` = ? and `product_id` = ?;";
+
+	    try {
+	    	_connection = MySQLConnect.getConnection();
+			_pStatement = _connection.prepareStatement(query);
+			_pStatement.setInt(1, userId);
+			_pStatement.setInt(2, productId);
+			_resultSet = _pStatement.executeQuery();
+
+	        while (_resultSet.next()) {
+	        	int id = _resultSet.getInt(1);
+	        	int nuserId = _resultSet.getInt(2);
+	        	int nproductId = _resultSet.getInt(3);
+	        	int size = _resultSet.getInt(4);
+	        	int num = _resultSet.getInt(5);
+	        	int price = _resultSet.getInt(6);
+	        	
+	        	item = new Item(0, userId, new Product(productId), size, num, price);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return item;
 	}
 }

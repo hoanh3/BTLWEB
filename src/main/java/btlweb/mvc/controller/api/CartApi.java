@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 
 import btlweb.mvc.model.Item;
 import btlweb.mvc.model.Product;
+import btlweb.mvc.model.dto.ItemDto;
 import btlweb.mvc.service.CartItemService;
 import btlweb.mvc.service.ProductService;
 import btlweb.mvc.service.impl.CartItemServiceImpl;
@@ -65,26 +66,22 @@ public class CartApi extends HttpServlet{
 		String path = req.getContextPath() + "/view/client/assets/images/products/";
 		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 		
-		if(pathInfo == null || pathInfo.equals("/")) {
-			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
-			return;
-		}
 		try {
-			String sid = req.getParameter("size");
-			String pNum = req.getParameter("num");
-			String uid = req.getParameter("uid");
-			String[] splits = pathInfo.split("/");
+
 			
-			int size = Integer.parseInt(sid);
-			int num = Integer.parseInt(pNum);
-			int userId = Integer.parseInt(uid);
-			int pid = Integer.parseInt(splits[1]);
+			StringBuilder buffer = new StringBuilder();
+			BufferedReader reader = req.getReader();
+			String line;
+			while((line = reader.readLine()) != null) {
+				buffer.append(line);
+			}
+			String payload = buffer.toString();
 			
-			Product product = _productService.getProductById(pid, path, galeryPath);
+			ItemDto itemDto = _gson.fromJson(payload, ItemDto.class);
+		
+			Product product = _productService.getProductById(itemDto.getPid(), path, galeryPath);
 			
-			System.out.println(product);
-			
-			Item item = new Item(pid, userId, product, size, num, product.getDiscount());
+			Item item = new Item(0, itemDto.getUid(), product, itemDto.getSize(), itemDto.getNum(), product.getDiscount());
 			
 			_cartItemService.addItem(item);
 			sendAsJson(resp, item);
@@ -101,21 +98,33 @@ public class CartApi extends HttpServlet{
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String pathInfo = req.getPathInfo();
+		String path = req.getContextPath() + "/view/client/assets/images/products/";
+		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 		
-		StringBuilder buffer = new StringBuilder();
-		BufferedReader reader = req.getReader();
-		
-		String line = "";
-		while((line = reader.readLine()) != null) {
-			buffer.append(line);
+		try {
+
+			StringBuilder buffer = new StringBuilder();
+			BufferedReader reader = req.getReader();
+			
+			String line = "";
+			while((line = reader.readLine()) != null) {
+				buffer.append(line);
+			}
+			
+			String payload = buffer.toString();
+			ItemDto itemDto = _gson.fromJson(payload, ItemDto.class);
+			
+			Product product = _productService.getProductById(itemDto.getPid(), path, galeryPath);
+			
+			Item item = new Item(0, itemDto.getUid(), product, itemDto.getSize(), itemDto.getNum(), product.getDiscount());
+			_cartItemService.updateItem(item);
+			
+			sendAsJson(resp, item);
+		} catch (Exception e) {
+			// TODO: handle exception
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}
-		
-		String payload = buffer.toString();
-		Item item = _gson.fromJson(payload, Item.class);
-		
-		_cartItemService.updateItem(item);
-		
-		sendAsJson(resp, item);
+		return;
 	}
 	
 	@Override

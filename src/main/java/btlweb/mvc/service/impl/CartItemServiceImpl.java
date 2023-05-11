@@ -5,6 +5,7 @@ import java.util.List;
 import btlweb.mvc.dao.CartItemDao;
 import btlweb.mvc.dao.impl.CartItemDaoImpl;
 import btlweb.mvc.model.Item;
+import btlweb.mvc.model.Product;
 import btlweb.mvc.service.CartItemService;
 import btlweb.mvc.service.ProductService;
 
@@ -25,7 +26,14 @@ public class CartItemServiceImpl implements CartItemService{
 	@Override
 	public void addItem(Item item) {
 		// TODO Auto-generated method stub
-		_cartItemDao.addItem(item);
+		Item itemInDB = _cartItemDao.getItem(item.getUserId(), item.getProduct().getId());
+		if(itemInDB == null) {
+			_cartItemDao.addItem(item);
+		} else {
+			int nNum = item.getNum() + itemInDB.getNum();
+			item.setNum(nNum);
+			_cartItemDao.updateItem(item);
+		}
 		return;
 	}
 
@@ -56,10 +64,9 @@ public class CartItemServiceImpl implements CartItemService{
 	}
 
 	public static void main(String[] args) {
+		ProductService _productService = new ProductServiceImpl();
 		CartItemService cartItemService = new CartItemServiceImpl();
-		List<Item> items = cartItemService.getCart(2, "", "");
-		for(Item item : items) {
-			System.out.println(item);
-		}
+		
+		cartItemService.addItem(new Item(0, 2, _productService.getProductById(1, "", ""), 1, 1, 59000));
 	}
 }
