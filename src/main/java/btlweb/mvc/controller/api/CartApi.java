@@ -84,7 +84,7 @@ public class CartApi extends HttpServlet{
 			
 			System.out.println(product);
 			
-			Item item = new Item(pid, userId, product, size, num, pid);
+			Item item = new Item(pid, userId, product, size, num, product.getDiscount());
 			
 			_cartItemService.addItem(item);
 			sendAsJson(resp, item);

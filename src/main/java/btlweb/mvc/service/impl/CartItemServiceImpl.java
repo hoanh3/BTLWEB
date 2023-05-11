@@ -55,4 +55,11 @@ public class CartItemServiceImpl implements CartItemService{
 		_cartItemDao.checkOutComplete(userId);
 	}
 
+	public static void main(String[] args) {
+		CartItemService cartItemService = new CartItemServiceImpl();
+		List<Item> items = cartItemService.getCart(2, "", "");
+		for(Item item : items) {
+			System.out.println(item);
+		}
+	}
 }

@@ -71,6 +71,12 @@ public class Item {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", userId=" + userId + ", product=" + product + ", size=" + size + ", num=" + num
+				+ ", price=" + price + "]";
+	}
 	
 	
 }
