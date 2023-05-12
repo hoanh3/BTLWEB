@@ -1,16 +1,28 @@
 let slider = document.querySelector('.slider-wrapper');
 let firstImg = document.querySelectorAll('.slider-wrapper .slider__img')[0];
 let arrowIcons = document.querySelectorAll('.slider i');
+let nextBtnSlider = document.getElementById('next-btn');
 
 let isDragStart = false;
 let prevPageX, prevScrollLeft, positionDiff;
 let firstImgWidth = firstImg.clientWidth;
+let count = 0;
 
 console.log(firstImgWidth);
 
+let refreshSlider = setInterval(() => { nextBtnSlider.click() }, 4000);
+
 arrowIcons.forEach((icon) => {
     icon.addEventListener('click', () => {
-        slider.scrollLeft += icon.id == 'prev-btn' ? (-1 * firstImgWidth) : firstImgWidth;
+        count++;
+        if(count >= 6) {
+            slider.scrollLeft = 0;
+            count = 0;
+        } else {
+            slider.scrollLeft += icon.id == 'prev-btn' ? (-1 * firstImgWidth) : firstImgWidth;
+        }
+        clearInterval(refreshSlider);
+        refreshSlider = setInterval(() => { nextBtnSlider.click() }, 4000);
     });
 });
 

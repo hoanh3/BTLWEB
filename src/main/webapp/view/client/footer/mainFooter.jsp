@@ -12,16 +12,18 @@
                         <h3 class="footer-title">Thông tin liên hệ:</h3>
                         <ul class="footer-menu">
                             <li class="footer-address">
-                                891 Hương Lộ 2, Bình Trị Đông A, Bình Tân, TP. Hồ Chí Minh (AM: 08H30 -> 11H45, PM: 13H30 -> 17H45) KH vui lòng đến đúng khung giờ mở cửa trên để mua hàng. Vergency chân thành cảm ơn.
+                                891 Hương Lộ 2, Bình Trị Đông A, Bình Tân, TP. Hồ Chí Minh (AM: 08H30 ->
+                                11H45, PM: 13H30 -> 17H45) KH vui lòng đến đúng khung giờ mở cửa trên để mua
+                                hàng. Vergency chân thành cảm ơn.
                             </li>
                             <li class="footer-phone">
-                                <p>Phone: </p>
+                                <p>Phone:</p>
                                 <span>
                                     <a href="">037 335 7405.</a>
                                 </span>
                             </li>
                             <li class="footer-email">
-                                <p>Email: </p>
+                                <p>Email:</p>
                                 <span>vergency.contact@gmail.com</span>
                             </li>
                         </ul>
@@ -81,10 +83,10 @@
                         </h3>
                         <div class="footer-fanpage">
                             <div class="fanpage-background">
-                                <img src="./assets/img/footer-img.jpg" alt="">
+                                <img src="${url}/images/footer-img.jpg" alt="" />
                             </div>
                             <div class="fanpage-avatar">
-                                <img src="./assets/img/footer-img2.jpg" alt="">
+                                <img src="${url}/images/footer-img2.jpg" alt="" />
                                 <div class="fanpage-info">
                                     <div class="fanpage-name">
                                         <a href="#" class="fanpage-link">Vergency</a>

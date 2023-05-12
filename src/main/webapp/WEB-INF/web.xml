@@ -67,6 +67,62 @@
   	<servlet-name>Home Servlet</servlet-name>
   	<url-pattern>/home/*</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Shop Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.ShopController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Shop Servlet</servlet-name>
+  	<url-pattern>/shop/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Blog Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.BlogController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Blog Servlet</servlet-name>
+  	<url-pattern>/blog/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>About Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.AboutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>About Servlet</servlet-name>
+  	<url-pattern>/about/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Contact Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.ContactController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Contact Servlet</servlet-name>
+  	<url-pattern>/contact/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Cart Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.CartController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Cart Servlet</servlet-name>
+  	<url-pattern>/cart-view/*</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>Product Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.ProductDetailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Product Servlet</servlet-name>
+  	<url-pattern>/product-detail/*</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
   	<servlet-name>Login Servlet</servlet-name>
   	<servlet-class>btlweb.mvc.controller.LoginController</servlet-class>

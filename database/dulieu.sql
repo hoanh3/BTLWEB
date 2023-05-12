@@ -19,12 +19,13 @@ VALUES
 ('T-SHIRTS'),
 ('SHIRTS'),
 ('SWEATERS'),
-('POLO'),
 ('HOODIES'),
 ('SHORTS'),
 ('BAGS'),
+('PERFUME'),
 ('JACKET'),
-('ACCESSORIES');
+('ACCESSORIES'),
+('POLO');
 
 INSERT INTO `btl`.`product`
 (`title`,

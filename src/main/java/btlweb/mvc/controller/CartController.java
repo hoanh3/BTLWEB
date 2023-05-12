@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import btlweb.mvc.service.ProductService;
 import btlweb.mvc.service.impl.ProductServiceImpl;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ public class CartController extends HttpServlet{
 			
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/client/cart.jsp");
+		dispatcher.forward(req, resp);
 	}
 }

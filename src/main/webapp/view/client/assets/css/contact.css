@@ -1,0 +1,166 @@
+.contact-main {
+    margin-bottom: 30px;
+}
+
+#contact {
+    margin-top: 30px;
+}
+
+.contact-title {
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.contact-title::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 82px;
+    height: 2px;
+    width: 25px;
+    background-color: var(--black-color);
+}
+
+.contact-map {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.contact-left-title {
+    padding-bottom: 6px;
+    margin-bottom: 18px;
+    font-size: 1.6rem;
+    border-bottom: 1px solid #eee;
+    font-weight: 500;
+}
+
+.contact-left-title i {
+    margin-right: 8px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.form-label {
+    text-align: left;
+}
+
+.form-label {
+    font-size: 1.4rem;
+    padding-bottom: 6px;
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    color: #999;
+    user-select: none;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.form-control {
+    padding: 8px 12px;
+    height: 35px;
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid #b3b3b3;
+    font-size: 1.6rem;
+    transition: 0.3s ease;
+}
+
+.form-control:focus {
+    border: 1px solid var(--primary-color);
+}
+
+.form-control:not(:placeholder-shown) + .form-label,
+.form-control:focus + .form-label {
+    top: -10px;
+    left: 8px;
+    padding: 0 10px;
+    display: inline-block;
+    background-color: white;
+    color: var(--primary-color);
+}
+
+textarea {
+    outline: none;
+    border: 1px solid #b3b3b3;
+    padding: 6px;
+    width: 100%;
+    height: 134px;
+    box-sizing: border-box;
+}
+
+.send-btn {
+    border: none;
+    outline: none;
+    padding: 12px 18px;
+    color: var(--white-color);
+    background-color: var(--black-color);
+    display: flex;
+    margin: auto;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.send-btn:hover {
+    opacity: 0.8;
+}
+
+.contact-right-title {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding-bottom: 6px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.contact-address,
+.contact-email,
+.contact-phone {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+}
+
+.contact-address i,
+.contact-email i,
+.contact-phone i {
+    margin-right: 8px;
+}
+
+.contact-address {
+    line-height: 2rem;
+}
+
+/* Mobile & Tablet */
+@media (max-width: 1023px) {
+    .contact-right {
+        margin: 20px 0 40px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 739px) {
+    .contact-main {
+        margin: 0 12px;
+    }
+
+    .contact-right-title {
+        margin-bottom: 0;
+    }
+
+    .form-group {
+        margin: 15px 12px;
+    }
+
+    .m-l-r-12 {
+        margin: 0 12px 16px;
+    }
+}

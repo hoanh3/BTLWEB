@@ -1,13 +1,6 @@
-/* body {
-    contain: paint;
-} */
-
 .main {
-    /* min-height: max-content; */
-    display: flex;
-    justify-content: center;
-    /* background-color: var(--primary-color); */
     background-image: linear-gradient(to bottom left, var(--primary-color), #bddfff);
+    /* background-color: var(--primary-color); */
 }
 
 .breadcrumb {
@@ -36,6 +29,11 @@
     font-size: 1rem;
 }
 
+#form-register,
+#form-login {
+    background-color: var(--white-color);
+}
+
 .form {
     position: relative;
     left: 50%;
@@ -47,10 +45,11 @@
     border-radius: 8px;
     margin: 36px 0 60px;
     max-width: 400px;
-    min-height: 580px;
+    min-height: 730px;
     background-color: var(--white-color);
-    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    background-color: transparent;
 }
 
 .form-login,
@@ -63,19 +62,23 @@
 
 @keyframes nextContent {
     from {
-        transform: translate(-100%, 0px);
+        transform: translateX(-100%);
+        opacity: 0;
     }
     to {
-        transform: translate(0, 0px);
+        transform: translateX(0);
+        opacity: 1;
     }
 }
 
 @keyframes outContent {
     from {
-        transform: translate(0, 0px);
+        transform: translateX(0);
+        opacity: 1;
     }
     to {
-        transform: translate(100%, 0px);
+        transform: translateX(100%);
+        opacity: 0;
     }
 }
 
@@ -330,4 +333,10 @@
 .support a {
     text-decoration: none;
     color: var(--primary-color);
+}
+
+@media (max-width: 739px) {
+    .breadcrumb {
+        margin-left: 18px !important;
+    }
 }
