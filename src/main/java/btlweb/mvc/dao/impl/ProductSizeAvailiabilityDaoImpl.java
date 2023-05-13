@@ -45,7 +45,7 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 	public int getSizeAvaiability(int productId, int sizeId) {
 		// TODO Auto-generated method stub
 		int sizeAvai = 0;
-		String query = "SELECT * FROM `product_size`"
+		String query = "SELECT `size_availability` FROM `product_size`"
 				+ "WHERE `product_id` = ? AND `size_id` = ?;";
 		try {
 			_connection = MySQLConnect.getConnection();
@@ -61,5 +61,9 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 		}
 		return sizeAvai;
 	}
-
+	
+	public static void main(String[] args) {
+		ProductSizeAvaliabitityDao productSizeAvaliabitityDao = new ProductSizeAvailiabilityDaoImpl();
+		System.out.println(productSizeAvaliabitityDao.getSizeAvaiability(1, 1));
+	}
 }

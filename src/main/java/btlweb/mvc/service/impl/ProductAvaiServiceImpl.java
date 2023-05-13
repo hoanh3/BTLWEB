@@ -19,4 +19,15 @@ public class ProductAvaiServiceImpl implements ProductAvaiService{
 		_proProductSizeAvaliabitityDao.updateProductAvailiability(items);
 		return;
 	}
+
+	@Override
+	public int getProductSA(int productId, int productSizeId) {
+		// TODO Auto-generated method stub
+		return _proProductSizeAvaliabitityDao.getSizeAvaiability(productId, productSizeId);
+	}
+	
+	public static void main(String[] args) {
+		ProductAvaiService productAvaiService = new ProductAvaiServiceImpl();
+		System.out.println(productAvaiService.getProductSA(1, 1));
+	}
 }

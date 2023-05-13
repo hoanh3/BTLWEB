@@ -14,11 +14,9 @@ import btlweb.mvc.dao.GaleryDao;
 import btlweb.mvc.dao.ProductDao;
 import btlweb.mvc.model.Product;
 import btlweb.mvc.model.Category;
+import btlweb.mvc.model.Galery;
 
 public class ProductDaoImpl implements ProductDao{
-	Connection conn = null;
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
 
 	@Override
 	public List<Product> getAll() {
@@ -26,21 +24,21 @@ public class ProductDaoImpl implements ProductDao{
 		List<Product> productList = new ArrayList<>();
 		String sql = "SELECT P.*, C.title FROM product AS P, category AS C WHERE P.category_id = C.id ";
 	    try {
-	        conn = MySQLConnect.getConnection();
-	        stmt = conn.prepareStatement(sql);
-	        rs = stmt.executeQuery();
-	        while (rs.next()) {
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+	        while (resultSet.next()) {
 	            Product product = new Product();
-	            product.setId(rs.getInt("id"));
-	            product.setTitle(rs.getString("title"));
-	            product.setRate(rs.getFloat("rate"));
-	            product.setPrice(rs.getInt("price"));
-	            product.setDiscount(rs.getInt("discount"));
-	            product.setThumbnail(rs.getString("thumbnail"));
-	            product.setDescription(rs.getString("description"));
-	            product.setCreatedAt(rs.getDate("create_at"));
-	            product.setUpdatedAt(rs.getDate("update_at"));
-	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	            product.setId(resultSet.getInt("id"));
+	            product.setTitle(resultSet.getString("title"));
+	            product.setRate(resultSet.getFloat("rate"));
+	            product.setPrice(resultSet.getInt("price"));
+	            product.setDiscount(resultSet.getInt("discount"));
+	            product.setThumbnail(resultSet.getString("thumbnail"));
+	            product.setDescription(resultSet.getString("description"));
+	            product.setCreatedAt(resultSet.getDate("create_at"));
+	            product.setUpdatedAt(resultSet.getDate("update_at"));
+	            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
@@ -52,34 +50,35 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public List<Product> getTopSale() {
 		// TODO Auto-generated method stub
-		 List<Product> productList = new ArrayList<>();
-		String sql = "SELECT P.*, C.title FROM product AS P, category AS C\r\n"
-				+ "WHERE P.category_id = C.id \r\n"
-				+ "ORDER BY ROUND((P.price - P.discount) / P.price * 100, 0) DESC\r\n"
-				+ "LIMIT 10";
-   try {
-       conn = MySQLConnect.getConnection();
-       stmt = conn.prepareStatement(sql);
-       rs = stmt.executeQuery();
-       while (rs.next()) {
-    	   Product product = new Product();
-           product.setId(rs.getInt("id"));
-           product.setTitle(rs.getString("title"));
-           product.setRate(rs.getFloat("rate"));
-           product.setPrice(rs.getInt("price"));
-           product.setDiscount(rs.getInt("discount"));
-           product.setThumbnail(rs.getString("thumbnail"));
-           product.setDescription(rs.getString("description"));
-           product.setCreatedAt(rs.getDate("create_at"));
-           product.setUpdatedAt(rs.getDate("update_at"));
-           product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
-           productList.add(product);
-       }
-   } catch (SQLException e) {
-       e.printStackTrace();
-   } 
-   return productList;
-}
+		List<Product> productList = new ArrayList<>();
+		String query = "SELECT P.*, C.title FROM `product` AS P, `category` AS C "
+				+ "WHERE P.category_id = C.id "
+				+ "ORDER BY ROUND((P.price - P.discount) / P.price * 100, 0) DESC "
+				+ "LIMIT 10;";
+		try {
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement statement = connection.prepareStatement(query);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				int id = resultSet.getInt(1);
+				String title = resultSet.getString(2);
+				int rate = resultSet.getInt(3);
+				int price = resultSet.getInt(4);
+				int discount = resultSet.getInt(5);
+				String thumbnail = resultSet.getString(6);
+				String description = resultSet.getString(7);
+				Date createAt = resultSet.getDate(8);
+				Date updateAt = resultSet.getDate(9);
+				Category category = new Category(resultSet.getInt(10), resultSet.getString(11));
+				productList.add(new Product(id, title, rate, price, discount, thumbnail, description, createAt, updateAt, category, new ArrayList<>()));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("loi topsale product dao");
+		}
+		return productList;
+	}
 	@Override
 	public List<Product> getBestSeller() {
 		// TODO Auto-generated method stub
@@ -91,25 +90,25 @@ public class ProductDaoImpl implements ProductDao{
 	    		+ "ORDER BY SUM(OD.num) DESC\r\n"
 	    		+ "LIMIT 10;";
 	    try {
-	        conn = MySQLConnect.getConnection();
-	        stmt = conn.prepareStatement(sql);
-	        rs = stmt.executeQuery();
-	        while (rs.next()) {
+	        Connection connection = MySQLConnect.getConnection();
+	        PreparedStatement statement = connection.prepareStatement(sql);
+	        ResultSet resultSet = statement.executeQuery();
+	        while (resultSet.next()) {
 	        	Product product = new Product();
-	            product.setId(rs.getInt("id"));
-	            product.setTitle(rs.getString("title"));
-	            product.setRate(rs.getFloat("rate"));
-	            product.setPrice(rs.getInt("price"));
-	            product.setDiscount(rs.getInt("discount"));
-	            product.setThumbnail(rs.getString("thumbnail"));
-	            product.setDescription(rs.getString("description"));
-	            product.setCreatedAt(rs.getDate("create_at"));
-	            product.setUpdatedAt(rs.getDate("update_at"));
-	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	            product.setId(resultSet.getInt("id"));
+	            product.setTitle(resultSet.getString("title"));
+	            product.setRate(resultSet.getFloat("rate"));
+	            product.setPrice(resultSet.getInt("price"));
+	            product.setDiscount(resultSet.getInt("discount"));
+	            product.setThumbnail(resultSet.getString("thumbnail"));
+	            product.setDescription(resultSet.getString("description"));
+	            product.setCreatedAt(resultSet.getDate("create_at"));
+	            product.setUpdatedAt(resultSet.getDate("update_at"));
+	            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        System.out.println("loi productdao best seller");
 	    } 
 	    return productList;
 	}
@@ -118,24 +117,24 @@ public class ProductDaoImpl implements ProductDao{
 	public List<Product> searchProductByName(String name) {
 		// TODO Auto-generated method stub
 		List<Product> products = new ArrayList<>();
-	    String sql = "SELECT P.*, C.title FROM product AS P, category AS C WHERE P.category_id = C.id AND P.name LIKE ?";
+	    String sql = "SELECT P.*, C.title FROM product AS P, category AS C WHERE P.category_id = C.id AND P.title LIKE ?;";
 	    try {
-	        conn = MySQLConnect.getConnection();
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setString(1, "%" + name + "%");
-	        rs = stmt.executeQuery();
-	        while (rs.next()) {
+	        Connection connection = MySQLConnect.getConnection();
+	        PreparedStatement statement = connection.prepareStatement(sql);
+	        statement.setString(1, "%" + name + "%");
+	        ResultSet resultSet = statement.executeQuery();
+	        while (resultSet.next()) {
 	        	Product product = new Product();
-	            product.setId(rs.getInt("id"));
-	            product.setTitle(rs.getString("title"));
-	            product.setRate(rs.getFloat("rate"));
-	            product.setPrice(rs.getInt("price"));
-	            product.setDiscount(rs.getInt("discount"));
-	            product.setThumbnail(rs.getString("thumbnail"));
-	            product.setDescription(rs.getString("description"));
-	            product.setCreatedAt(rs.getDate("create_at"));
-	            product.setUpdatedAt(rs.getDate("update_at"));
-	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	            product.setId(resultSet.getInt("id"));
+	            product.setTitle(resultSet.getString("title"));
+	            product.setRate(resultSet.getFloat("rate"));
+	            product.setPrice(resultSet.getInt("price"));
+	            product.setDiscount(resultSet.getInt("discount"));
+	            product.setThumbnail(resultSet.getString("thumbnail"));
+	            product.setDescription(resultSet.getString("description"));
+	            product.setCreatedAt(resultSet.getDate("create_at"));
+	            product.setUpdatedAt(resultSet.getDate("update_at"));
+	            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
 	            products.add(product);
 	        }
 	    } catch (SQLException ex) {
@@ -151,23 +150,23 @@ public class ProductDaoImpl implements ProductDao{
 		Product product = null;
 	    String query = "SELECT P.*, C.title FROM product AS P, category AS C WHERE P.id = ? AND P.category_id = C.id";
 	    try {	
-	    	conn = MySQLConnect.getConnection();
-	    	stmt = conn.prepareStatement(query); 
-	    	stmt.setInt(1, productId);
-	    	rs = stmt.executeQuery();
-	    	while (rs.next()) {
+	    	Connection connection = MySQLConnect.getConnection();
+	    	PreparedStatement statement = connection.prepareStatement(query); 
+	    	statement.setInt(1, productId);
+	    	ResultSet resultSet = statement.executeQuery();
+	    	while (resultSet.next()) {
 	            
 	                product = new Product();
-	                product.setId(rs.getInt("id"));
-		            product.setTitle(rs.getString("title"));
-		            product.setRate(rs.getFloat("rate"));
-		            product.setPrice(rs.getInt("price"));
-		            product.setDiscount(rs.getInt("discount"));
-		            product.setThumbnail(rs.getString("thumbnail"));
-		            product.setDescription(rs.getString("description"));
-		            product.setCreatedAt(rs.getDate("create_at"));
-		            product.setUpdatedAt(rs.getDate("update_at"));
-		            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	                product.setId(resultSet.getInt("id"));
+		            product.setTitle(resultSet.getString("title"));
+		            product.setRate(resultSet.getFloat("rate"));
+		            product.setPrice(resultSet.getInt("price"));
+		            product.setDiscount(resultSet.getInt("discount"));
+		            product.setThumbnail(resultSet.getString("thumbnail"));
+		            product.setDescription(resultSet.getString("description"));
+		            product.setCreatedAt(resultSet.getDate("create_at"));
+		            product.setUpdatedAt(resultSet.getDate("update_at"));
+		            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
 	        }
 	    }
 	     catch (SQLException e) {
@@ -184,23 +183,23 @@ public class ProductDaoImpl implements ProductDao{
 		// TODO Auto-generated method stub
 		List<Product> productList = new ArrayList<>();
 	    try {
-	        conn = MySQLConnect.getConnection();
+	        Connection connection = MySQLConnect.getConnection();
 	        String sql = "SELECT P.*, C.title FROM Product AS P, category AS C WHERE category_id=? AND P.category_id = C.id";
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setString(1, catId);
-	        rs = stmt.executeQuery();
-	        while (rs.next()) {
+	        PreparedStatement statement = connection.prepareStatement(sql);
+	        statement.setString(1, catId);
+	        ResultSet resultSet = statement.executeQuery();
+	        while (resultSet.next()) {
 	        	Product product = new Product();
-	            product.setId(rs.getInt("id"));
-	            product.setTitle(rs.getString("title"));
-	            product.setRate(rs.getFloat("rate"));
-	            product.setPrice(rs.getInt("price"));
-	            product.setDiscount(rs.getInt("discount"));
-	            product.setThumbnail(rs.getString("thumbnail"));
-	            product.setDescription(rs.getString("description"));
-	            product.setCreatedAt(rs.getDate("create_at"));
-	            product.setUpdatedAt(rs.getDate("update_at"));
-	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	            product.setId(resultSet.getInt("id"));
+	            product.setTitle(resultSet.getString("title"));
+	            product.setRate(resultSet.getFloat("rate"));
+	            product.setPrice(resultSet.getInt("price"));
+	            product.setDiscount(resultSet.getInt("discount"));
+	            product.setThumbnail(resultSet.getString("thumbnail"));
+	            product.setDescription(resultSet.getString("description"));
+	            product.setCreatedAt(resultSet.getDate("create_at"));
+	            product.setUpdatedAt(resultSet.getDate("update_at"));
+	            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
@@ -214,12 +213,12 @@ public class ProductDaoImpl implements ProductDao{
 		// TODO Auto-generated method stub
 		int count = 0;
 	    try {
-	        conn = MySQLConnect.getConnection();
+	        Connection connection = MySQLConnect.getConnection();
 	        String sql = "SELECT COUNT(*) as count FROM Product";
-	        stmt = conn.prepareStatement(sql);
-	        rs = stmt.executeQuery();
-	        if (rs.next()) {
-	            count = rs.getInt("count");
+	        PreparedStatement statement = connection.prepareStatement(sql);
+	        ResultSet resultSet = statement.executeQuery();
+	        if (resultSet.next()) {
+	            count = resultSet.getInt("count");
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -234,24 +233,24 @@ public class ProductDaoImpl implements ProductDao{
 	    int pageSize = 8; 
 	    int offset = (pageId - 1) * pageSize;
 	    try {
-	        conn = MySQLConnect.getConnection();
+	        Connection connection = MySQLConnect.getConnection();
 	        String sql = "SELECT P.*, C.title FROM product AS P, category AS C WHERE P.category_id = C.id LIMIT ? OFFSET ?";
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setInt(1, pageSize);
-	        stmt.setInt(2, offset);
-	        rs = stmt.executeQuery();
-	        while (rs.next()) {
+	        PreparedStatement statement = connection.prepareStatement(sql);
+	        statement.setInt(1, pageSize);
+	        statement.setInt(2, offset);
+	        ResultSet resultSet = statement.executeQuery();
+	        while (resultSet.next()) {
 	        	Product product = new Product();
-	            product.setId(rs.getInt("id"));
-	            product.setTitle(rs.getString("title"));
-	            product.setRate(rs.getFloat("rate"));
-	            product.setPrice(rs.getInt("price"));
-	            product.setDiscount(rs.getInt("discount"));
-	            product.setThumbnail(rs.getString("thumbnail"));
-	            product.setDescription(rs.getString("description"));
-	            product.setCreatedAt(rs.getDate("create_at"));
-	            product.setUpdatedAt(rs.getDate("update_at"));
-	            product.setCategory(new Category(rs.getInt("category_id"), rs.getString("title")));
+	            product.setId(resultSet.getInt("id"));
+	            product.setTitle(resultSet.getString("title"));
+	            product.setRate(resultSet.getFloat("rate"));
+	            product.setPrice(resultSet.getInt("price"));
+	            product.setDiscount(resultSet.getInt("discount"));
+	            product.setThumbnail(resultSet.getString("thumbnail"));
+	            product.setDescription(resultSet.getString("description"));
+	            product.setCreatedAt(resultSet.getDate("create_at"));
+	            product.setUpdatedAt(resultSet.getDate("update_at"));
+	            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
 	            productList.add(product);
 	        }
 	    } catch (SQLException e) {
@@ -264,19 +263,19 @@ public class ProductDaoImpl implements ProductDao{
 		// TODO Auto-generated method stub
 		int result = 0;
 	    try {
-	        conn = MySQLConnect.getConnection();
+	        Connection connection = MySQLConnect.getConnection();
 	        String query = "INSERT INTO product (title, rate, price, discount, thumbnail, description, create_at, update_at, category_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	        stmt = conn.prepareStatement(query);
-	        stmt.setString(1, product.getTitle());
-	        stmt.setFloat(2, product.getRate());
-	        stmt.setInt(3, product.getPrice());
-	        stmt.setInt(4, product.getDiscount());
-	        stmt.setString(5, product.getThumbnail());
-	        stmt.setString(6, product.getDescription());
-	        stmt.setDate(7, new java.sql.Date(product.getCreatedAt().getTime()));
-	        stmt.setDate(8, new java.sql.Date(product.getUpdatedAt().getTime()));
-	        stmt.setInt(9, product.getCategory().getId());
-	        result = stmt.executeUpdate();
+	        PreparedStatement statement = connection.prepareStatement(query);
+	        statement.setString(1, product.getTitle());
+	        statement.setFloat(2, product.getRate());
+	        statement.setInt(3, product.getPrice());
+	        statement.setInt(4, product.getDiscount());
+	        statement.setString(5, product.getThumbnail());
+	        statement.setString(6, product.getDescription());
+	        statement.setDate(7, new java.sql.Date(product.getCreatedAt().getTime()));
+	        statement.setDate(8, new java.sql.Date(product.getUpdatedAt().getTime()));
+	        statement.setInt(9, product.getCategory().getId());
+	        result = statement.executeUpdate();
 	    } catch (SQLException ex) {
 	        ex.printStackTrace();
 	    } 
@@ -288,19 +287,19 @@ public class ProductDaoImpl implements ProductDao{
 		// TODO Auto-generated method stub
 		int result = 0;
 	    try {
-	        conn = MySQLConnect.getConnection();
+	        Connection connection = MySQLConnect.getConnection();
 	        String sql = "UPDATE product SET title=?, rate=?, price=?, discount=?, thumbnail=?, description=?, category_id=?, update_at=? WHERE id=?";
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setString(1, product.getTitle());
-	        stmt.setFloat(2, product.getRate());
-	        stmt.setInt(3, product.getPrice());
-	        stmt.setInt(4, product.getDiscount());
-	        stmt.setString(5, product.getThumbnail());
-	        stmt.setString(6, product.getDescription());
-	        stmt.setInt(7, product.getCategory().getId());
-	        stmt.setDate(8, new java.sql.Date(product.getUpdatedAt().getTime()));
-	        stmt.setInt(9, product.getId());
-	        result = stmt.executeUpdate();
+	        PreparedStatement statement = connection.prepareStatement(sql);
+	        statement.setString(1, product.getTitle());
+	        statement.setFloat(2, product.getRate());
+	        statement.setInt(3, product.getPrice());
+	        statement.setInt(4, product.getDiscount());
+	        statement.setString(5, product.getThumbnail());
+	        statement.setString(6, product.getDescription());
+	        statement.setInt(7, product.getCategory().getId());
+	        statement.setDate(8, new java.sql.Date(product.getUpdatedAt().getTime()));
+	        statement.setInt(9, product.getId());
+	        result = statement.executeUpdate();
 	    } catch (SQLException ex) {
 	        ex.printStackTrace();
 	    } 
@@ -312,11 +311,11 @@ public class ProductDaoImpl implements ProductDao{
 		// TODO Auto-generated method stub
 		int rowDeleted = 0;
 	    try {
-	        Connection conn = MySQLConnect.getConnection();
-	        PreparedStatement statement = conn.prepareStatement("DELETE FROM product WHERE id = ?");
+	        Connection connection = MySQLConnect.getConnection();
+	        PreparedStatement statement = connection.prepareStatement("DELETE FROM product WHERE id = ?");
 	        statement.setInt(1, id);
 	        rowDeleted = statement.executeUpdate();
-	        conn.close();
+	        connection.close();
 	    } catch (SQLException ex) {
 	        ex.printStackTrace();
 	    }
@@ -325,9 +324,10 @@ public class ProductDaoImpl implements ProductDao{
 	
 	public static void main(String[] args) {
 		ProductDao abc = new ProductDaoImpl();
-		List<Product> productList = abc.getBestSeller();
-		for (Product i : productList) {
-		    System.out.println(i);
-		}
+		System.out.println(abc.getProductByCatId("1"));
+//		List<Product> productList = abc.searchProductByName("SWEATER");
+//		for (Product i : productList) {
+//		    System.out.println(i);
+//		}
 	}
 }

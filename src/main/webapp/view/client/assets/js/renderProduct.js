@@ -7,7 +7,7 @@ async function getProduct() {
             "Content-Type": "application/json"
         },
     };
-    let data = await fetch(pathAPI);
+    let data = await fetch(pathAPI + "?filter=topsale");
     let response = await data.json();
     console.log({ response });
 
@@ -49,6 +49,56 @@ async function getProduct() {
         `;
     });
     document.querySelector(".product .product-list").innerHTML = await product_html.join("");
+}
+
+async function getProductInBestSeller() {
+    let option = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+    };
+    let data = await fetch(pathAPI + "?filter=bestseller");
+    let response = await data.json();
+    console.log({ response });
+
+    const product_html = await response.map((product) => {
+        return `
+            <div class="col l-3 m-4 c-6">
+                <div class="product-information">
+                    <a href="#" class="product-item">
+                        <div class="product-item__img" style="background-image: url(http://localhost:8080${
+                            product.thumbnail
+                        });"></div>
+                        <h4 class="product-item__name">${product.title}</h4>
+                        <p class="product-item__vendor">Vergency</p>
+                        <div class="product-item__review">
+                            <span class="rating">
+                                <i class="star-yellow fa-solid fa-star"></i>
+                                <i class="star-yellow fa-solid fa-star"></i>
+                                <i class="star-yellow fa-solid fa-star"></i>
+                                <i class="star-yellow fa-solid fa-star"></i>
+                                <i class="star-yellow fa-solid fa-star"></i>
+                            </span>
+                        </div>
+                        <div class="product-item__price">
+                            <span class="price-old">${product.price / 1000}.000đ</span>
+                            <span class="price-new">${product.discount / 1000}.000đ</span>
+                        </div>
+                        <div class="product-item__sale-off">${Math.round((product.price - product.discount) / product.price * 100)}%</div>
+                    </a>
+                    <div class="product-item__quick-view">
+                        <a 
+                            class="quick-view--btn" 
+                            onclick='showQuickView(${JSON.stringify(product)})'
+                        >
+                            Xem nhanh
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
     document.querySelector(".product .best-saller").innerHTML = await product_html.join("");
 }
 
@@ -133,6 +183,7 @@ function hideQuickView() {
 
 function start() {
     getProduct();
+    getProductInBestSeller();
 }
 
 start();

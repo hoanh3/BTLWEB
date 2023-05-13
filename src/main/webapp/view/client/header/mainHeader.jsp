@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="${url}/css/cart.css" />
     </head>
     <body>
-        <input type="hidden" id="user-id" value="2" />
+        <input type="hidden" id="user-id" value="${sessionScope.user != null ? sessionScope.user.id : 0}" />
         <div class="app">
             <div class="header">
                 <div class="header-wrapper">

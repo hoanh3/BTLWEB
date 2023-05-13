@@ -30,7 +30,6 @@ public class LoginController extends HttpServlet{
 		
 		try {
 			User user = _userService.findUserByEmail(username);
-			System.out.println(user);
 			if(user != null && BCrypt.checkpw(password, user.getPassword())) {
 				HttpSession session = req.getSession();
 				session.setAttribute("user", user);

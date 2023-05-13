@@ -170,10 +170,7 @@
                 Validator.isEmail('.email'),
                 Validator.isRequired('.password'),
                 Validator.minLength('.password', 6),
-            ],
-            onSubmit: function(data) {
-                console.log(data);
-            }
+            ]
         });
         Validator({
             form: '#form-register',
@@ -189,10 +186,7 @@
                 Validator.isConfirmation('#repeat_password', function() {
                     return document.querySelector('.form-register .password').value;
                 }, 'Mật khẩu nhập lại không khớp. Vui lòng nhập lại!'),
-            ],
-            onSubmit: function(data) {
-                console.log(data);
-            }
+            ]
         });
     </script>
 

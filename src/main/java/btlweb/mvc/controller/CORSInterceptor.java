@@ -69,6 +69,7 @@ public class CORSInterceptor implements Filter {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("loi origin");
+			System.out.println(request.getHeader("Origin"));
 		}
 	}
     
