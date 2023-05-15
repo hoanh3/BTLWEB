@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import btlweb.mvc.dao.CartItemDao;
+import btlweb.mvc.dao.ProductDao;
 import btlweb.mvc.dbconnect.MySQLConnect;
 import btlweb.mvc.model.Category;
 import btlweb.mvc.model.Item;
@@ -50,10 +51,10 @@ public class CartItemDaoImpl implements CartItemDao{
 
 	@Override
 	public void addItem(Item item) {
-		String query = "INSERT INTO `cart_item`\r\n"
-				+ "(`user_id`,`product_id`,`size_id`,`num`,`price`)\r\n"
-				+ "VALUES\r\n"
-				+ "(?, ?, ?, ?, ?);";
+		String query = "INSERT INTO `cart_item` "
+				+ "(`user_id`,`product_id`,`size_id`,`num`,`price`) "
+				+ "VALUES "
+				+ "(?,?,?,?,?);";
 		try {
 			_connection = MySQLConnect.getConnection();
 			_pStatement = _connection.prepareStatement(query);
@@ -66,7 +67,8 @@ public class CartItemDaoImpl implements CartItemDao{
 			_pStatement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("loi CartItemDao");
+			e.printStackTrace();
+			System.out.println("loi CartItemDao add");
 		}
 		return;
 	}
@@ -153,7 +155,8 @@ public class CartItemDaoImpl implements CartItemDao{
 
 	public static void main(String[] args) {
 		CartItemDao cartItemDao = new CartItemDaoImpl();
-		cartItemDao.updateItem(new Item(0, 2, new Product(2), 1, 1, 59000));
+		ProductDao productDao = new ProductDaoImpl();
+		cartItemDao.addItem(new Item(0, 3, productDao.getProductById(7), 1, 1, 249000));
 	}
 
 	@Override
@@ -184,4 +187,5 @@ public class CartItemDaoImpl implements CartItemDao{
 	    }
 	    return item;
 	}
+	
 }

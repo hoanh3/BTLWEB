@@ -11,6 +11,8 @@ import javax.swing.ListModel;
 import btlweb.mvc.dao.ProductSizeAvaliabitityDao;
 import btlweb.mvc.dbconnect.MySQLConnect;
 import btlweb.mvc.model.Item;
+import btlweb.mvc.service.ProductService;
+import btlweb.mvc.service.impl.ProductServiceImpl;
 
 public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityDao{
 	Connection _connection = null;
@@ -20,9 +22,9 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 	@Override
 	public void updateProductAvailiability(List<Item> items) {
 		// TODO Auto-generated method stub
-		String query = "UPDATE `btl`.`product_size`"
-				+ "SET"
-				+ "`size_availability` = ?"
+		String query = "UPDATE `btl`.`product_size` "
+				+ "SET "
+				+ "`size_availability` = ? "
 				+ "WHERE `product_id` = ? AND `size_id` = ?;";
 		try {
 			_connection = MySQLConnect.getConnection();
@@ -38,6 +40,8 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 			_connection.commit();
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("loi update avai product dao");
+			e.printStackTrace();
 		}
 	}
 
@@ -64,6 +68,10 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 	
 	public static void main(String[] args) {
 		ProductSizeAvaliabitityDao productSizeAvaliabitityDao = new ProductSizeAvailiabilityDaoImpl();
-		System.out.println(productSizeAvaliabitityDao.getSizeAvaiability(1, 1));
+		ProductService productService = new ProductServiceImpl();
+		List<Item> items = new ArrayList<>();
+		items.add(new Item(0, 2, productService.getProductById(1, "", ""), 1, 9, 59000));
+		items.add(new Item(0, 2, productService.getProductById(1, "", ""), 2, 9, 59000));
+		productSizeAvaliabitityDao.updateProductAvailiability(items);
 	}
 }

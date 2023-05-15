@@ -56,8 +56,8 @@
                     <div class="sidebar">
                         <div class="section-order">
                             <table class="product-table">
-                                <tbody>
-                                    <tr class="product">
+                                <tbody class="product-table-body">
+                                    <!-- <tr class="product">
                                         <td class="product-img">
                                             <div class="product-thumbnail">
                                                 <img
@@ -107,7 +107,7 @@
                                             <span class="product-size">L</span>
                                         </td>
                                         <td class="product-price">59.000đ</td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
@@ -128,10 +128,7 @@
                             </div>
                             <div class="total-price">
                                 <span class="title">Tổng tiền</span>
-                                <span class="price">
-                                    <span>VND</span>
-                                    <span>271.000đ</span>
-                                </span>
+                                <span class="price">271.000đ</span>
                             </div>
                         </div>
                     </div>
@@ -158,28 +155,45 @@
                                         <a href="${pageContext.request.contextPath}/login">Đăng nhập</a>
                                     </p>
                                     <div class="section-info">
-                                        <form action="" method="POST" class="form-info" id="form-info">
-                                            <div class="form-group">
-                                                <input
-                                                    type="text"
-                                                    name="username"
-                                                    class="form-control"
-                                                    placeholder=" "
-                                                />
-                                                <label for="username" class="form-label">Họ và tên</label>
-                                                <span class="form-message"></span>
+                                        <form action="${pageContext.request.contextPath}/checkout" method="POST" class="form-info" id="form-info">
+                                            <div class="wrapper-form">
+                                                <div class="form-group">
+                                                    <input
+                                                        type="text"
+                                                        name="last-name"
+                                                        class="form-control"
+                                                        placeholder=""
+                                                        value="${user.lastName}"
+                                                    />
+                                                    <label for="last-name" class="form-label">Họ</label>
+                                                    <span class="form-message"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input
+                                                        type="text"
+                                                        name="first-name"
+                                                        class="form-control"
+                                                        placeholder=" "
+                                                        value="${user.firstName}"
+                                                    />
+                                                    <label for="first-name" class="form-label">Tên</label>
+                                                    <span class="form-message"></span>
+                                                </div>
                                             </div>
+                                            
                                             <div class="form-group">
-                                                <input type="text" name="email" class="form-control" placeholder=" " />
+                                                <input type="text" name="email" class="form-control" placeholder=" " 
+                                                value="${user.email}"/>
                                                 <label for="email" class="form-label">Email</label>
                                                 <span class="form-message"></span>
                                             </div>
                                             <div class="form-group">
                                                 <input
                                                     type="text"
-                                                    name="phone"
+                                                    name="phone-number"
                                                     class="form-control phone"
                                                     placeholder=" "
+                                                    value="${user.phoneNumber}"
                                                 />
                                                 <label for="phone" class="form-label">Số điện thoại</label>
                                                 <span class="form-message required"
@@ -191,34 +205,39 @@
                                                 <div class="form-group">
                                                     <input
                                                         type="text"
-                                                        name="address"
+                                                        name="city"
                                                         class="form-control address1"
                                                         placeholder=" "
+                                                        value="${user.city}"
                                                     />
-                                                    <label for="address" class="form-label">Tỉnh/Thành Phố</label>
+                                                    <label for="city" class="form-label">Tỉnh/Thành Phố</label>
                                                     <span class="form-message"></span>
                                                 </div>
                                                 <div class="form-group">
                                                     <input
                                                         type="text"
-                                                        name="address"
+                                                        name="district"
                                                         class="form-control address2"
                                                         placeholder=" "
+                                                        value="${user.district}"
                                                     />
-                                                    <label for="address" class="form-label">Quận/Huyện</label>
+                                                    <label for="district" class="form-label">Quận/Huyện</label>
                                                     <span class="form-message"></span>
                                                 </div>
                                                 <div class="form-group">
                                                     <input
                                                         type="text"
-                                                        name="address"
+                                                        name="street-address"
                                                         class="form-control address3"
                                                         placeholder=" "
+                                                        value="${user.streetAddress}"
                                                     />
-                                                    <label for="address" class="form-label">Phường/Xã</label>
+                                                    <label for="street-address" class="form-label">Phường/Xã</label>
                                                     <span class="form-message"></span>
                                                 </div>
                                             </div>
+                                            
+                                            <input type="hidden" id="user-id" value="${sessionScope.user != null ? sessionScope.user.id : 0}" name = "user-id"/>
                                         </form>
 
                                         <div class="section-shipping-rate">
@@ -288,11 +307,11 @@
                                 </div>
                                 <div class="section-footer">
                                     <a href="${pageContext.request.contextPath}/cart-view" class="previous-link">Giỏ hàng</a>
-                                    <form action="" method="POST" class="form-submit">
-                                        <button class="submit">
+                                    <div class="form-submit">
+                                        <button class="submit" form="form-info" type="submit">
                                             <span>Hoàn tất đơn hàng</span>
                                         </button>
-                                    </form>
+                                    </div>
                                 </div>
                             </section>
                         </div>
@@ -303,7 +322,8 @@
             </div>
         </div>
 
-        <script src="${url}/JS/validator.js"></script>
+        <script src="${url}/js/validator.js"></script>
+        <script src="${url}/js/checkout.js"></script>
         <script>
             let toggleOrder = document.querySelector(".toggle-order");
             toggleOrder.onclick = function () {

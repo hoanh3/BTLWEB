@@ -418,15 +418,15 @@
                                     <p>Kích Thước:</p>
                                     <form class="size-select">
                                         <label for="small" class="size-option">
-                                            <input type="radio" name="size" value="S" id="small" />
+                                            <input type="radio" name="size" value="1" id="small" />
                                             <span>S</span>
                                         </label>
                                         <label for="medium" class="size-option">
-                                            <input type="radio" name="size" value="M" id="medium" />
+                                            <input type="radio" name="size" value="2" id="medium" />
                                             <span>M</span>
                                         </label>
                                         <label for="large" class="size-option">
-                                            <input type="radio" name="size" value="L" id="large" />
+                                            <input type="radio" name="size" value="3" id="large" />
                                             <span>L</span>
                                         </label>
                                         <label for="x-large" class="size-option sold-out">
@@ -441,7 +441,7 @@
                                         <button class="minus-btn">
                                             <i class="fa-solid fa-minus"></i>
                                         </button>
-                                        <p class="amount">0</p>
+                                        <p class="amount" data-max="1">0</p>
                                         <button class="plus-btn">
                                             <i class="fa-solid fa-plus"></i>
                                         </button>

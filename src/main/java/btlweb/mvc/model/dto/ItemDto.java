@@ -51,6 +51,12 @@ public class ItemDto {
 	public void setNum(int num) {
 		this.num = num;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ItemDto [pid=" + pid + ", uid=" + uid + ", size=" + size + ", num=" + num + "]";
+	}
 	
 	
 }

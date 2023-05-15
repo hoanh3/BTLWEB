@@ -18,4 +18,11 @@ public class CartController extends HttpServlet{
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/view/client/cart.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		System.out.println("post cart-view");
+		resp.sendRedirect(req.getContextPath() + "/cart-view");
+	}
 }

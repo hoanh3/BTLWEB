@@ -34,8 +34,11 @@ public class CheckoutController extends HttpServlet{
 		
 		try {
 			_orderService.addOrder(firstName, lastName, email, phoneNumber, city, district, streetAddress, note, Integer.parseInt(userId));
+			resp.sendRedirect(req.getContextPath() + "/home");
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("loi checkout");
+			e.printStackTrace();
 		}
 	}
 }

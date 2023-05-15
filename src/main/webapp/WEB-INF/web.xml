@@ -140,6 +140,14 @@
   	<url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet>
+  	<servlet-name>Logout Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.LogoutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Logout Servlet</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
   	<servlet-name>Register Servlet</servlet-name>
   	<servlet-class>btlweb.mvc.controller.RegisterController</servlet-class>
   </servlet>

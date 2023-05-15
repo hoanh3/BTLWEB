@@ -51,15 +51,16 @@ async function render(url = "") {
     let total_price = 0;
     let stringHTML = await response.map((product) => {
         total_price += product.product.discount * product.num;
+        let price = partition((product.product.discount * product.num).toString()).join(".");
         return `
             <div class="cart-product__item">
                 <div class="cart-product__img">
-                    <a href="#" class="cart-product__link">
+                    <a href="product.html" class="cart-product__link">
                         <img src="http://localhost:8080${product.product.thumbnail}" alt="">
                     </a>
                 </div>
                 <div class="cart-product__info">
-                    <a href="#" class="cart-product__link">
+                    <a href="product.html" class="cart-product__link">
                         <strong class="cart-product__name">${product.product.title}</strong>
                         <span class="cart-product__size">${product.size}</span>
                     </a>
@@ -68,24 +69,24 @@ async function render(url = "") {
                         <del>(${product.product.price / 1000}.000đ)</del>
                     </p>
                     <div class="quantity-select">
-                        <button class="minus-btn">
+                        <button class="minus-btn" onclick='reduceItem(${JSON.stringify(product)})'>
                             <i class="fa-solid fa-minus"></i>
                         </button>
-                        <p class="amount">${product.num}</p>
-                        <button class="plus-btn">
+                        <p class="amount" min-data="1">${product.num}</p>
+                        <button class="plus-btn" onclick='increaseItem(${JSON.stringify(product)})'>
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
-                    <p class="total-price__item">${(product.product.discount / 1000) * product.num}.000đ</p>
+                    <p class="total-price__item">${price}đ</p>
                 </div>
                 <div class="cart-product__remove">
-                    <a href="#" class="remove-item">Xóa sản phẩm</a>
+                    <a href="#" class="remove-item" onclick='removeItem(${JSON.stringify(product)})'>Xóa sản phẩm</a>
                 </div>
             </div>
         `;
     });
 
-    if (stringHTML.length === 0) {
+    if (stringHTML.length == 0) {
         document.querySelector(".head-title-cart").style.display = "none";
         document.querySelector(
             ".form-cart"
@@ -104,8 +105,22 @@ async function render(url = "") {
                     <textarea id="box-note" rows="5" placeholder="Ghi chú:"></textarea>
                 </div>
             `;
-        document.querySelector(".right-cart .total-price").innerHTML = total_price / 1000 + ".000đ";
     }
+
+    let priceStr = total_price.toString();
+    function partition(str) {
+        str = str.split("").reverse().join("");
+        let val = [];
+        for (let i = 0; i < str.length; i += 3) {
+            val.push(str.substr(i, 3));
+        }
+        for (let i = 0; i < val.length; i++) {
+            // console.log(typeof val[i]);
+            val[i] = val[i].split("").reverse().join("");
+        }
+        return val.reverse();
+    }
+    document.querySelector(".right-cart .total-price").innerHTML = partition(priceStr).join(".") + "đ";
 }
 
 function getItemCart() {
@@ -114,9 +129,49 @@ function getItemCart() {
     render(url);
 }
 
-function postItem() {
+async function putItem(url = "", data = {}) {
+    const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    console.log("response:", response);
+    return response.json();
+}
+
+function reduceItem(product) {
+    let amount = document.querySelector(".amount").getAttribute("min-data");
+    if (amount == product.quantity) return;
+
+    let productId = product.product.id;
     let userId = document.getElementById("user-id").value;
-    let productId;
+    let size = product.size;
+    let quantity = product.num - 1;
+    let data = { pid: productId, uid: userId, num: quantity, size: size };
+    console.log({ data });
+    putItem("http://localhost:8080/btlweb/cart", data);
+    location.reload();
+    // let url = `http://localhost:8080/btlweb/cart?uid=${userId}`;
+    // render(url);
+}
+
+function increaseItem(product) {
+    let productId = product.product.id;
+    let userId = document.getElementById("user-id").value;
+    let size = product.size;
+    let quantity = product.num + 1;
+    let data = { pid: productId, uid: userId, num: quantity, size: size };
+    console.log({ data });
+    putItem("http://localhost:8080/btlweb/cart", data);
+    location.reload();
+    // let url = `http://localhost:8080/btlweb/cart?uid=${userId}`;
+    // render(url);
+}
+
+function removeItem(product) {
+    console.log(product);
 }
 
 function start() {
