@@ -3,13 +3,14 @@ package btlweb.mvc.dao;
 import java.util.List;
 
 import btlweb.mvc.model.User;
+import btlweb.mvc.model.dto.UserDto;
 
 public interface UserDao {
 	
 	List<User> getAll();
 	
 	int insertUser(User user); // return ve status. != 0: thanhcong, == 0: that bai
-	int update(User user); // 	return ve status. != 0: thanhcong, == 0: that bai
+	int update(UserDto user); // 	return ve status. != 0: thanhcong, == 0: that bai
 	User findUserByEmail(String email);
 	User findUserById(int id);
 

@@ -76,6 +76,7 @@
   	<url-pattern>/home/*</url-pattern>
   </servlet-mapping>
   
+  
   <servlet>
   	<servlet-name>Shop Servlet</servlet-name>
   	<servlet-class>btlweb.mvc.controller.ShopController</servlet-class>
@@ -154,6 +155,31 @@
   <servlet-mapping>
   	<servlet-name>Register Servlet</servlet-name>
   	<url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>Account Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.AccountController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Account Servlet</servlet-name>
+  	<url-pattern>/account/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>Address Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.AddressController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Address Servlet</servlet-name>
+  	<url-pattern>/address/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Update Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.UpdateController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Update Servlet</servlet-name>
+  	<url-pattern>/update/*</url-pattern>
   </servlet-mapping>
   
   

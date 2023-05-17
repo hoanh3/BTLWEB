@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 
 import btlweb.mvc.model.Category;
 import btlweb.mvc.model.User;
+import btlweb.mvc.model.dto.UserDto;
 import btlweb.mvc.service.UserService;
 import btlweb.mvc.service.impl.UserServiceImpl;
 import jakarta.servlet.ServletException;
@@ -98,7 +99,7 @@ public class UserApi extends HttpServlet{
 		}
 		
 		String payload = buffer.toString();
-		User user = _gson.fromJson(payload, User.class);
+		UserDto user = _gson.fromJson(payload, UserDto.class);
 		
 		int status = _userService.update(user);
 		
@@ -107,7 +108,7 @@ public class UserApi extends HttpServlet{
 			return;
 		} else {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-			System.out.println("cap nhat category khong thanh cong");
+			System.out.println("cap nhat user khong thanh cong");
 		}
 	}
 	

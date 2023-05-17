@@ -3,11 +3,12 @@ package btlweb.mvc.service;
 import java.util.List;
 
 import btlweb.mvc.model.User;
+import btlweb.mvc.model.dto.UserDto;
 
 public interface UserService {
 	List<User> getAll();
 	int insertUser(String email, String password);
-	int update(User user);
+	int update(UserDto user);
 	User findUserByEmail(String email);
 	User findUserById(int id);
 

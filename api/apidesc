@@ -11,7 +11,7 @@ user api {
 	GET 	/user					:lấy danh sách tất cả các user trong db
 	GET 	/user?pageId={id}		:lấy danh sách các user ở trang thứ {id}
 	GET 	/user/{id}				:lấy user có id = {id}
-	PUT		/user					:cập nhật user
+	PUT		/user/id				:cập nhật user
 	DELETE	/user/{id}				:xóa user có id = {id}
 }
 

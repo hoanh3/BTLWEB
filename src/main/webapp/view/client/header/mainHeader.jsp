@@ -23,6 +23,8 @@
         <link rel="stylesheet" href="${url}/css/blog.css" />
         <link rel="stylesheet" href="${url}/css/about.css" />
         <link rel="stylesheet" href="${url}/css/cart.css" />
+        <link rel="stylesheet" href="${url}/css/account.css" />
+        <link rel="stylesheet" href="${url}/css/address.css" />
     </head>
     <body>
         <input type="hidden" id="user-id" value="${sessionScope.user != null ? sessionScope.user.id : 0}" />
@@ -54,7 +56,7 @@
                             </div>
                         </div>
                         <div class="header__user">
-                            <a href="${pageContext.request.contextPath}/login" class="header__user-link">
+                            <a href="${pageContext.request.contextPath}/${sessionScope.user != null ? 'account' : 'login'}" class="header__user-link">
                                 <i class="control-icon fa-solid fa-user"></i>
                             </a>
                         </div>

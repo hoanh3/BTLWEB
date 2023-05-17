@@ -5,6 +5,7 @@ import java.util.List;
 import btlweb.mvc.dao.UserDao;
 import btlweb.mvc.dao.impl.UserDaoImpl;
 import btlweb.mvc.model.User;
+import btlweb.mvc.model.dto.UserDto;
 import btlweb.mvc.service.UserService;
 
 public class UserServiceImpl implements UserService{
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int update(User user) {
+	public int update(UserDto user) {
 		return _userDao.update(user);
 	}
 

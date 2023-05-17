@@ -16,7 +16,7 @@ async function getProduct() {
         return `
             <div class="col l-3 m-4 c-6">
                 <div class="product-information">
-                    <a href="product.html" class="product-item">
+                    <a href="${window.location.pathname}/product?pid=${product.product.id}" class="product-item">
                         <div class="product-item__img" style="background-image: url(http://localhost:8080${
                             product.thumbnail
                         });"></div>
