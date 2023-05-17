@@ -68,6 +68,23 @@ public class CORSInterceptor implements Filter {
 	        filterChain.doFilter(request, servletResponse);
 		} catch (Exception e) {
 			// TODO: handle exception
+			if(request.getServerName().equals("localhost") && request.getLocalPort() == 8080) {
+				// Authorize the origin, all headers, and all methods
+	            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
+	            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers", "*");
+	            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods",
+	                    "GET, OPTIONS, HEAD, PUT, POST, DELETE");
+
+	            HttpServletResponse resp = (HttpServletResponse) servletResponse;
+
+	            // CORS handshake (pre-flight request)
+	            if (request.getMethod().equals("OPTIONS")) {
+	                resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+	                return;
+	            }
+			}
+	        filterChain.doFilter(request, servletResponse);
+			System.out.println(request.getServerName() + " " + request.getLocalPort());
 			System.out.println("loi origin");
 			System.out.println(request.getHeader("Origin"));
 		}
