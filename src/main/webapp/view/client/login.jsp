@@ -28,7 +28,7 @@
                                 <div class="spacer"></div>
                 
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control email" placeholder=" ">
+                                    <input type="text" name="email" class="form-control email" placeholder=" ">
                                     <label for="username" class="form-label">Email</label>
                                     <span class="form-message"></span>
                                 </div>
@@ -78,20 +78,20 @@
                                 <div class="spacer"></div>
                     
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control firstname" placeholder=" ">
-                                    <label for="username" class="form-label">Họ</label>
+                                    <input type="text" name="last-name" class="form-control firstname" placeholder=" ">
+                                    <label for="last-name" class="form-label">Họ</label>
                                     <span class="form-message"></span>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control lastname" placeholder=" ">
-                                    <label for="username" class="form-label">Tên</label>
+                                    <input type="text" name="first-name" class="form-control lastname" placeholder=" ">
+                                    <label for="first-name" class="form-label">Tên</label>
                                     <span class="form-message"></span>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control email" placeholder=" ">
-                                    <label for="username" class="form-label">Email</label>
+                                    <input type="text" name="email" class="form-control email" placeholder=" ">
+                                    <label for="email" class="form-label">Email</label>
                                     <span class="form-message"></span>
                                 </div>
                     

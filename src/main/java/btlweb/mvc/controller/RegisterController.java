@@ -16,12 +16,15 @@ public class RegisterController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = req.getParameter("username");
+		String firstName = req.getParameter("first-name");
+		String lastName = req.getParameter("last-name");
+		
+		String username = req.getParameter("email");
 		String password = req.getParameter("password");
 		
 		try {
 			if(_userService.findUserByEmail(username) == null) {
-				int status = _userService.insertUser(username, BCrypt.hashpw(password, BCrypt.gensalt(12)));
+				int status = _userService.insertUser(username, BCrypt.hashpw(password, BCrypt.gensalt(12)), firstName, lastName);
 				if(status != 0) {
 					System.out.println("thanh cong");
 					resp.sendRedirect(req.getContextPath() + "/login?success");

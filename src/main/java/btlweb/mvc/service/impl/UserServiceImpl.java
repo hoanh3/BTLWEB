@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int insertUser(String email, String password) {
-		User user = new User(0, "", "", email, password, "", "", "", "", null);
+	public int insertUser(String email, String password, String firstName, String lastName) {
+		User user = new User(0, firstName, lastName, email, password, "", "", "", "", null);
 		return _userDao.insertUser(user);
 	}
 
