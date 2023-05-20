@@ -28,21 +28,21 @@ public class ProductDaoImpl implements ProductDao{
 			PreparedStatement statement = connection.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
 	        while (resultSet.next()) {
-	            Product product = new Product();
-	            product.setId(resultSet.getInt("id"));
-	            product.setTitle(resultSet.getString("title"));
-	            product.setRate(resultSet.getFloat("rate"));
-	            product.setPrice(resultSet.getInt("price"));
-	            product.setDiscount(resultSet.getInt("discount"));
-	            product.setThumbnail(resultSet.getString("thumbnail"));
-	            product.setDescription(resultSet.getString("description"));
-	            product.setCreatedAt(resultSet.getDate("create_at"));
-	            product.setUpdatedAt(resultSet.getDate("update_at"));
-	            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
-	            productList.add(product);
+	        	int id = resultSet.getInt(1);
+				String title = resultSet.getString(2);
+				int rate = resultSet.getInt(3);
+				int price = resultSet.getInt(4);
+				int discount = resultSet.getInt(5);
+				String thumbnail = resultSet.getString(6);
+				String description = resultSet.getString(7);
+				Date createAt = resultSet.getDate(8);
+				Date updateAt = resultSet.getDate(9);
+				Category category = new Category(resultSet.getInt(10), resultSet.getString(11));
+				productList.add(new Product(id, title, rate, price, discount, thumbnail, description, createAt, updateAt, category, new ArrayList<>()));
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
+	        System.out.println("loi getall product");
 	    } 
 	    return productList;
 	}
@@ -94,18 +94,17 @@ public class ProductDaoImpl implements ProductDao{
 	        PreparedStatement statement = connection.prepareStatement(sql);
 	        ResultSet resultSet = statement.executeQuery();
 	        while (resultSet.next()) {
-	        	Product product = new Product();
-	            product.setId(resultSet.getInt("id"));
-	            product.setTitle(resultSet.getString("title"));
-	            product.setRate(resultSet.getFloat("rate"));
-	            product.setPrice(resultSet.getInt("price"));
-	            product.setDiscount(resultSet.getInt("discount"));
-	            product.setThumbnail(resultSet.getString("thumbnail"));
-	            product.setDescription(resultSet.getString("description"));
-	            product.setCreatedAt(resultSet.getDate("create_at"));
-	            product.setUpdatedAt(resultSet.getDate("update_at"));
-	            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
-	            productList.add(product);
+	        	int id = resultSet.getInt(1);
+				String title = resultSet.getString(2);
+				int rate = resultSet.getInt(3);
+				int price = resultSet.getInt(4);
+				int discount = resultSet.getInt(5);
+				String thumbnail = resultSet.getString(6);
+				String description = resultSet.getString(7);
+				Date createAt = resultSet.getDate(8);
+				Date updateAt = resultSet.getDate(9);
+				Category category = new Category(resultSet.getInt(10), resultSet.getString(11));
+				productList.add(new Product(id, title, rate, price, discount, thumbnail, description, createAt, updateAt, category, new ArrayList<>()));
 	        }
 	    } catch (SQLException e) {
 	        System.out.println("loi productdao best seller");
@@ -124,18 +123,17 @@ public class ProductDaoImpl implements ProductDao{
 	        statement.setString(1, "%" + name + "%");
 	        ResultSet resultSet = statement.executeQuery();
 	        while (resultSet.next()) {
-	        	Product product = new Product();
-	            product.setId(resultSet.getInt("id"));
-	            product.setTitle(resultSet.getString("title"));
-	            product.setRate(resultSet.getFloat("rate"));
-	            product.setPrice(resultSet.getInt("price"));
-	            product.setDiscount(resultSet.getInt("discount"));
-	            product.setThumbnail(resultSet.getString("thumbnail"));
-	            product.setDescription(resultSet.getString("description"));
-	            product.setCreatedAt(resultSet.getDate("create_at"));
-	            product.setUpdatedAt(resultSet.getDate("update_at"));
-	            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
-	            products.add(product);
+	        	int id = resultSet.getInt(1);
+				String title = resultSet.getString(2);
+				int rate = resultSet.getInt(3);
+				int price = resultSet.getInt(4);
+				int discount = resultSet.getInt(5);
+				String thumbnail = resultSet.getString(6);
+				String description = resultSet.getString(7);
+				Date createAt = resultSet.getDate(8);
+				Date updateAt = resultSet.getDate(9);
+				Category category = new Category(resultSet.getInt(10), resultSet.getString(11));
+				products.add(new Product(id, title, rate, price, discount, thumbnail, description, createAt, updateAt, category, new ArrayList<>()));
 	        }
 	    } catch (SQLException ex) {
 	        ex.printStackTrace();
@@ -155,18 +153,17 @@ public class ProductDaoImpl implements ProductDao{
 	    	statement.setInt(1, productId);
 	    	ResultSet resultSet = statement.executeQuery();
 	    	while (resultSet.next()) {
-	            
-	                product = new Product();
-	                product.setId(resultSet.getInt("id"));
-		            product.setTitle(resultSet.getString("title"));
-		            product.setRate(resultSet.getFloat("rate"));
-		            product.setPrice(resultSet.getInt("price"));
-		            product.setDiscount(resultSet.getInt("discount"));
-		            product.setThumbnail(resultSet.getString("thumbnail"));
-		            product.setDescription(resultSet.getString("description"));
-		            product.setCreatedAt(resultSet.getDate("create_at"));
-		            product.setUpdatedAt(resultSet.getDate("update_at"));
-		            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
+	    		int id = resultSet.getInt(1);
+				String title = resultSet.getString(2);
+				int rate = resultSet.getInt(3);
+				int price = resultSet.getInt(4);
+				int discount = resultSet.getInt(5);
+				String thumbnail = resultSet.getString(6);
+				String description = resultSet.getString(7);
+				Date createAt = resultSet.getDate(8);
+				Date updateAt = resultSet.getDate(9);
+				Category category = new Category(resultSet.getInt(10), resultSet.getString(11));
+				product = new Product(id, title, rate, price, discount, thumbnail, description, createAt, updateAt, category, new ArrayList<>());
 	        }
 	    }
 	     catch (SQLException e) {
@@ -189,18 +186,17 @@ public class ProductDaoImpl implements ProductDao{
 	        statement.setString(1, catId);
 	        ResultSet resultSet = statement.executeQuery();
 	        while (resultSet.next()) {
-	        	Product product = new Product();
-	            product.setId(resultSet.getInt("id"));
-	            product.setTitle(resultSet.getString("title"));
-	            product.setRate(resultSet.getFloat("rate"));
-	            product.setPrice(resultSet.getInt("price"));
-	            product.setDiscount(resultSet.getInt("discount"));
-	            product.setThumbnail(resultSet.getString("thumbnail"));
-	            product.setDescription(resultSet.getString("description"));
-	            product.setCreatedAt(resultSet.getDate("create_at"));
-	            product.setUpdatedAt(resultSet.getDate("update_at"));
-	            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
-	            productList.add(product);
+	        	int id = resultSet.getInt(1);
+				String title = resultSet.getString(2);
+				int rate = resultSet.getInt(3);
+				int price = resultSet.getInt(4);
+				int discount = resultSet.getInt(5);
+				String thumbnail = resultSet.getString(6);
+				String description = resultSet.getString(7);
+				Date createAt = resultSet.getDate(8);
+				Date updateAt = resultSet.getDate(9);
+				Category category = new Category(resultSet.getInt(10), resultSet.getString(11));
+				productList.add(new Product(id, title, rate, price, discount, thumbnail, description, createAt, updateAt, category, new ArrayList<>()));
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -240,18 +236,17 @@ public class ProductDaoImpl implements ProductDao{
 	        statement.setInt(2, offset);
 	        ResultSet resultSet = statement.executeQuery();
 	        while (resultSet.next()) {
-	        	Product product = new Product();
-	            product.setId(resultSet.getInt("id"));
-	            product.setTitle(resultSet.getString("title"));
-	            product.setRate(resultSet.getFloat("rate"));
-	            product.setPrice(resultSet.getInt("price"));
-	            product.setDiscount(resultSet.getInt("discount"));
-	            product.setThumbnail(resultSet.getString("thumbnail"));
-	            product.setDescription(resultSet.getString("description"));
-	            product.setCreatedAt(resultSet.getDate("create_at"));
-	            product.setUpdatedAt(resultSet.getDate("update_at"));
-	            product.setCategory(new Category(resultSet.getInt("category_id"), resultSet.getString("title")));
-	            productList.add(product);
+	        	int id = resultSet.getInt(1);
+				String title = resultSet.getString(2);
+				int rate = resultSet.getInt(3);
+				int price = resultSet.getInt(4);
+				int discount = resultSet.getInt(5);
+				String thumbnail = resultSet.getString(6);
+				String description = resultSet.getString(7);
+				Date createAt = resultSet.getDate(8);
+				Date updateAt = resultSet.getDate(9);
+				Category category = new Category(resultSet.getInt(10), resultSet.getString(11));
+				productList.add(new Product(id, title, rate, price, discount, thumbnail, description, createAt, updateAt, category, new ArrayList<>()));
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();

@@ -46,6 +46,12 @@ public class ProductApi extends HttpServlet{
 				sendAsJson(resp, products);
 				return;
 			}
+			String relateId = req.getParameter("related");
+			if(relateId != null) {
+				List<Product> products = _productService.getProductByCatId(relateId, path, galeryPath);
+				sendAsJson(resp, products.subList(0, Math.min(6, products.size())));
+				return;
+			}
 			String search = req.getParameter("search");
 			if(search != null) {
 				List<Product> products = _productService.searchProductByName(search, path, galeryPath);
@@ -61,15 +67,25 @@ public class ProductApi extends HttpServlet{
 			String filter = req.getParameter("filter");
 			if(filter != null ) {
 				if(filter.equals("topsale")) {
-					List<Product> products = _productService.getTopSale(path, galeryPath);
-					sendAsJson(resp, products);
+					try {
+						List<Product> products = _productService.getTopSale(path, galeryPath);
+						sendAsJson(resp, products);						
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println("xung doi ");
+					}
 					return ;
 				} else if(filter.equals("bestseller")) {
-					List<Product> products = _productService.getBestSeller(path, galeryPath);
-					if(products.size() < 10) {
-						products = _productService.getTopSale(path, galeryPath);
+					try {
+						List<Product> products = _productService.getBestSeller(path, galeryPath);
+//						if(products.size() < 10) {
+//							products = _productService.getTopSale(path, galeryPath);
+//						}
+						sendAsJson(resp, products);						
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println("xung doi ");
 					}
-					sendAsJson(resp, products);
 					return ;
 				}				
 			}

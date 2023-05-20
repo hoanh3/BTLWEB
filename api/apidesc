@@ -17,6 +17,7 @@ user api {
 
 product api {
 	GET 	/product					:lấy danh sách tất cả các product trong db
+	GET 	/product?relate=			:lấy danh sách các product có liên quan đến sản phẩm
 	GET 	/product?cate-id={id}		:lấy danh sách các product của một danh mục
 	GET 	/product?pageId={id}		:lấy danh sách các product ở trang thứ {id}
 	GET 	/product?search=			:lấy danh sách các product có tên chứa từ khóa

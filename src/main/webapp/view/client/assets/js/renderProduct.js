@@ -1,6 +1,6 @@
 const pathAPI = "http://localhost:8080/btlweb/product";
 
-async function getProduct() {
+async function getProduct(path) {
     let option = {
         method: "GET",
         headers: {
@@ -8,7 +8,7 @@ async function getProduct() {
             origin: "http://127.0.0.1:5500/",
         },
     };
-    let data = await fetch(pathAPI, option);
+    let data = await fetch(path, option);
     let response = await data.json();
     console.log({ response });
 
@@ -16,7 +16,7 @@ async function getProduct() {
         return `
             <div class="col l-3 m-4 c-6">
                 <div class="product-information">
-                    <a href="${window.location.pathname}/product?pid=${product.id}" class="product-item">
+                    <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/product-detail?pid=${product.id}" class="product-item">
                         <div class="product-item__img" style="background-image: url(http://localhost:8080${
                             product.thumbnail
                         });"></div>
@@ -50,6 +50,57 @@ async function getProduct() {
         `;
     });
     document.querySelector(".product .product-list").innerHTML = await product_html.join("");
+}
+
+async function getBestSeller(path) {
+    let option = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            origin: "http://127.0.0.1:5500/",
+        },
+    };
+    let data = await fetch(path, option);
+    let response = await data.json();
+    console.log({ response });
+
+    const product_html = await response.map((product) => {
+        return `
+            <div class="col l-3 m-4 c-6">
+                <div class="product-information">
+                    <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/product-detail?pid=${product.id}" class="product-item">
+                        <div class="product-item__img" style="background-image: url(http://localhost:8080${
+                            product.thumbnail
+                        });"></div>
+                        <h4 class="product-item__name">${product.title}</h4>
+                        <p class="product-item__vendor">Vergency</p>
+                        <div class="product-item__review">
+                            <span class="rating">
+                                <i class="star-yellow fa-solid fa-star"></i>
+                                <i class="star-yellow fa-solid fa-star"></i>
+                                <i class="star-yellow fa-solid fa-star"></i>
+                                <i class="star-yellow fa-solid fa-star"></i>
+                                <i class="star-yellow fa-solid fa-star"></i>
+                            </span>
+                        </div>
+                        <div class="product-item__price">
+                            <span class="price-old">${product.price / 1000}.000đ</span>
+                            <span class="price-new">${product.discount / 1000}.000đ</span>
+                        </div>
+                        <div class="product-item__sale-off">50%</div>
+                    </a>
+                    <div class="product-item__quick-view">
+                        <a 
+                            class="quick-view--btn" 
+                            onclick='showQuickView(${JSON.stringify(product)})'
+                        >
+                            Xem nhanh
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
     document.querySelector(".product .best-saller").innerHTML = await product_html.join("");
 }
 
@@ -77,10 +128,10 @@ function showQuickView(product) {
     addToCartBtn.onclick = () => {
         let uid = document.getElementById("user-id").value;
         console.log(uid);
-        if(uid == 0) {
-            location.replace("http://localhost:8080/btlweb/login");
-            return;
-        }
+        // if(uid == 0) {
+        //     location.replace("http://localhost:8080/btlweb/login");
+        //     return;
+        // }
 
         let size = document.querySelector("input[name=size]:checked");
         let quantity = document.querySelector(".quantity-select .amount");
@@ -154,7 +205,8 @@ async function postData(url = "", data = {}) {
 }
 
 function start() {
-    getProduct();
+    getProduct(pathAPI + "?filter=topsale");
+    getBestSeller(pathAPI + "?filter=bestseller");
 }
 
 start();

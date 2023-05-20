@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:url value="/view/client/assets" var="url" />
         <!-- header begin -->
@@ -7,15 +8,16 @@
         <!-- header end -->
 
             <main class="container">
+                <input type="hidden" name="cate-id" id="cate-id" value="${product.category.id}">
                 <div class="grid wide">
                     <div class="row">
                         <div class="col l-12 m-12 c-12">
                             <ul class="breadcrumb">
                                 <li><a href="${pageContext.request.contextPath}/home">Trang chủ</a></li>
                                 <li><i class="fa-solid fa-angle-right"></i></li>
-                                <li><a href="${pageContext.request.contextPath}/shop?cate-id=1">T-SHIRTS</a></li>
+                                <li><a href="${pageContext.request.contextPath}/shop?cate-id=${product.category.id}">${product.category.title}</a></li>
                                 <li><i class="fa-solid fa-angle-right"></i></li>
-                                <li><a href="#">ACTION T-SHIRT/GREY</a></li>
+                                <li><a href="#">${product.title}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -25,60 +27,20 @@
                         <div class="col l-5 m-12 c-12">
                             <div class="product-image">
                                 <div class="big-img">
-                                    <img src="${url}/images/Products/product2.png" alt="" />
+                                    <img src="${product.thumbnail}" alt="" />
                                 </div>
                                 <div class="small-img">
                                     <i class="prev-icon fa-solid fa-chevron-left"></i>
                                     <div class="product-slider">
-                                        <div class="slider-item active">
-                                            <img
-                                                src="${url}/images/SliderQuickView/image1.png"
-                                                alt=""
-                                                class="slider-img"
-                                            />
-                                        </div>
-                                        <div class="slider-item">
-                                            <img
-                                                src="${url}/images/SliderQuickView/image2.png"
-                                                alt=""
-                                                class="slider-img"
-                                            />
-                                        </div>
-                                        <div class="slider-item">
-                                            <img
-                                                src="${url}/images/SliderQuickView/image3.png"
-                                                alt=""
-                                                class="slider-img"
-                                            />
-                                        </div>
-                                        <div class="slider-item">
-                                            <img
-                                                src="${url}/images/SliderQuickView/image4.png"
-                                                alt=""
-                                                class="slider-img"
-                                            />
-                                        </div>
-                                        <div class="slider-item">
-                                            <img
-                                                src="${url}/images/SliderQuickView/image5.png"
-                                                alt=""
-                                                class="slider-img"
-                                            />
-                                        </div>
-                                        <div class="slider-item">
-                                            <img
-                                                src="${url}/images/SliderQuickView/image6.png"
-                                                alt=""
-                                                class="slider-img"
-                                            />
-                                        </div>
-                                        <div class="slider-item">
-                                            <img
-                                                src="${url}/images/SliderQuickView/image7.png"
-                                                alt=""
-                                                class="slider-img"
-                                            />
-                                        </div>
+                                        <c:forEach var="p" items = "${product.galeries}">
+                                            <div class="slider-item">
+                                                <img
+                                                    src="${p.thumbnail}"
+                                                    alt=""
+                                                    class="slider-img"
+                                                />
+                                            </div>
+                                        </c:forEach>
                                     </div>
                                     <i class="next-icon fa-solid fa-chevron-right"></i>
                                 </div>
@@ -88,7 +50,7 @@
                         <!-- Product information -->
                         <div class="col l-5 m-12 c-12">
                             <div class="product-info">
-                                <div class="product-title">FIRE T-SHIRT/DARK GREY</div>
+                                <div class="product-title">${product.title}</div>
                                 <div class="product-rating">
                                     <span class="rating">
                                         <i class="star-yellow fa-solid fa-star"></i>
@@ -105,8 +67,8 @@
                                 </div>
 
                                 <div class="product-price">
-                                    <span>59.000đ</span>
-                                    <del>420.000đ</del>
+                                    <span><fmt:formatNumber type="number" pattern="###,###đ" value="${product.discount}"/></span>
+                                    <del><fmt:formatNumber type="number" pattern="###,###đ" value="${product.price}"/></del>
                                 </div>
 
                                 <div class="quick-view__size">
@@ -117,11 +79,11 @@
                                             <span>S</span>
                                         </label>
                                         <label for="medium" class="size-option">
-                                            <input type="radio" name="size" value="s" id="medium" />
+                                            <input type="radio" name="size" value="m" id="medium" />
                                             <span>M</span>
                                         </label>
                                         <label for="large" class="size-option">
-                                            <input type="radio" name="size" value="L" id="large" />
+                                            <input type="radio" name="size" value="l" id="large" />
                                             <span>L</span>
                                         </label>
                                         <label for="x-large" class="size-option sold-out">
@@ -259,14 +221,11 @@
                                 </div>
                                 <div class="product-description">
                                     <div class="container-desc">
-                                        <p>• Thông tin sản phẩm:</p>
-                                        <p>&nbsp;Name: FIRE T-SHIRT/DARK GREY</p>
-                                        <p>&nbsp;Họa tiết: In Lụa</p>
-                                        <p>
-                                            &nbsp;COLOR: BLACK / WHITE / DARK GREEN / DARK BROW / DARK GREY / DARK RED
-                                        </p>
-                                        <p>&nbsp;SIZE: S/ M / L / XL</p>
-                                        <p>&nbsp;MATERIAL: PREMIUM COTTON.</p>
+                                        <pre style="
+                                        font-family: sans-serif;
+                                        font-weight: 400;
+                                        font-size: 12px;
+                                    ">${product.description}</pre>
                                         <p>
                                             <img src="${url}/images/vgc-tee_size_chart.jpg" alt="" class="desc-size" />
                                         </p>
@@ -297,90 +256,7 @@
                                     <h3 class="title-group">Sản phẩm liên quan</h3>
                                 </div>
                                 <ul class="list-related">
-                                    <li class="item-related">
-                                        <div class="related-img">
-                                            <img src="${url}/images/Products/product1.png" alt="" />
-                                        </div>
-                                        <div class="related-info">
-                                            <a href="#" class="related-link">
-                                                <h3 class="title">FIRE T-SHIRT/RED</h3>
-                                                <p class="price">
-                                                    <span class="price-new">59.000đ</span>
-                                                    <span class="price-old">420.000đ</span>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="item-related">
-                                        <div class="related-img">
-                                            <img src="${url}/images/Products/product7.png" alt="" />
-                                        </div>
-                                        <div class="related-info">
-                                            <a href="#" class="related-link">
-                                                <h3 class="title">FIRE T-SHIRT/DARK GREY</h3>
-                                                <p class="price">
-                                                    <span class="price-new">59.000đ</span>
-                                                    <span class="price-old">420.000đ</span>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="item-related">
-                                        <div class="related-img">
-                                            <img src="${url}/images/Products/product3.png" alt="" />
-                                        </div>
-                                        <div class="related-info">
-                                            <a href="#" class="related-link">
-                                                <h3 class="title">FIRE T-SHIRT/BROWN</h3>
-                                                <p class="price">
-                                                    <span class="price-new">59.000đ</span>
-                                                    <span class="price-old">420.000đ</span>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="item-related">
-                                        <div class="related-img">
-                                            <img src="${url}/images/Products/product2.png" alt="" />
-                                        </div>
-                                        <div class="related-info">
-                                            <a href="#" class="related-link">
-                                                <h3 class="title">FIRE T-SHIRT/DARK GREY</h3>
-                                                <p class="price">
-                                                    <span class="price-new">59.000đ</span>
-                                                    <span class="price-old">420.000đ</span>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="item-related">
-                                        <div class="related-img">
-                                            <img src="${url}/images/Products/product5.png" alt="" />
-                                        </div>
-                                        <div class="related-info">
-                                            <a href="#" class="related-link">
-                                                <h3 class="title">FIRE T-SHIRT/RED</h3>
-                                                <p class="price">
-                                                    <span class="price-new">59.000đ</span>
-                                                    <span class="price-old">420.000đ</span>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li class="item-related">
-                                        <div class="related-img">
-                                            <img src="${url}/images/Products/product6.png" alt="" />
-                                        </div>
-                                        <div class="related-info">
-                                            <a href="#" class="related-link">
-                                                <h3 class="title"></h3>
-                                                <p class="price">
-                                                    <span class="price-new">59.000đ</span>
-                                                    <span class="price-old">420.000đ</span>
-                                                </p>
-                                            </a>
-                                        </div>
-                                    </li>
+                                    
                                 </ul>
                             </div>
 
@@ -424,6 +300,7 @@
         </div>
     </body>
 
-    <script src="{url}/js/app.js"></script>
-    <script src="{url}/js/product.js"></script>
+    <script src="${url}/js/app.js"></script>
+    <script src="${url}/js/context.js"></script>
+    <script src="${url}/js/product.js"></script>
 </html>

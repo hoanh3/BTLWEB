@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.ietf.jgss.Oid;
+
 import btlweb.mvc.dao.GaleryDao;
 import btlweb.mvc.dao.ProductDao;
 import btlweb.mvc.dao.impl.GaleryDaoImpl;
@@ -116,4 +118,11 @@ public class ProductServiceImpl implements ProductService{
 		return _productDao.deleteProduct(id);
 	}
 
+	public static void main(String[] args) {
+		ProductService productService = new ProductServiceImpl();
+		List<Product> products = productService.getProductByCatId("1", "", "");
+		for(Product product : products) {
+			System.out.println(product);
+		}
+	}
 }

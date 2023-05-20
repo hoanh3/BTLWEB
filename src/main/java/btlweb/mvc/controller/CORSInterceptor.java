@@ -84,7 +84,7 @@ public class CORSInterceptor implements Filter {
 	            }
 			}
 	        filterChain.doFilter(request, servletResponse);
-			System.out.println(request.getServerName() + " " + request.getLocalPort());
+//			System.out.println(request.getServerName() + " " + request.getLocalPort());
 		}
 	}
     

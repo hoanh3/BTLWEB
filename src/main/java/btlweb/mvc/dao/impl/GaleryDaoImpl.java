@@ -13,9 +13,6 @@ import btlweb.mvc.model.Product;
 import btlweb.mvc.dbconnect.MySQLConnect;
 
 public class GaleryDaoImpl implements GaleryDao{
-	Connection conn = null;
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
 	@Override
 	public List<Galery> getGaleryByProductId(int productId) {
 		// TODO Auto-generated method stub
@@ -23,16 +20,16 @@ public class GaleryDaoImpl implements GaleryDao{
 	    List<Galery> galeryList = new ArrayList<>();
 
 	    try {
-	        conn = MySQLConnect.getConnection();
-	        stmt = conn.prepareStatement("SELECT * FROM galery WHERE product_id=?");
-	        stmt.setInt(1, productId);
-	        rs = stmt.executeQuery();
+	        Connection connection = MySQLConnect.getConnection();
+	        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM galery WHERE product_id=?");
+	        preparedStatement.setInt(1, productId);
+	        ResultSet resultSet = preparedStatement.executeQuery();
 
-	        while (rs.next()) {
+	        while (resultSet.next()) {
 	        	Galery galery = new Galery();
-	            galery.setId( rs.getInt("id"));
-	            galery.setProductId(rs.getInt("product_id"));
-	            galery.setThumbnail(rs.getString("thumbnail"));
+	            galery.setId( resultSet.getInt("id"));
+	            galery.setProductId(resultSet.getInt("product_id"));
+	            galery.setThumbnail(resultSet.getString("thumbnail"));
 
 	            
 	            galeryList.add(galery);
@@ -52,13 +49,13 @@ public class GaleryDaoImpl implements GaleryDao{
 	    
 
 	    try {
-	        conn = MySQLConnect.getConnection();
+	    	Connection connection = MySQLConnect.getConnection();
 	        int pageSize = 8; 
 		    int offset = (pageId - 1) * pageSize;
-	        stmt = conn.prepareStatement("SELECT * FROM galery LIMIT ? OFFSET ?");
-	        stmt.setInt(1, pageSize);
-	        stmt.setInt(2, offset);
-	        rs = stmt.executeQuery();
+		    PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM galery LIMIT ? OFFSET ?");
+		    preparedStatement.setInt(1, pageSize);
+		    preparedStatement.setInt(2, offset);
+		    ResultSet rs = preparedStatement.executeQuery();
 
 	        while (rs.next()) {
 	        	Galery galery = new Galery();
@@ -78,11 +75,11 @@ public class GaleryDaoImpl implements GaleryDao{
 	public int getNumOfGalery() {
 		// TODO Auto-generated method stub
 		int count = 0;
-	    Connection conn = MySQLConnect.getConnection();
 	    String query = "SELECT COUNT(*) FROM gallery";
 	    try {
-	    	stmt = conn.prepareStatement(query);
-	        rs = stmt.executeQuery();
+	    	Connection connection = MySQLConnect.getConnection();
+	    	PreparedStatement preparedStatement = connection.prepareStatement(query);
+	    	ResultSet rs = preparedStatement.executeQuery();
 	        while (rs.next()) {
 	            count = rs.getInt(1);
 	        }
@@ -95,13 +92,13 @@ public class GaleryDaoImpl implements GaleryDao{
 	@Override
 	public int insertGalery(Galery product) {
 		// TODO Auto-generated method stub
-		Connection conn = MySQLConnect.getConnection();
 	    int result = 0;
 	    try {
-	        stmt = conn.prepareStatement("INSERT INTO Galery(product_id, thumbnail) VALUES(?, ?)");
-	        stmt.setInt(1, product.getProductId());
-	        stmt.setString(2, product.getThumbnail());
-	        result = stmt.executeUpdate();
+	    	Connection connection = MySQLConnect.getConnection();
+	    	PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Galery(product_id, thumbnail) VALUES(?, ?)");
+	        preparedStatement.setInt(1, product.getProductId());
+	        preparedStatement.setString(2, product.getThumbnail());
+	        result = preparedStatement.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } 
@@ -111,14 +108,14 @@ public class GaleryDaoImpl implements GaleryDao{
 	@Override
 	public int updateGalery(Galery product) {
 		// TODO Auto-generated method stub
-		Connection conn = MySQLConnect.getConnection();
 		int result = 0;
 		try {
-			stmt = conn.prepareStatement("UPDATE galery SET product_id = ?, thumbnail = ? WHERE id = ?");
-			stmt.setInt(1, product.getProductId());
-			stmt.setString(2, product.getThumbnail());
-			stmt.setInt(3, product.getId());
-			result = stmt.executeUpdate();
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE galery SET product_id = ?, thumbnail = ? WHERE id = ?");
+			preparedStatement.setInt(1, product.getProductId());
+			preparedStatement.setString(2, product.getThumbnail());
+			preparedStatement.setInt(3, product.getId());
+			result = preparedStatement.executeUpdate();
 		}
 		catch (SQLException e) {
 			 e.printStackTrace();
@@ -130,12 +127,12 @@ public class GaleryDaoImpl implements GaleryDao{
 	public int deleteGalery(int id) {
 		// TODO Auto-generated method stub
 		int rows = 0;
+		String sql = "DELETE FROM galery WHERE id = ?";
 	    try {
-	        conn = MySQLConnect.getConnection();
-	        String sql = "DELETE FROM galery WHERE id = ?";
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setInt(1, id);
-	        rows = stmt.executeUpdate();
+	    	Connection connection = MySQLConnect.getConnection();
+	    	PreparedStatement preparedStatement = connection.prepareStatement(sql);
+	    	preparedStatement.setInt(1, id);
+	        rows = preparedStatement.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
@@ -147,12 +144,12 @@ public class GaleryDaoImpl implements GaleryDao{
 		// TODO Auto-generated method stub
 		
 		Galery galery = null;
+		String sql = "SELECT * FROM galery WHERE id=?";
 	    try {
-	        conn = MySQLConnect.getConnection();
-	        String sql = "SELECT * FROM galery WHERE id=?";
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setInt(1, id);
-	        rs = stmt.executeQuery();
+	    	Connection connection = MySQLConnect.getConnection();
+	        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+	        preparedStatement.setInt(1, id);
+	        ResultSet rs = preparedStatement.executeQuery();
 
 	        if (rs.next()) {
 	        	galery = new Galery();

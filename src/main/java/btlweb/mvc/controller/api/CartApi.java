@@ -88,6 +88,10 @@ public class CartApi extends HttpServlet{
 			String payload = buffer.toString();
 			
 			ItemDto itemDto = _gson.fromJson(payload, ItemDto.class);
+			if(itemDto.getUid() == 0) {
+				System.out.println(req.getLocalPort());
+				resp.sendRedirect(req.getContextPath() + "/login");
+			}
 			
 			Product product = _productService.getProductById(itemDto.getPid(), path, galeryPath);
 			

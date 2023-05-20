@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="${url}/css/contact.css" />
         <link rel="stylesheet" href="${url}/css/blog.css" />
         <link rel="stylesheet" href="${url}/css/about.css" />
+        <link rel="stylesheet" href="${url}/css/product.css" />
         <link rel="stylesheet" href="${url}/css/cart.css" />
         <link rel="stylesheet" href="${url}/css/account.css" />
         <link rel="stylesheet" href="${url}/css/address.css" />
