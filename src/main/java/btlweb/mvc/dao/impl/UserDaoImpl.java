@@ -220,5 +220,34 @@ public class UserDaoImpl implements UserDao{
 		System.out.println(userDao.delete(1));
 	}
 
+	@Override
+	public User adminFindByEmail(String email) {
+		// TODO Auto-generated method stub
+		User user = null;
+		   try {
+			  Connection conn = MySQLConnect.getConnection();
+		      String sql = "SELECT U.*, R.name FROM user as U, role as R where email = ? and U.role_id = R.id and U.role_id = 1;";
+		      PreparedStatement ps = conn.prepareStatement(sql);
+		      ps.setString(1, email);
+		      ResultSet rs = ps.executeQuery();
+		      if (rs.next()) {
+		         user = new User();
+		         user.setId(rs.getInt("id"));
+		         user.setFirstName(rs.getString("first_name"));
+		         user.setLastName(rs.getString("last_name"));
+		         user.setEmail(rs.getString("email"));
+		         user.setPassword(rs.getString("password"));
+		         user.setPhoneNumber(rs.getString("phoneNumber"));
+		         user.setCity(rs.getString("city"));
+		         user.setDistrict(rs.getString("district"));
+		         user.setStreetAddress(rs.getString("street_address"));
+		         user.setRole(new Role(rs.getInt("role_id"), rs.getString("name")));
+		      }
+		   } catch (SQLException e) {
+		      e.printStackTrace();
+		   } 
+		   return user;
+	}
+
 
 }

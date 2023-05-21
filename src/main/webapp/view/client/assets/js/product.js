@@ -41,7 +41,7 @@ async function getRelatedProduct(path) {
         return `
         <li class="item-related">
             <div class="related-img">
-                <img src="http://localhost:8080${
+                <img src="${
                     product.thumbnail
                 }" alt="" />
             </div>

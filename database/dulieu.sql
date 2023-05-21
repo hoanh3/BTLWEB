@@ -38,7 +38,7 @@ INSERT INTO `btl`.`product`
 `update_at`,
 `category_id`)
 VALUES
-('WORLD MAP T-SHIRT/RED', 5.0, 420000, 59000, 'worldmap.jpg', '• Thông tin sản phẩm:
+('WORLD MAP T-SHIRT/RED', 5.0, 420000, 59000, 'https://res.cloudinary.com/dasj31isc/image/upload/v1684598425/product/worldmap_mt3wdt.webp', '• Thông tin sản phẩm:
 
  WORLD MAP T-SHIRT
 
@@ -49,7 +49,7 @@ VALUES
  SIZE: M / L / XL
 
  MATERIAL: PREMIUM COTTON.', '2023-04-12 18:00:00', '2023-04-12 18:00:00', 1),
- ('SWEATER SWEATER/YELLOW', 5.0, 560000, 159000, 'sweater1.jpg', '• Thông tin sản phẩm:
+ ('SWEATER SWEATER/YELLOW', 5.0, 560000, 159000, 'https://res.cloudinary.com/dasj31isc/image/upload/v1684598454/product/sweater1_zipgz8.webp', '• Thông tin sản phẩm:
 
  SWEATER SWEATER/YELLOW
 
@@ -60,7 +60,7 @@ VALUES
  SIZE: M / L / XL
 
  MATERIAL: PREMIUM COTTON.', '2023-04-15 18:00:00', '2023-04-15 18:00:00', 3),
- ('IDENTIFY T-SHIRT/RED', 5.0, 420000, 59000, 'identity.jpg', '• Thông tin sản phẩm:
+ ('IDENTIFY T-SHIRT/RED', 5.0, 420000, 59000, 'https://res.cloudinary.com/dasj31isc/image/upload/v1684598453/product/identity_ghq51n.webp', '• Thông tin sản phẩm:
 
  IDENTIFY T-SHIRT
 
@@ -71,7 +71,7 @@ VALUES
  SIZE: M / L / XL
 
  MATERIAL: PREMIUM COTTON.', '2023-04-15 18:00:00', '2023-04-15 18:00:00', 1),
- ('FLOAT ICONS T-SHIRT/DARK BROW', 5.0, 420000, 59000, 'float.jpg', '• Thông tin sản phẩm:
+ ('FLOAT ICONS T-SHIRT/DARK BROW', 5.0, 420000, 59000, 'https://res.cloudinary.com/dasj31isc/image/upload/v1684598454/product/float_vgpfmm.webp', '• Thông tin sản phẩm:
 
  FLOAT ICONS T-SHIRT
 
@@ -82,7 +82,7 @@ VALUES
  SIZE: M / L / XL
 
  MATERIAL: PREMIUM COTTON.', '2023-04-15 18:00:00', '2023-04-15 18:00:00', 1),
- ('SWEATER SWEATER BEAR/GREY', 5.0, 560000, 189000, 'sweater2.jpg', '• Thông tin sản phẩm:
+ ('SWEATER SWEATER BEAR/GREY', 5.0, 560000, 189000, 'https://res.cloudinary.com/dasj31isc/image/upload/v1684598455/product/sweater2_pqcuez.webp', '• Thông tin sản phẩm:
 
  SWEATER SWEATER BEAR/GREY
 
@@ -93,7 +93,7 @@ VALUES
  SIZE: M / L / XL
 
  MATERIAL: PREMIUM COTTON.', '2023-04-15 18:00:00', '2023-04-15 18:00:00', 3),
- ('POLO POLO BASIC/GREY', 5.0, 360000, 129000, 'polo1.jpg', '• Thông tin sản phẩm:
+ ('POLO POLO BASIC/GREY', 5.0, 360000, 129000, 'https://res.cloudinary.com/dasj31isc/image/upload/v1684598455/product/polo1_ftzogf.webp', '• Thông tin sản phẩm:
 
  POLO POLO BASIC/GREY
 
@@ -104,7 +104,7 @@ VALUES
  SIZE: M / L / XL
 
  MATERIAL: PREMIUM COTTON.', '2023-04-15 18:00:00', '2023-04-15 18:00:00', 4),
- ('POLO POLO BLACKWHITE/BLACK', 5.0, 360000, 149000, 'polo2.jpg', '• Thông tin sản phẩm:
+ ('POLO POLO BLACKWHITE/BLACK', 5.0, 360000, 149000, 'https://res.cloudinary.com/dasj31isc/image/upload/v1684598453/product/polo2_fee0ac.jpg', '• Thông tin sản phẩm:
 
  POLO POLO BLACKWHITE/BLACK
 
@@ -115,7 +115,7 @@ VALUES
  SIZE: M / L / XL
 
  MATERIAL: PREMIUM COTTON.', '2023-04-15 18:00:00', '2023-04-15 18:00:00', 4),
- ('SHIRT SHIRT BASIC/BLUE', 5.0, 360000, 249000, 'shirt1.jpg', '• Thông tin sản phẩm:
+ ('SHIRT SHIRT BASIC/BLUE', 5.0, 360000, 249000, 'https://res.cloudinary.com/dasj31isc/image/upload/v1684598454/product/shirt1_e2h53v.webp', '• Thông tin sản phẩm:
 
  SHIRT SHIRT BASIC/BLUE
 
@@ -126,7 +126,7 @@ VALUES
  SIZE: M / L / XL
 
  MATERIAL: PREMIUM COTTON.', '2023-04-15 18:00:00', '2023-04-15 18:00:00', 2),
- ('SHIRT SHIRT CARO/DIOR', 5.0, 380000, 249000, 'shirt2.jpg', '• Thông tin sản phẩm:
+ ('SHIRT SHIRT CARO/DIOR', 5.0, 380000, 249000, 'https://res.cloudinary.com/dasj31isc/image/upload/v1684598455/product/shirt2_u8so06.jpg', '• Thông tin sản phẩm:
 
  SHIRT SHIRT CARO/DIOR
 

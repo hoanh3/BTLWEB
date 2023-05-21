@@ -15,9 +15,6 @@ import btlweb.mvc.model.Item;
 import btlweb.mvc.model.Product;
 
 public class CartItemDaoImpl implements CartItemDao{
-	private Connection _connection = null;
-	private PreparedStatement _pStatement = null;
-	private ResultSet _resultSet = null;
 
 	@Override
 	public List<Item> getCart(int userId) {
@@ -28,18 +25,18 @@ public class CartItemDaoImpl implements CartItemDao{
 				+ "where `user_id` = ?;";
 
 	    try {
-	    	_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query);
-			_pStatement.setInt(1, userId);
-			_resultSet = _pStatement.executeQuery();
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, userId);
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-	        while (_resultSet.next()) {
-	        	int id = _resultSet.getInt(1);
-	        	int nuserId = _resultSet.getInt(2);
-	        	int productId = _resultSet.getInt(3);
-	        	int size = _resultSet.getInt(4);
-	        	int num = _resultSet.getInt(5);
-	        	int price = _resultSet.getInt(6);
+	        while (resultSet.next()) {
+	        	int id = resultSet.getInt(1);
+	        	int nuserId = resultSet.getInt(2);
+	        	int productId = resultSet.getInt(3);
+	        	int size = resultSet.getInt(4);
+	        	int num = resultSet.getInt(5);
+	        	int price = resultSet.getInt(6);
 	        	
 	        	items.add(new Item(id, userId, new Product(productId), size, num, price));
 	        }
@@ -56,15 +53,15 @@ public class CartItemDaoImpl implements CartItemDao{
 				+ "VALUES "
 				+ "(?,?,?,?,?);";
 		try {
-			_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query);
-			_pStatement.setInt(1, item.getUserId());
-			_pStatement.setInt(2, item.getProduct().getId());
-			_pStatement.setInt(3, item.getSize());
-			_pStatement.setInt(4, item.getNum());
-			_pStatement.setInt(5, item.getPrice());
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, item.getUserId());
+			preparedStatement.setInt(2, item.getProduct().getId());
+			preparedStatement.setInt(3, item.getSize());
+			preparedStatement.setInt(4, item.getNum());
+			preparedStatement.setInt(5, item.getPrice());
 			
-			_pStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -78,11 +75,11 @@ public class CartItemDaoImpl implements CartItemDao{
 		String query = "DELETE FROM `cart_item`\r\n"
 				+ "WHERE `id` = ?;";
 		try {
-			_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query);
-			_pStatement.setInt(1, id);
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
 			
-			_pStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("loi CartItemDao");
@@ -98,14 +95,14 @@ public class CartItemDaoImpl implements CartItemDao{
 				+ "`num` = ?\r\n"
 				+ "WHERE `user_id` = ? AND  `product_id` = ? AND `size_id` = ?;\r\n";
 		try {
-			_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query);
-			_pStatement.setInt(1, item.getNum());
-			_pStatement.setInt(2, item.getUserId());
-			_pStatement.setInt(3, item.getProduct().getId());
-			_pStatement.setInt(4, item.getSize());
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, item.getNum());
+			preparedStatement.setInt(2, item.getUserId());
+			preparedStatement.setInt(3, item.getProduct().getId());
+			preparedStatement.setInt(4, item.getSize());
 			
-			_pStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -120,14 +117,14 @@ public class CartItemDaoImpl implements CartItemDao{
 		String query = "SELECT SUM(`price`) FROM `cart_item`"
 				+ "WHERE `user_id` = ?;";
 		try {
-			_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query);
-			_pStatement.setInt(1, userId);
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, userId);
 			
-			_resultSet = _pStatement.executeQuery();
+			ResultSet resultSet = preparedStatement.executeQuery();
 			
-			while(_resultSet.next()) {
-				totalMoney = _resultSet.getInt(1);
+			while(resultSet.next()) {
+				totalMoney = resultSet.getInt(1);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -141,11 +138,11 @@ public class CartItemDaoImpl implements CartItemDao{
 		String query = "DELETE FROM `cart_item`\r\n"
 				+ "WHERE `user_id` = ?;";
 		try {
-			_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query);
-			_pStatement.setInt(1, userId);
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, userId);
 			
-			_pStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("loi CartItemDao");
@@ -166,19 +163,19 @@ public class CartItemDaoImpl implements CartItemDao{
 				+ "where `user_id` = ? and `product_id` = ?;";
 
 	    try {
-	    	_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query);
-			_pStatement.setInt(1, userId);
-			_pStatement.setInt(2, productId);
-			_resultSet = _pStatement.executeQuery();
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setInt(2, productId);
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-	        while (_resultSet.next()) {
-	        	int id = _resultSet.getInt(1);
-	        	int nuserId = _resultSet.getInt(2);
-	        	int nproductId = _resultSet.getInt(3);
-	        	int size = _resultSet.getInt(4);
-	        	int num = _resultSet.getInt(5);
-	        	int price = _resultSet.getInt(6);
+	        while (resultSet.next()) {
+	        	int id = resultSet.getInt(1);
+	        	int nuserId = resultSet.getInt(2);
+	        	int nproductId = resultSet.getInt(3);
+	        	int size = resultSet.getInt(4);
+	        	int num = resultSet.getInt(5);
+	        	int price = resultSet.getInt(6);
 	        	
 	        	item = new Item(0, userId, new Product(productId), size, num, price);
 	        }

@@ -11,29 +11,29 @@ public class GaleryServiceImpl implements GaleryService{
 	private GaleryDao _galeryDao = new GaleryDaoImpl();
 
 	@Override
-	public Galery getGaleryById(int id, String path) {
+	public Galery getGaleryById(int id) {
 		// TODO Auto-generated method stub
 		Galery galery = _galeryDao.getGaleryById(id);
-		galery.setThumbnail(path + galery.getThumbnail());
+		galery.setThumbnail(galery.getThumbnail());
 		return galery;
 	}
 
 	@Override
-	public List<Galery> getGaleryByProductId(int productId, String path) {
+	public List<Galery> getGaleryByProductId(int productId) {
 		// TODO Auto-generated method stub
 		List<Galery> galeries = _galeryDao.getGaleryByProductId(productId);
 		for(Galery galery : galeries) {
-			galery.setThumbnail(path + galery.getThumbnail());
+			galery.setThumbnail(galery.getThumbnail());
 		}
 		return galeries;
 	}
 
 	@Override
-	public List<Galery> getGaleryInPage(int pageId, String path) {
+	public List<Galery> getGaleryInPage(int pageId) {
 		// TODO Auto-generated method stub
 		List<Galery> galeries = _galeryDao.getGaleryInPage(pageId);
 		for(Galery galery : galeries) {
-			galery.setThumbnail(path + galery.getThumbnail());
+			galery.setThumbnail(galery.getThumbnail());
 		}
 		return galeries;
 	}

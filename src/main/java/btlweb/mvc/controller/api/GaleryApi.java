@@ -36,12 +36,11 @@ public class GaleryApi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String path = req.getContextPath() + "/view/client/assets/images/galery/";
 		
 		if(pathInfo == null || pathInfo.equals("/")) {
 			String pageId = req.getParameter("pageId");
 			if(pageId != null) {
-				List<Galery> galeries = _galeryService.getGaleryInPage(Integer.parseInt(pageId), path);
+				List<Galery> galeries = _galeryService.getGaleryInPage(Integer.parseInt(pageId));
 				sendAsJson(resp, galeries);
 				return ;
 			}
@@ -55,7 +54,7 @@ public class GaleryApi extends HttpServlet{
 		}
 		
 		int galeryId = Integer.parseInt(args[1]);
-		Galery galery = _galeryService.getGaleryById(galeryId, path);
+		Galery galery = _galeryService.getGaleryById(galeryId);
 		if(galery == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return ;
@@ -67,7 +66,6 @@ public class GaleryApi extends HttpServlet{
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String path = req.getContextPath() + "/view/client/assets/images/galery/";
 
 		if(pathInfo == null || pathInfo.equals("/")){
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
@@ -84,7 +82,7 @@ public class GaleryApi extends HttpServlet{
 		int galeryId = Integer.parseInt(splits[1]);
 		
 		
-		Galery galery = _galeryService.getGaleryById(galeryId, path);
+		Galery galery = _galeryService.getGaleryById(galeryId);
 		
 		if(galery == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);

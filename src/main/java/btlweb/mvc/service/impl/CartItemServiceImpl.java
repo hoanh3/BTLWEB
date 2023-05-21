@@ -14,11 +14,11 @@ public class CartItemServiceImpl implements CartItemService{
 	private ProductService _productService = new ProductServiceImpl();
 
 	@Override
-	public List<Item> getCart(int userId, String path, String pathGalery) {
+	public List<Item> getCart(int userId) {
 		// TODO Auto-generated method stub
 		List<Item> items = _cartItemDao.getCart(userId);
 		for(Item item : items) {
-			item.setProduct(_productService.getProductById(item.getProduct().getId(), path, pathGalery));
+			item.setProduct(_productService.getProductById(item.getProduct().getId()));
 		}
 		return items;
 	}
@@ -67,6 +67,6 @@ public class CartItemServiceImpl implements CartItemService{
 		ProductService _productService = new ProductServiceImpl();
 		CartItemService cartItemService = new CartItemServiceImpl();
 		
-		cartItemService.addItem(new Item(0, 2, _productService.getProductById(1, "", ""), 1, 1, 59000));
+		cartItemService.addItem(new Item(0, 2, _productService.getProductById(1), 1, 1, 59000));
 	}
 }

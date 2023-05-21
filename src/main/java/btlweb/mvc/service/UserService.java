@@ -10,6 +10,7 @@ public interface UserService {
 	int insertUser(String email, String password, String firstName, String lastName);
 	int update(UserDto user);
 	User findUserByEmail(String email);
+	User adminFindUserByEmail(String email);
 	User findUserById(int id);
 
 

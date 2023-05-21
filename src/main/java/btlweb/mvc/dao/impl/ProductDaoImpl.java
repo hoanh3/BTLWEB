@@ -1,6 +1,7 @@
 package btlweb.mvc.dao.impl;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -256,11 +257,11 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public int insertProduct(Product product) {
 		// TODO Auto-generated method stub
-		int result = 0;
+		int pid = 0;
+		String query = "INSERT INTO product (title, rate, price, discount, thumbnail, description, create_at, update_at, category_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	    try {
 	        Connection connection = MySQLConnect.getConnection();
-	        String query = "INSERT INTO product (title, rate, price, discount, thumbnail, description, create_at, update_at, category_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	        PreparedStatement statement = connection.prepareStatement(query);
+	        PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 	        statement.setString(1, product.getTitle());
 	        statement.setFloat(2, product.getRate());
 	        statement.setInt(3, product.getPrice());
@@ -270,11 +271,17 @@ public class ProductDaoImpl implements ProductDao{
 	        statement.setDate(7, new java.sql.Date(product.getCreatedAt().getTime()));
 	        statement.setDate(8, new java.sql.Date(product.getUpdatedAt().getTime()));
 	        statement.setInt(9, product.getCategory().getId());
-	        result = statement.executeUpdate();
+	        
+	        statement.executeUpdate();
+			
+			ResultSet resultSet = statement.getGeneratedKeys();
+			while(resultSet.next()) {
+				pid = resultSet.getInt(1);
+			}
 	    } catch (SQLException ex) {
-	        ex.printStackTrace();
+	        ex.printStackTrace(); 
 	    } 
-	    return result;
+	    return pid;
 	}
 
 	@Override
@@ -317,12 +324,33 @@ public class ProductDaoImpl implements ProductDao{
 	    return rowDeleted;
 	}
 	
+	
+	
 	public static void main(String[] args) {
 		ProductDao abc = new ProductDaoImpl();
-		System.out.println(abc.getProductByCatId("1"));
+		System.out.println(abc.insertProduct(new Product(0, "test", 0, 0, 0, "test", "test", new Date(0), new Date(0), new Category(1, "test"), new ArrayList<>())));
 //		List<Product> productList = abc.searchProductByName("SWEATER");
 //		for (Product i : productList) {
 //		    System.out.println(i);
 //		}
+	}
+
+	@Override
+	public int getLastesProduct() {
+		int pid = 0;
+		String query = "SELECT * FROM product;";
+		try {
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement pStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			
+			ResultSet resultSet = pStatement.getGeneratedKeys();
+			while(resultSet.next()) {
+				pid = resultSet.getInt(1);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("loi product dao");
+		}
+		return pid;
 	}
 }

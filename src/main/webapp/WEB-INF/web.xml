@@ -64,6 +64,62 @@
   <!--API end-->
   
   <!--Admin Begin-->
+  <servlet>
+  	<servlet-name>AdminProduct Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.admin.AdminProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminProduct Servlet</servlet-name>
+  	<url-pattern>/admin/product/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>AdminLogin Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.admin.AdminLoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminLogin Servlet</servlet-name>
+  	<url-pattern>/admin/login/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>AdminHome Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.admin.AdminHomeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminHome Servlet</servlet-name>
+  	<url-pattern>/admin/home/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>AdminCategory Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.admin.AdminCategoryController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminCategory Servlet</servlet-name>
+  	<url-pattern>/admin/category/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>AdminAdmin Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.admin.AdminAdminController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminAdmin Servlet</servlet-name>
+  	<url-pattern>/admin/admin/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>AdminUser Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.admin.AdminUserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminUser Servlet</servlet-name>
+  	<url-pattern>/admin/user/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>AdminOrder Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.admin.AdminOrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminOrder Servlet</servlet-name>
+  	<url-pattern>/admin/order/*</url-pattern>
+  </servlet-mapping>
   <!--Admin End-->
   
   <!--Client begin-->

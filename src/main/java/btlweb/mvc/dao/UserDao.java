@@ -12,6 +12,7 @@ public interface UserDao {
 	int insertUser(User user); // return ve status. != 0: thanhcong, == 0: that bai
 	int update(UserDto user); // 	return ve status. != 0: thanhcong, == 0: that bai
 	User findUserByEmail(String email);
+	User adminFindByEmail(String email);
 	User findUserById(int id);
 
 	//phan trang

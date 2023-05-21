@@ -17,9 +17,7 @@ async function getProduct(path) {
             <div class="col l-3 m-4 c-6">
                 <div class="product-information">
                     <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/product-detail?pid=${product.id}" class="product-item">
-                        <div class="product-item__img" style="background-image: url(http://localhost:8080${
-                            product.thumbnail
-                        });"></div>
+                        <div class="product-item__img" style="background-image: url(${product.thumbnail});"></div>
                         <h4 class="product-item__name">${product.title}</h4>
                         <p class="product-item__vendor">Vergency</p>
                         <div class="product-item__review">
@@ -69,7 +67,7 @@ async function getBestSeller(path) {
             <div class="col l-3 m-4 c-6">
                 <div class="product-information">
                     <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/product-detail?pid=${product.id}" class="product-item">
-                        <div class="product-item__img" style="background-image: url(http://localhost:8080${
+                        <div class="product-item__img" style="background-image: url(${
                             product.thumbnail
                         });"></div>
                         <h4 class="product-item__name">${product.title}</h4>
@@ -106,7 +104,7 @@ async function getBestSeller(path) {
 
 function showQuickView(product) {
     let modal = document.querySelector(".modal");
-    let img = "http://localhost:8080" + product.thumbnail;
+    let img = product.thumbnail;
     let galleries = document.querySelectorAll(".slider-product__item img");
     let addToCartBtn = document.querySelector(".modal .quick-view__add-cart span");
 

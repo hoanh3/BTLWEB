@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    box-sizing: border-box;
+}
+.all {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0 14px 20px -17px rgba(0, 0, 0, 0.2);
+}
+.header .logo {
+    width: 25%;
+}
+.header .logo img {
+    width: 100%;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    margin-right: 3%;
+}
+.navbar .icon {
+    margin-right: 10px;
+}
+.icon i {
+    font-size: 20px;
+}
+.login a {
+    text-decoration: none;
+}
+.slidebar {
+    display: flex;
+    width: 100%;
+    margin-top: 12px;
+    margin-bottom: 30px;
+    position: relative;
+    margin-top: 84px;
+}
+.nav {
+    width: 25%;
+    /* border-right: 1px solid #ccc; */
+    /* position: fixed; */
+    background-color: #fff;
+    /* height: calc(100vh - 84px - 12px); */
+}
+.nav #items {
+    margin-right: 55px;
+}
+.nav #items li {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+.nav #items li:hover {
+    cursor: pointer;
+    /* background-color: azure; */
+}
+.nav #items li a {
+    display: block;
+    padding: 20px;
+    margin-left: 16%;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+.act-btn {
+    appearance: none;
+    background-color: #2ea44f;
+    border-radius: 6px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+#render {
+    margin-bottom: 12px;
+}
+
+.content > a {
+    padding: 12px;
+    font-size: 16px;
+}
+
+.list h2 {
+    padding-top: 6px;
+    padding-left: 10px;
+}
+
+.Add {
+    margin: 16px 20px 20px;
+    border-radius: 5px;
+}
+
+.modal-inner .form-control {
+    margin: 10px 20px;
+    border: 1px solid #b3b3b3;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-left: 20px;
+}
+
+.active {
+    background-color: #32c4f0;
+}

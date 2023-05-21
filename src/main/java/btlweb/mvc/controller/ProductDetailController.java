@@ -23,7 +23,7 @@ public class ProductDetailController extends HttpServlet{
 		String pid = req.getParameter("pid");
 		try {
 			int pidI = Integer.parseInt(pid);
-			Product product = _productService.getProductById(pidI, path, galeryPath);
+			Product product = _productService.getProductById(pidI);
 			req.setAttribute("product", product);
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -26,7 +26,7 @@ function updateUser() {
          city: city, district: district, streetAddress: streetAddress};
     console.log({ data });
     putUser(`${SERVER}/${CONTEXT}/user/${uid}`, data);
-    window.location.replace(`/${CONTEXT}/update/${uid}`);
+    window.location.replace(`/${CONTEXT}/address`);
 }
 
 updateBtn.addEventListener("click", function(event) {

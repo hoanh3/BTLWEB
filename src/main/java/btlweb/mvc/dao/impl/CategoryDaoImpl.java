@@ -13,24 +13,21 @@ import btlweb.mvc.dbconnect.MySQLConnect;
 
 public class CategoryDaoImpl implements CategoryDao{
 	
-	Connection conn = null;
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
 	@Override
 	public List<Category> getAll() {
 		// TODO Auto-generated method stub
 		List<Category> categoryList = new ArrayList<>();
+		String query = "SELECT * FROM category";
 
 	    try {
-	         conn = MySQLConnect.getConnection();
-	        String sql = "SELECT * FROM category";
-	         stmt = conn.prepareStatement(sql);
-	         rs = stmt.executeQuery();
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-	        while (rs.next()) {
+	        while (resultSet.next()) {
 	            Category category = new Category();
-	            category.setId(rs.getInt("id"));
-	            category.setTitle( rs.getString("title"));
+	            category.setId(resultSet.getInt("id"));
+	            category.setTitle(resultSet.getString("title"));
 	            categoryList.add(category);   
 	        }
 
@@ -45,15 +42,15 @@ public class CategoryDaoImpl implements CategoryDao{
 	public int getNumOfCategory() {
 		// TODO Auto-generated method stub
 		int count = 0;
+		String query = "SELECT COUNT(*) FROM category";
 
 	    try {
-	        conn = MySQLConnect.getConnection();
-	        String sql = "SELECT COUNT(*) FROM category";
-	        stmt = conn.prepareStatement(sql);
-	        rs = stmt.executeQuery();
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-	        if (rs.next()) {
-	            count = rs.getInt(1);
+	        if (resultSet.next()) {
+	            count = resultSet.getInt(1);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -72,10 +69,10 @@ public class CategoryDaoImpl implements CategoryDao{
 		    Connection conn = MySQLConnect.getConnection();
 		    int recordsPerPage = 8;
 		    int startRecord = (pageId - 1) * recordsPerPage;
-	        PreparedStatement stmt = conn.prepareStatement(query);
-	        stmt.setInt(1, recordsPerPage);
-	        stmt.setInt(2, startRecord);
-	        ResultSet rs = stmt.executeQuery();
+	        PreparedStatement preparedStatement = conn.prepareStatement(query);
+	        preparedStatement.setInt(1, recordsPerPage);
+	        preparedStatement.setInt(2, startRecord);
+	        ResultSet rs = preparedStatement.executeQuery();
 
 	        while (rs.next()) {
 	            Category category = new Category();
@@ -93,19 +90,19 @@ public class CategoryDaoImpl implements CategoryDao{
 	public Category getCategoryById(int id) {
 		// TODO Auto-generated method stub
 		Category category = null;
+		String query = "SELECT id, title FROM category WHERE id=?";
 	    
 
 	    try {
-	        conn = MySQLConnect.getConnection();
-	        String sql = "SELECT id, title FROM category WHERE id=?";
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setInt(1, id);
-	        rs = stmt.executeQuery();
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+	        preparedStatement.setInt(1, id);
+	        ResultSet resultSet = preparedStatement.executeQuery();
 
-	        if (rs.next()) {
+	        if (resultSet.next()) {
 	            category = new Category();
-	            category.setId(rs.getInt("id"));
-	            category.setTitle(rs.getString("title"));
+	            category.setId(resultSet.getInt("id"));
+	            category.setTitle(resultSet.getString("title"));
 	        }
 	    } catch (SQLException ex) {
 	    	 ex.printStackTrace();
@@ -118,13 +115,13 @@ public class CategoryDaoImpl implements CategoryDao{
 	public int insertCategory(Category category) {
 		// TODO Auto-generated method stub
 		int result = 0;
+		String query = "INSERT INTO category (title) VALUES (?)";
 	    
 	    try {
-	        conn = MySQLConnect.getConnection();
-	        String sql = "INSERT INTO category (title) VALUES (?)";
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setString(1, category.getTitle());
-	        result = stmt.executeUpdate();
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+	        preparedStatement.setString(1, category.getTitle());
+	        result = preparedStatement.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
@@ -135,13 +132,13 @@ public class CategoryDaoImpl implements CategoryDao{
 	public int updateCategory(Category category) {
 		// TODO Auto-generated method stub
 		int result = 0;
+		String query = "UPDATE category SET title = ? WHERE id = ?";
 		try {
-	        conn = MySQLConnect.getConnection();
-	        String query = "UPDATE category SET title = ? WHERE id = ?";
-	        stmt = conn.prepareStatement(query);
-	        stmt.setString(1, category.getTitle());
-	        stmt.setInt(2, category.getId());
-	        result = stmt.executeUpdate();
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+	        preparedStatement.setString(1, category.getTitle());
+	        preparedStatement.setInt(2, category.getId());
+	        result = preparedStatement.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } 
@@ -151,12 +148,12 @@ public class CategoryDaoImpl implements CategoryDao{
 	public int deleteCategory(int id) {
 		// TODO Auto-generated method stub
 		int result = 0;
+		String query = "DELETE FROM category WHERE id = ?";
 	    try {
-	        conn = MySQLConnect.getConnection();
-	        String sql = "DELETE FROM category WHERE id = ?";
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setInt(1, id);
-	        result = stmt.executeUpdate();
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+	        preparedStatement.setInt(1, id);
+	        result = preparedStatement.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }

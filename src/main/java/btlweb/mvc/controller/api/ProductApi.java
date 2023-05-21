@@ -1,5 +1,6 @@
 package btlweb.mvc.controller.api;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -9,6 +10,7 @@ import com.google.gson.Gson;
 import btlweb.mvc.model.Category;
 import btlweb.mvc.model.Product;
 import btlweb.mvc.model.User;
+import btlweb.mvc.model.dto.ProductDto;
 import btlweb.mvc.service.ProductService;
 import btlweb.mvc.service.impl.ProductServiceImpl;
 import jakarta.servlet.ServletException;
@@ -36,31 +38,29 @@ public class ProductApi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String path = req.getContextPath() + "/view/client/assets/images/products/";
-		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 
 		if(pathInfo == null || pathInfo.equals("/")) {
 			String cateId = req.getParameter("cate-id");
 			if(cateId != null) {
-				List<Product> products = _productService.getProductByCatId(cateId, path, galeryPath);
+				List<Product> products = _productService.getProductByCatId(cateId);
 				sendAsJson(resp, products);
 				return;
 			}
 			String relateId = req.getParameter("related");
 			if(relateId != null) {
-				List<Product> products = _productService.getProductByCatId(relateId, path, galeryPath);
+				List<Product> products = _productService.getProductByCatId(relateId);
 				sendAsJson(resp, products.subList(0, Math.min(6, products.size())));
 				return;
 			}
 			String search = req.getParameter("search");
 			if(search != null) {
-				List<Product> products = _productService.searchProductByName(search, path, galeryPath);
+				List<Product> products = _productService.searchProductByName(search);
 				sendAsJson(resp, products);
 				return;
 			}
 			String pageId = req.getParameter("pageId");
 			if(pageId != null) {
-				List<Product> products = _productService.getProductInPage(Integer.parseInt(pageId), path, galeryPath);
+				List<Product> products = _productService.getProductInPage(Integer.parseInt(pageId));
 				sendAsJson(resp, products);
 				return ;
 			}
@@ -68,7 +68,7 @@ public class ProductApi extends HttpServlet{
 			if(filter != null ) {
 				if(filter.equals("topsale")) {
 					try {
-						List<Product> products = _productService.getTopSale(path, galeryPath);
+						List<Product> products = _productService.getTopSale();
 						sendAsJson(resp, products);						
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -77,7 +77,7 @@ public class ProductApi extends HttpServlet{
 					return ;
 				} else if(filter.equals("bestseller")) {
 					try {
-						List<Product> products = _productService.getBestSeller(path, galeryPath);
+						List<Product> products = _productService.getBestSeller();
 //						if(products.size() < 10) {
 //							products = _productService.getTopSale(path, galeryPath);
 //						}
@@ -89,7 +89,7 @@ public class ProductApi extends HttpServlet{
 					return ;
 				}				
 			}
-			List<Product> products = _productService.getAll(path, galeryPath);
+			List<Product> products = _productService.getAll();
 			sendAsJson(resp, products);
 			return ;
 		}
@@ -101,7 +101,7 @@ public class ProductApi extends HttpServlet{
 		}
 		
 		int productId = Integer.parseInt(args[1]);
-		Product product = _productService.getProductById(productId, path, galeryPath);
+		Product product = _productService.getProductById(productId);
 		if(product == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return ;
@@ -111,10 +111,77 @@ public class ProductApi extends HttpServlet{
 	}
 	
 	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String pathInfo = req.getPathInfo();
+		
+		if(pathInfo == null || pathInfo.equals("/")) {
+			StringBuffer buffer = new StringBuffer();
+			BufferedReader reader = req.getReader();
+			String line = "";
+			
+			while((line = reader.readLine()) != null) {
+				buffer.append(line);
+			}
+			
+			String payload = buffer.toString();
+			
+			ProductDto productDto = _gson.fromJson(payload, ProductDto.class);
+			
+			_productService.insertProduct(productDto);
+			
+			sendAsJson(resp, productDto);
+		} else {
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		}
+		return;
+	}
+	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String pathInfo = req.getPathInfo();
+		
+		if(pathInfo == null || pathInfo.equals("/")) {
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+			
+		} else {
+			String[] splits = pathInfo.split("/");
+			if(splits.length == 2) {
+				int pid = Integer.parseInt(splits[1]);
+				
+				Product product = _productService.getProductById(pid);
+				
+				if(product == null) {
+					resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+					return;
+				}
+				
+				StringBuffer buffer = new StringBuffer();
+				BufferedReader reader = req.getReader();
+				
+				String line = "";
+				while((line = reader.readLine()) != null) {
+					buffer.append(line);
+				}
+				String payload = buffer.toString();
+				
+				ProductDto productDto = _gson.fromJson(payload, ProductDto.class);
+				
+				_productService.updateProduct(productDto, pid);
+				
+				sendAsJson(resp, productDto);
+				return;
+			}
+			
+		}
+		return;
+	}
+	
+	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String path = req.getContextPath() + "/view/client/assets/images/products/";
-		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 
 		if(pathInfo == null || pathInfo.equals("/")){
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
@@ -131,7 +198,7 @@ public class ProductApi extends HttpServlet{
 		int productId = Integer.parseInt(splits[1]);
 		
 		
-		Product product = _productService.getProductById(productId, path, galeryPath);
+		Product product = _productService.getProductById(productId);
 		
 		if(product == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);

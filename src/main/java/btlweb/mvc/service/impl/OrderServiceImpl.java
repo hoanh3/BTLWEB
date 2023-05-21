@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService{
 		date = new java.sql.Date(calendar.getTimeInMillis());
 		Order order = new Order(0, firstName, lastName, email, phoneNumber, city, district, streetAddress, note, date, 0, _cartItemService.getTotalMoney(userID), userID);
 		int oid = _orderDao.addOrder(order);
-		List<Item> items = _cartItemService.getCart(userID, null, null);
+		List<Item> items = _cartItemService.getCart(userID);
 		_orderDetailService.addOrderLine(items, oid);
 		_cartItemService.checkOutComplete(userID);
 		_productAvaiService.updateProductAvailiability(items);

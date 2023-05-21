@@ -12,9 +12,6 @@ import btlweb.mvc.model.Order;
 import btlweb.mvc.model.User;
 
 public class OrderDaoImpl implements OrderDao{
-	private Connection _connection = null;
-	private PreparedStatement _pStatement = null;
-	private ResultSet _resultSet = null;
 
 	@Override
 	public int addOrder(Order order) {
@@ -25,26 +22,26 @@ public class OrderDaoImpl implements OrderDao{
 				+ "VALUES\r\n"
 				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
-			_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-			_pStatement.setString(1, order.getFirstName());
-			_pStatement.setString(2, order.getLastName());
-			_pStatement.setString(3, order.getEmail());
-			_pStatement.setString(4, order.getPhoneNumber());
-			_pStatement.setString(5, order.getCity());
-			_pStatement.setString(6, order.getDistrict());
-			_pStatement.setString(7, order.getStreetAddress());
-			_pStatement.setString(8, order.getNote());
-			_pStatement.setDate(9, (Date) order.getOrderDate());
-			_pStatement.setLong(10, order.getStatus());
-			_pStatement.setLong(11, order.getTotalMoney());
-			_pStatement.setInt(12, order.getUserId());
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement pStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			pStatement.setString(1, order.getFirstName());
+			pStatement.setString(2, order.getLastName());
+			pStatement.setString(3, order.getEmail());
+			pStatement.setString(4, order.getPhoneNumber());
+			pStatement.setString(5, order.getCity());
+			pStatement.setString(6, order.getDistrict());
+			pStatement.setString(7, order.getStreetAddress());
+			pStatement.setString(8, order.getNote());
+			pStatement.setDate(9, (Date) order.getOrderDate());
+			pStatement.setLong(10, order.getStatus());
+			pStatement.setLong(11, order.getTotalMoney());
+			pStatement.setInt(12, order.getUserId());
 			
-			_pStatement.execute();
+			pStatement.execute();
 			
-			_resultSet = _pStatement.getGeneratedKeys();
-			while(_resultSet.next()) {
-				oid = _resultSet.getInt(1);
+			ResultSet resultSet = pStatement.getGeneratedKeys();
+			while(resultSet.next()) {
+				oid = resultSet.getInt(1);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -1,0 +1,342 @@
+.main {
+    background-image: linear-gradient(to bottom left, var(--primary-color), #bddfff);
+    /* background-color: var(--primary-color); */
+}
+
+.breadcrumb {
+    display: flex;
+    list-style: none;
+    font-size: 1.5rem;
+    margin-top: 26px;
+}
+
+.breadcrumb li {
+    margin: 0 4px;
+}
+
+.breadcrumb li:last-child {
+    /* user-select: none; */
+    pointer-events: none;
+}
+
+.breadcrumb li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.breadcrumb li i {
+    font-size: 1rem;
+}
+
+#form-register,
+#form-login {
+    background-color: var(--white-color);
+}
+
+.form {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    border-radius: 8px;
+    margin: 36px 0 60px;
+    max-width: 400px;
+    min-height: 730px;
+    background-color: var(--white-color);
+    /* -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    background-color: transparent;
+}
+
+.form-login,
+.form-register {
+    padding: 32px;
+    background-color: #fff;
+    position: absolute;
+    border-radius: 8px;
+}
+
+@keyframes nextContent {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes outContent {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.form.form-sign-in .form-login {
+    z-index: 1;
+    animation: nextContent 0.7s ease 1 forwards;
+}
+
+.form.form-sign-in .form-register {
+    z-index: 1;
+    animation: outContent 0.7s ease 1 forwards;
+}
+
+.form.form-sign-up .form-login {
+    z-index: 1;
+    animation: outContent 0.7s ease 1 forwards;
+}
+
+.form.form-sign-up .form-register {
+    z-index: 1;
+    animation: nextContent 0.7s ease 1 forwards;
+}
+
+.form .heading {
+    font-size: 2.4rem;
+    position: relative;
+    line-height: 2rem;
+}
+
+.form-login .heading::after,
+.form-register .heading::after {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+.form-login .heading::after {
+    width: 120px;
+}
+
+.form-register .heading::after {
+    width: 100px;
+}
+
+.form .description {
+    font-size: 1.6rem;
+    color: #636d77;
+    /* font-weight: lighter; */
+    font-weight: lighter;
+    letter-spacing: 2px;
+    margin-top: 28px;
+}
+
+.spacer {
+    margin-top: 36px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.form-label,
+.form-message {
+    text-align: left;
+}
+
+.form-label {
+    font-size: 1.4rem;
+    padding-bottom: 6px;
+    position: absolute;
+    top: 12px;
+    left: 13px;
+    color: #999;
+    user-select: none;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+
+.form-group.invalid .form-control {
+    border-color: #f33a58;
+}
+  
+.form-group.invalid .form-message {
+    color: #f33a58;
+}
+
+.form-message {
+    font-style: 1.2rem;
+    line-height: 1.6rem;
+    padding: 4px 0 0;
+}
+
+.form-control {
+    padding: 8px 12px;
+    height: 38px;
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid #b3b3b3;
+    font-size: 1.6rem;
+    transition: 0.3s ease;
+}
+
+.form-control:focus {
+    border: 1px solid var(--primary-color);
+}
+
+.form-control:not(:placeholder-shown) + .form-label,
+.form-control:focus + .form-label {
+    top: -10px;
+    left: 8px;
+    padding: 0 10px;
+    display: inline-block;
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.form-submit {
+    outline: none;
+    background-color: var(--primary-color);
+    margin-top: 12px;
+    padding: 12px 16px;
+    font-weight: 450;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    width: 100%;
+    border: none;
+    color: var(--white-color);
+    cursor: pointer;
+}
+
+.form-submit:hover {
+    opacity: 0.88;
+}
+
+.req-pass {
+    margin-top: 12px;
+    text-align: left;
+    font-size: 1.3rem;
+    display: flex;
+}
+
+.req-pass a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.req-pass .sign-up-link {
+    margin-left: auto;
+}
+
+.form-login .req-pass {
+    margin-bottom: 20px;
+}
+
+.form-register .req-pass {
+    text-align: center;
+    display: block;
+}
+
+.or {
+    display: flex;
+    margin-top: 12px;
+}
+
+.or-text {
+    color: #333;
+    padding: 0 16px;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.or > div {
+    margin-top: 8px;
+}
+
+.or div:first-child {
+    height: 1px;
+    width: 100%;
+    background-color: #dbdbdb;
+    flex: 1;
+}
+
+.or div:last-child {
+    height: 1px;
+    width: 100%;
+    background-color: #d0d0d0;
+    flex: 1;
+}
+
+.form-btn {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.sign-in-btn {
+    cursor: pointer;
+    color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    width: 160px;
+    padding: 8px 16px;
+    outline: none;
+    border-radius: 3px;
+    background-color: var(--white-color);
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.sign-in-btn:hover {
+    background-color: #f1f1f1;
+}
+
+.form-btn .sign-in-btn i {
+    font-size: 2.2rem;
+    margin-left: 4px;
+}
+
+.form-btn .sign-in-btn span {
+    margin-left: 10px;
+}
+
+.sign-in-with-google {
+    margin-left: 16px;
+}
+
+.sign-in-with-fb i {
+    color: #097DEB;
+}
+
+.sign-in-with-google i {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.support {
+    margin-top: 16px;
+    font-size: 1.3rem;
+}
+
+.support a {
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+@media (max-width: 739px) {
+    .breadcrumb {
+        margin-left: 18px !important;
+    }
+}

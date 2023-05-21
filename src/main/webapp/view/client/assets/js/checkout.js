@@ -18,7 +18,7 @@ async function render(url = "") {
                 <td class="product-img">
                     <div class="product-thumbnail">
                         <img
-                            src="http://localhost:8080${product.product.thumbnail}"
+                            src="${product.product.thumbnail}"
                             alt=""
                             class="product-thumb-img"
                         />

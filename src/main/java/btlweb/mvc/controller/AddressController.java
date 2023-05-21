@@ -2,6 +2,7 @@ package btlweb.mvc.controller;
 
 import java.io.IOException;
 
+import btlweb.mvc.model.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;

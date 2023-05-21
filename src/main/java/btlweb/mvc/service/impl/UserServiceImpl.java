@@ -52,4 +52,10 @@ public class UserServiceImpl implements UserService{
 		return _userDao.getAll();
 	}
 
+	@Override
+	public User adminFindUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return _userDao.adminFindByEmail(email);
+	}
+
 }

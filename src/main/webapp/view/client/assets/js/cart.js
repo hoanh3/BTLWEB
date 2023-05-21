@@ -56,7 +56,7 @@ async function render(url = "") {
             <div class="cart-product__item">
                 <div class="cart-product__img">
                     <a href="product.html" class="cart-product__link">
-                        <img src="http://localhost:8080${product.product.thumbnail}" alt="">
+                        <img src="${product.product.thumbnail}" alt="">
                     </a>
                 </div>
                 <div class="cart-product__info">

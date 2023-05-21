@@ -12,9 +12,6 @@ import btlweb.mvc.dbconnect.MySQLConnect;
 import btlweb.mvc.model.Item;
 
 public class OrderDetailDaoImpl implements OrderDetailDao{
-	private Connection _connection = null;
-	private PreparedStatement _pStatement = null;
-	private ResultSet _resultSet = null;
 
 	@Override
 	public void addOrderLine(List<Item> items, int oid) {
@@ -23,19 +20,19 @@ public class OrderDetailDaoImpl implements OrderDetailDao{
 				+ "VALUES\r\n"
 				+ "(?, ?, ?, ?, ?);";
 		try {
-			_connection = MySQLConnect.getConnection();
-			_pStatement = _connection.prepareStatement(query);
-			_connection.setAutoCommit(false);
+		 	Connection connection  = MySQLConnect.getConnection();
+			PreparedStatement pStatement = connection.prepareStatement(query);
+			connection.setAutoCommit(false);
 			for(Item item : items) {
-				_pStatement.setInt(1, oid);
-				_pStatement.setInt(2, item.getProduct().getId());
-				_pStatement.setInt(3, item.getSize());
-				_pStatement.setInt(4, item.getPrice());
-				_pStatement.setInt(5, item.getNum());
-				_pStatement.addBatch();
+				pStatement.setInt(1, oid);
+				pStatement.setInt(2, item.getProduct().getId());
+				pStatement.setInt(3, item.getSize());
+				pStatement.setInt(4, item.getPrice());
+				pStatement.setInt(5, item.getNum());
+				pStatement.addBatch();
 			}
-			_pStatement.executeBatch();
-			_connection.commit();
+			pStatement.executeBatch();
+			connection.commit();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

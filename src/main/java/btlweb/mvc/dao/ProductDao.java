@@ -12,6 +12,8 @@ public interface ProductDao {
 	Product getProductById(int productId);
 	List<Product> getProductByCatId(String catId);// danh sach san pham theo danh muc
 	
+	int getLastesProduct();
+	
 	// phan trang
 	int getNumberOfProduct();
 	List<Product> getProductInPage(int pageId);

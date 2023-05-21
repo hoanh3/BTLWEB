@@ -15,8 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CORSInterceptor implements Filter {
 
     private static final String[] allowedOrigins = {
-            "http://localhost:8947", "http://localhost:5500",
-            "http://127.0.0.1:8947", "http://127.0.0.1:5500"
+            "http://localhost:8947", "http://localhost:5500", "http://localhost:5501",
+            "http://127.0.0.1:8947", "http://127.0.0.1:5500", "http://127.0.0.1:5501"
     };
 
 //    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

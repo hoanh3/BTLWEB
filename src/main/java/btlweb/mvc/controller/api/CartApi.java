@@ -48,14 +48,12 @@ public class CartApi extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String path = req.getContextPath() + "/view/client/assets/images/products/";
-		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 		
 		if(pathInfo == null || pathInfo.equals("/")) {
 			String uid = req.getParameter("uid");
 			if(uid != null) {
 				int userId = Integer.parseInt(uid);
-				List<Item> items = _cartItemService.getCart(userId, path, galeryPath);
+				List<Item> items = _cartItemService.getCart(userId);
 				List<CartSN> cartItems = new ArrayList<>();
 				for(Item item : items) {
 					cartItems.add(new CartSN(item.getId(), item.getUserId(), item.getProduct(), 
@@ -73,8 +71,6 @@ public class CartApi extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String pathInfo = req.getPathInfo();
-		String path = req.getContextPath() + "/view/client/assets/images/products/";
-		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 		
 		try {
 
@@ -93,7 +89,7 @@ public class CartApi extends HttpServlet{
 				resp.sendRedirect(req.getContextPath() + "/login");
 			}
 			
-			Product product = _productService.getProductById(itemDto.getPid(), path, galeryPath);
+			Product product = _productService.getProductById(itemDto.getPid());
 			
 			Item item = new Item(0, itemDto.getUid(), product, itemDto.getSize(), itemDto.getNum(), product.getDiscount());
 			
@@ -112,8 +108,6 @@ public class CartApi extends HttpServlet{
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String pathInfo = req.getPathInfo();
-		String path = req.getContextPath() + "/view/client/assets/images/products/";
-		String galeryPath = req.getContextPath() + "/view/client/assets/images/galery/";
 		
 		try {
 
@@ -128,7 +122,7 @@ public class CartApi extends HttpServlet{
 			String payload = buffer.toString();
 			ItemDto itemDto = _gson.fromJson(payload, ItemDto.class);
 			
-			Product product = _productService.getProductById(itemDto.getPid(), path, galeryPath);
+			Product product = _productService.getProductById(itemDto.getPid());
 			
 			Item item = new Item(0, itemDto.getUid(), product, itemDto.getSize(), itemDto.getNum(), product.getDiscount());
 			_cartItemService.updateItem(item);

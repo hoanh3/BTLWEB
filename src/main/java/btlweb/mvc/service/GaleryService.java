@@ -6,10 +6,10 @@ import btlweb.mvc.model.Galery;
 
 public interface GaleryService {
 
-	Galery getGaleryById(int id, String path);
-	List<Galery> getGaleryByProductId(int productId, String path);
+	Galery getGaleryById(int id);
+	List<Galery> getGaleryByProductId(int productId);
 	
-	List<Galery> getGaleryInPage(int pageId, String path);
+	List<Galery> getGaleryInPage(int pageId);
 	int getNumOfGalery();
 	
 	int insertGalery(Galery galery);
