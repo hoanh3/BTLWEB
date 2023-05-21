@@ -117,7 +117,7 @@ function showQuickView(product) {
 
     for (let i = 0; i < galleries.length; i++) {
         if (product.galeries[i].thumbnail.length > 0) {
-            let thumb = "http://localhost:8080" + product.galeries[i].thumbnail;
+            let thumb = product.galeries[i].thumbnail;
             console.log(thumb);
             galleries[i].setAttribute("src", thumb);
         }
