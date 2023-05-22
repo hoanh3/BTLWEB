@@ -24,7 +24,7 @@ public class RegisterController extends HttpServlet{
 		
 		try {
 			if(_userService.findUserByEmail(username) == null) {
-				int status = _userService.insertUser(username, BCrypt.hashpw(password, BCrypt.gensalt(12)), firstName, lastName);
+				int status = _userService.insertUser(username, BCrypt.hashpw(password, BCrypt.gensalt(12)), firstName, lastName, 2);
 				if(status != 0) {
 					System.out.println("thanh cong");
 					resp.sendRedirect(req.getContextPath() + "/login?success");

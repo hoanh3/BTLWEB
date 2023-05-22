@@ -17,40 +17,7 @@
             <!-- header end -->
             <div class="content">
                 <table id="render">
-                    <tr>
-                        <th>Id</th>
-                        <th>Tên chuyên chuyên mục</th>
-                        <th>Chuyên mục cha</th>
-                        <th>Hành động</th>
-                        <!-- <th>Hành động</th> -->
-                    </tr>
-                    <tr>
-                        <td>1</th>
-                        <td>T-SHIRTS</th>
-                        <td>Tran Hoan</th>
-                        <td>
-                            <button class="act-btn edit-btn" >Sửa</button> 
-                            <button class="act-btn delete-btn" >Xóa</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</th>
-                        <td>SWEATERS</th>
-                        <td>Tran Hoan</th>
-                        <td>
-                            <button class="act-btn edit-btn" >Sửa</button> 
-                            <button class="act-btn delete-btn" >Xóa</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</th>
-                        <td>HOODIES</th>
-                        <td>Tran Hoan</th>
-                        <td>
-                            <button class="act-btn edit-btn" >Sửa</button> 
-                            <button class="act-btn delete-btn" >Xóa</button>
-                        </td>
-                    </tr>
+                    
                 </table>
                 <a href="#open">Thêm chuyên mục</a>
             </div>
@@ -62,25 +29,25 @@
         <div class="modal-overlay" class=""></div>
         <div class="modal-body">
             <div class="modal-inner">
-                <div class="admin-title">
-                    <h1>Thêm chuyên mục</h1>
-                </div>
-                <div class="form-group">
-                    <label class="id">ID:</label>
-                    <input class="form-control" type="text" placeholder="ID" id="tenId" />
-                </div>
-                <div class="form-group">
-                    <label class="username">Tên chuyển mục</label>
-                    <input class="form-control" type="text" placeholder="Tên chuyên mục" id="tenChuyenMuc" />
-                </div>
-                <div class="form-group">
-                    <label class="Password">chuyên mục cha</label>
-                    <input class="form-control" type="text" placeholder="Chuyên mục cha" id="chuyenMucCha" />
-                </div>
-                <button class="Add" onclick="add()">Thêm</button>
+                <form action="" id="form-input">
+                    <div class="admin-title">
+                        <h1>Thêm chuyên mục</h1>
+                    </div>
+                    <div class="form-group">
+                        <label class="id">ID:</label>
+                        <input class="form-control" readonly="readonly" name="input-1" type="text" placeholder="ID" id="input-1" />
+                    </div>
+                    <div class="form-group">
+                        <label class="username">Tên chuyển mục</label>
+                        <input class="form-control" name="input-2" type="text" placeholder="Tên chuyên mục" id="input-2" />
+                    </div>
+                    <button class="Add" id="add-btn">Thêm</button>
+                    <button class="Add" id="update-btn">Cập nhật</button>
+                </form>
             </div>
         </div>
     </div>
     <script src ="${url}/js/catalogManamegent.js"></script>
+    <script src="${url}/js/category.js"></script>
 </body>
 </html>

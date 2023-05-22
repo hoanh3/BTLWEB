@@ -82,14 +82,11 @@ public class CategoryApi extends HttpServlet{
 			}
 			
 			String payload = buffer.toString();
+			
 			Category category = _gson.fromJson(payload, Category.class);
 			
 			int status = _categoryService.insertCategory(category);
-			if(status == 0) {
-				System.out.println("luu category khong thanh cong");
-			} else {
-				sendAsJson(resp, category);
-			}
+			sendAsJson(resp, category);
 		} else {
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
@@ -159,23 +156,18 @@ public class CategoryApi extends HttpServlet{
 			return;
 		}
 		
-		int catId = Integer.parseInt(splits[1]);
+		int cateId = Integer.parseInt(splits[1]);
 		
-		Category category = _categoryService.getCategoryById(catId);
+		Category category = _categoryService.getCategoryById(cateId);
 		
 		if(category == null) {
 			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 		
-		int status = _categoryService.deleteCategory(catId);
-		if(status == 0) {
-			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-			System.out.println("xoa category khong thanh cong");
-			return;
-		} else {
-			sendAsJson(resp, category);
-		}
+		int status = _categoryService.deleteCategory(cateId);
+		
+		sendAsJson(resp, category);
 		return;
 	}
 }

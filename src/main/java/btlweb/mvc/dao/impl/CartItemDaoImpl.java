@@ -184,5 +184,23 @@ public class CartItemDaoImpl implements CartItemDao{
 	    }
 	    return item;
 	}
+
+	@Override
+	public void deleteItemByUserId(int userId) {
+		// TODO Auto-generated method stub
+		String query = "DELETE FROM `cart_item`\r\n"
+				+ "WHERE `user_id` = ?;";
+		try {
+	    	Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, userId);
+			
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("loi CartItemDao");
+		}
+		return;
+	}
 	
 }

@@ -17,62 +17,60 @@
             <!-- header end -->
             <div class="content">
                 <table id="render">
-                    <tr>
-                        <th>Id</th>
-                        <th>Họ</th>
-                        <th>Tên</th>
-                        <th>Email</th>
-                        <th>Số điện thoại</th>
-                        <th>Phường</th>
-                        <th>Quân</th>
-                        <th>Thành phố</th>
-                        <th>Hành động</th>
-                    </tr>
-                    <tr>
-                        <td>1</th>
-                        <td>Tran Cong</th>
-                        <td>Hoan</th>
-                        <td>test1@gmail.com</th>
-                        <td>0987654321</th>
-                        <td>Mỗ Lao</th>
-                        <td>Hà Đông</th>
-                        <td>Hà Nội</th>
-                        <td>
-                            <button class="act-btn edit-btn" >Sửa</button> 
-                            <button class="act-btn delete-btn" >Xóa</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</th>
-                        <td>Tran Cong</th>
-                        <td>Hoan</th>
-                        <td>test2@gmail.com</th>
-                        <td>0987654321</th>
-                        <td>Mỗ Lao</th>
-                        <td>Hà Đông</th>
-                        <td>Hà Nội</th>
-                        <td>
-                            <button class="act-btn edit-btn" >Sửa</button> 
-                            <button class="act-btn delete-btn" >Xóa</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</th>
-                        <td>Tran Cong</th>
-                        <td>Hoan</th>
-                        <td>test3@gmail.com</th>
-                        <td>0987654321</th>
-                        <td>Mỗ Lao</th>
-                        <td>Hà Đông</th>
-                        <td>Hà Nội</th>
-                        <td>
-                            <button class="act-btn edit-btn" >Sửa</button> 
-                            <button class="act-btn delete-btn" >Xóa</button>
-                        </td>
-                    </tr>
+                    
                 </table>
             </div>
         </div>
     </div>
+
+    <div class="modal" id="open">
+        <a href="#" class="close"></a>
+        <div class="modal-overlay" class=""></div>
+        <div class="modal-body">
+            <div class="modal-inner">
+                <div class="admin-title">
+                <h1>Edit User</h1>
+                </div>
+                <form action="#" id="form-input">
+                    <div class="form-group">
+                        <label for="input-1">ID:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="input-1" name="input-1"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-2">Họ:</label>
+                        <input class="form-control" id="input-2" name="input-2" />
+                    </div>
+                    <div class="form-group">
+                        <label for="input-3">Tên: </label>
+                        <input type="text" class="form-control" id="input-3" name="input-3"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-4">Email: </label>
+                        <input type="text" class="form-control" id="input-4" name="input-4"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-5">Số điện thoại:</label>
+                        <input type="text" class="form-control" id="input-5" name="input-5"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-6">Phường/Đường/Xã:</label>
+                        <input type="text" class="form-control" id="input-6" name="input-6"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-7">Quân/Huyện</label>
+                        <input type="text" class="form-control" id="input-7" name="input-7"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-8">Tỉnh/Thành phố</label>
+                        <input type="text" id="input-8" name="input-8" class="file form-control" />
+                    </div>
+                    <button class="Add" type="submit" id="update-btn">Cập nhật</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="${url}/js/user.js"></script>
 </body>
 </html>

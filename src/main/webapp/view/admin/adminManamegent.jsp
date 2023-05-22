@@ -18,40 +18,7 @@
             <!-- header end -->
             <div class="content">
                 <table id="render">
-                    <tr>
-                        <th>Id</th>
-                        <th>Tên đăng nhập</th>
-                        <th>Tên admin</th>
-                        <th>Hành động</th>
-                        <!-- <th>Hành động</th> -->
-                    </tr>
-                    <tr>
-                        <td>1</th>
-                        <td>admin1@gmail.com</th>
-                        <td>Tran Hoan</th>
-                        <td>
-                            <button class="act-btn edit-btn" >Sửa</button> 
-                            <button class="act-btn delete-btn" >Xóa</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</th>
-                        <td>admin2@gmail.com</th>
-                        <td>Tran Hoan</th>
-                        <td>
-                            <button class="act-btn edit-btn" >Sửa</button> 
-                            <button class="act-btn delete-btn" >Xóa</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</th>
-                        <td>admin3@gmail.com</th>
-                        <td>Tran Hoan</th>
-                        <td>
-                            <button class="act-btn edit-btn" >Sửa</button> 
-                            <button class="act-btn delete-btn" >Xóa</button>
-                        </td>
-                    </tr>
+                    
                 </table>
                 <a href="#open">Thêm admin</a>
             </div>
@@ -67,26 +34,50 @@
                 <div class="admin-title">
                     <h1>Thêm ADMIN</h1>
                 </div>
-                <div class="form-group">
-                    <label class="id">ID:</label>
-                    <input class="form-control" type="text" placeholder="ID" id="tenId" />
-                </div>
-                <div class="form-group">
-                    <label class="username">Username:</label>
-                    <input class="form-control" type="text" placeholder="Username" id="tenDn" />
-                </div>
-                <div class="form-group">
-                    <label class="Password">Password</label>
-                    <input class="form-control" type="password" placeholder="Password" id="password" />
-                </div>
-                <div class="form-group">
-                    <label class="name">Tên admin</label>
-                    <input class="form-control" type="text" placeholder="Tên admin" id="tenAdmin" />
-                </div>
-                <button class="Add" onclick="add()">Thêm</button>
+                <form action="#" id="form-input">
+                    <div class="form-group">
+                        <label for="input-1">ID:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="input-1" name="input-1"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-2">Họ:</label>
+                        <input class="form-control" id="input-2" name="input-2" />
+                    </div>
+                    <div class="form-group">
+                        <label for="input-3">Tên: </label>
+                        <input type="text" class="form-control" id="input-3" name="input-3"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-4">Email: </label>
+                        <input type="text" class="form-control" id="input-4" name="input-4"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-9">Password: </label>
+                        <input type="text" class="form-control" id="input-9" name="input-9"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-5">Số điện thoại:</label>
+                        <input type="text" class="form-control" id="input-5" name="input-5"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-6">Phường/Đường/Xã:</label>
+                        <input type="text" class="form-control" id="input-6" name="input-6"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-7">Quân/Huyện</label>
+                        <input type="text" class="form-control" id="input-7" name="input-7"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-8">Tỉnh/Thành phố</label>
+                        <input type="text" id="input-8" name="input-8" class="file form-control" />
+                    </div>
+                    <button class="Add" type="submit" id="add-btn">Thêm</button>
+                    <button class="Add" type="submit" id="update-btn">Cập nhật</button>
+                </form>
             </div>
         </div>
     </div>
     <script src="${url}/js/adminManamegent.js"></script>
+    <script src="${url}/js/admin.js"></script>
 </body>
 </html>

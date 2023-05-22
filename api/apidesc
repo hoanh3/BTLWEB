@@ -24,6 +24,8 @@ product api {
 	GET 	/product?filter=topsale		:lấy danh sách các product sắp xếp theo thứ tự giảm giá nhiều nhất
 	GET 	/product?filter=bestseller	:lấy danh sách các product sắp xếp theo thứ tự bán ra nhiều nhất
 	GET 	/product/{id}				:lấy product có id = {id}
+	POST 	/product					:thêm product 
+	PUT 	/product/{id}				:sửa product có id = {id}
 	DELETE	/product/{id}				:xóa product có id = {id}
 }
 

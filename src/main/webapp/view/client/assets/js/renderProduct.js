@@ -13,6 +13,7 @@ async function getProduct(path) {
     console.log({ response });
 
     const product_html = await response.map((product) => {
+        let sale = (1 - product.discount / product.price).toFixed(2) * 100;
         return `
             <div class="col l-3 m-4 c-6">
                 <div class="product-information">
@@ -33,7 +34,7 @@ async function getProduct(path) {
                             <span class="price-old">${product.price / 1000}.000đ</span>
                             <span class="price-new">${product.discount / 1000}.000đ</span>
                         </div>
-                        <div class="product-item__sale-off">50%</div>
+                        <div class="product-item__sale-off">${sale}%</div>
                     </a>
                     <div class="product-item__quick-view">
                         <a 
@@ -63,6 +64,7 @@ async function getBestSeller(path) {
     console.log({ response });
 
     const product_html = await response.map((product) => {
+        let sale = (1 - product.discount / product.price).toFixed(2) * 100;
         return `
             <div class="col l-3 m-4 c-6">
                 <div class="product-information">
@@ -85,7 +87,7 @@ async function getBestSeller(path) {
                             <span class="price-old">${product.price / 1000}.000đ</span>
                             <span class="price-new">${product.discount / 1000}.000đ</span>
                         </div>
-                        <div class="product-item__sale-off">50%</div>
+                        <div class="product-item__sale-off">${sale}%</div>
                     </a>
                     <div class="product-item__quick-view">
                         <a 
@@ -146,7 +148,7 @@ function showQuickView(product) {
         };
         console.log({ data });
         postData("http://localhost:8080/btlweb/cart", data);
-        modal.classList.remove("open");
+        hideQuickView();
     };
 }
 

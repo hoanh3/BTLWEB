@@ -12,4 +12,6 @@ public interface CartItemService {
 	
 	int getTotalMoney(int userId);
 	void checkOutComplete(int userId);
+	
+	void deleteItemByUserId(int userId);
 }

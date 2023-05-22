@@ -69,4 +69,11 @@ public class CartItemServiceImpl implements CartItemService{
 		
 		cartItemService.addItem(new Item(0, 2, _productService.getProductById(1), 1, 1, 59000));
 	}
+
+	@Override
+	public void deleteItemByUserId(int userId) {
+		// TODO Auto-generated method stub
+		_cartItemDao.deleteItemByUserId(userId);
+		return;
+	}
 }

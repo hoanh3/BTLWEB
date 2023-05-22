@@ -51,9 +51,9 @@ public class CORSInterceptor implements Filter {
 			String requestOrigin = request.getHeader("Origin");
 	        if(isAllowedOrigin(requestOrigin)) {
 	            // Authorize the origin, all headers, and all methods
-	            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", requestOrigin);
-	            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers", "*");
-	            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods",
+	            ((HttpServletResponse) servletResponse).setHeader("Access-Control-Allow-Origin", requestOrigin);
+	            ((HttpServletResponse) servletResponse).setHeader("Access-Control-Allow-Headers", "*");
+	            ((HttpServletResponse) servletResponse).setHeader("Access-Control-Allow-Methods",
 	                    "GET, OPTIONS, HEAD, PUT, POST, DELETE");
 
 	            HttpServletResponse resp = (HttpServletResponse) servletResponse;
@@ -70,9 +70,9 @@ public class CORSInterceptor implements Filter {
 			// TODO: handle exception
 			if(request.getServerName().equals("localhost") && request.getLocalPort() == 8080) {
 				// Authorize the origin, all headers, and all methods
-	            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
-	            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers", "*");
-	            ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods",
+	            ((HttpServletResponse) servletResponse).setHeader("Access-Control-Allow-Origin", "*");
+	            ((HttpServletResponse) servletResponse).setHeader("Access-Control-Allow-Headers", "*");
+	            ((HttpServletResponse) servletResponse).setHeader("Access-Control-Allow-Methods",
 	                    "GET, OPTIONS, HEAD, PUT, POST, DELETE");
 
 	            HttpServletResponse resp = (HttpServletResponse) servletResponse;
@@ -84,6 +84,7 @@ public class CORSInterceptor implements Filter {
 	            }
 			}
 	        filterChain.doFilter(request, servletResponse);
+	        e.printStackTrace();
 //			System.out.println(request.getServerName() + " " + request.getLocalPort());
 		}
 	}

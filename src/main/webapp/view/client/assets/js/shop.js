@@ -15,7 +15,7 @@ async function getProduct(path) {
         return `
         <div class="col l-4 m-6 c-6">
             <div class="product-information">
-                <a href="#" class="product-item">
+                <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/product-detail?pid=${product.id}" class="product-item">
                     <div class="product-item__img" style="background-image: url(${product.thumbnail});"></div>
                     <h4 class="product-item__name">${product.title}</h4>
                     <p class="product-item__vendor">Vergency</p>
@@ -32,7 +32,7 @@ async function getProduct(path) {
                         <span class="price-old">${product.price}</span>
                         <span class="price-new">${product.discount}</span>
                     </div>
-                    <div class="product-item__sale-off">${sale}</div>
+                    <div class="product-item__sale-off">${sale}%</div>
                 </a>
                 <div class="product-item__quick-view">
                     <a class="quick-view--btn"

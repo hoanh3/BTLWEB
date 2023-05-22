@@ -167,6 +167,8 @@ public class ProductApi extends HttpServlet{
 				}
 				String payload = buffer.toString();
 				
+//				System.out.println(payload);
+				
 				ProductDto productDto = _gson.fromJson(payload, ProductDto.class);
 				
 				_productService.updateProduct(productDto, pid);
@@ -206,12 +208,8 @@ public class ProductApi extends HttpServlet{
 		}
 		
 		int status = _productService.deleteProduct(productId);
-		if(status == 0) {
-			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return;
-		} else {
-			sendAsJson(resp, product);
-		}
+		
+		sendAsJson(resp, product);
 		return;
 	}
 }

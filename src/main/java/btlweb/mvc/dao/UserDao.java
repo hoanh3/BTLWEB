@@ -8,6 +8,7 @@ import btlweb.mvc.model.dto.UserDto;
 public interface UserDao {
 	
 	List<User> getAll();
+	List<User> getAdmin();
 	
 	int insertUser(User user); // return ve status. != 0: thanhcong, == 0: that bai
 	int update(UserDto user); // 	return ve status. != 0: thanhcong, == 0: that bai

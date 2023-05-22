@@ -1,6 +1,7 @@
 package btlweb.mvc.dao.impl;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +19,7 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public List<User> getAll() {
 		List<User> userList = new ArrayList<>();
-		String sql = "SELECT U.*, R.name FROM user as U, role as R WHERE U.role_id = R.id";
+		String sql = "SELECT U.*, R.name FROM user as U, role as R WHERE U.role_id = R.id and U.role_id = 2";
 	    try {
 	    	Connection conn = MySQLConnect.getConnection();
 	    	PreparedStatement ps = conn.prepareStatement(sql);
@@ -119,7 +120,7 @@ public class UserDaoImpl implements UserDao{
 		      ps.setString(6, user.getCity());
 		      ps.setString(7, user.getDistrict());
 		      ps.setString(8, user.getStreetAddress());
-		      ps.setInt(9, 2);
+		      ps.setInt(9, user.getRole().getId());
 		      rows = ps.executeUpdate();
 		   } catch (SQLException e) {
 		      e.printStackTrace();
@@ -248,6 +249,35 @@ public class UserDaoImpl implements UserDao{
 		   } 
 		   return user;
 	}
+
+	@Override
+	public List<User> getAdmin() {
+		List<User> userList = new ArrayList<>();
+		String sql = "SELECT U.*, R.name FROM user as U, role as R WHERE U.role_id = R.id and U.role_id = 1";
+	    try {
+	    	Connection conn = MySQLConnect.getConnection();
+	    	PreparedStatement ps = conn.prepareStatement(sql);
+	    	ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            User user = new User();
+	            user.setId(rs.getInt("id"));
+	            user.setFirstName(rs.getString("first_name"));
+	            user.setLastName(rs.getString("last_name"));
+	            user.setEmail(rs.getString("email"));
+	            user.setPassword(rs.getString("password"));
+	            user.setPhoneNumber(rs.getString("phoneNumber"));
+	            user.setCity(rs.getString("city"));
+	            user.setDistrict(rs.getString("district"));
+	            user.setStreetAddress(rs.getString("street_address"));
+		        user.setRole(new Role(rs.getInt("role_id"), rs.getString("name")));
+	            userList.add(user);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return userList;
+	}
+
 
 
 }
