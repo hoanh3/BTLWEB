@@ -30,4 +30,4 @@ function updateUser() {
 updateBtn.addEventListener("click", function(event) {
     event.preventDefault();
     updateUser();
-})
+});

@@ -64,7 +64,7 @@ public class CORSInterceptor implements Filter {
 	                return;
 	            }
 	        }
-	        System.out.println(requestOrigin);
+//	        System.out.println(requestOrigin);
 	        // pass the request along the filter chain
 	        filterChain.doFilter(request, servletResponse);
 		} catch (Exception e) {

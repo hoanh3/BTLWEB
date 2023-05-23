@@ -65,7 +65,7 @@
     </div>
 
     <!-- menu begin -->
-    <jsp:include page="./mobile/menu.jsp" flush="true" />
+    <jsp:include page="./menu/menu.jsp" flush="true" />
     <!-- menu end -->
 
     <div class="back-to-top">

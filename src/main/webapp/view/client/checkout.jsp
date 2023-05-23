@@ -236,6 +236,17 @@
                                                     <span class="form-message"></span>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <input
+                                                    type="text"
+                                                    name="note"
+                                                    class="form-control phone"
+                                                    placeholder=" "
+                                                    value=""
+                                                />
+                                                <label for="note" class="form-label">Ghi chú đơn hàng</label>
+                                                <span class="form-message"></span>
+                                            </div>
                                             
                                             <input type="hidden" id="user-id" value="${sessionScope.user != null ? sessionScope.user.id : 0}" name = "user-id"/>
                                         </form>

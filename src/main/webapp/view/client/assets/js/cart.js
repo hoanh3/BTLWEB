@@ -101,10 +101,6 @@ async function render(url = "") {
                         <a href="/shop">Tiếp tục mua sản phẩm khác</a>
                     </div>
                 </div>
-                <h3>Ghi chú đơn hàng</h3>
-                <div class="checkout-note">
-                    <textarea id="box-note" rows="5" placeholder="Ghi chú:"></textarea>
-                </div>
             `;
     }
 

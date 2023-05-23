@@ -35,17 +35,17 @@
         </div>
     </div>
     <!-- modal layout -->
-    <div class="modal" id="open">
-        <a href="#" class="close"></a>
+    <div class="modal open">
         <div class="modal-overlay" class=""></div>
         <div class="modal-body">
-            <div class="modal-inner">
-                <div class="admin-title">
+            <i class="close-icon fa-solid fa-xmark"></i>
+            <div class="modal-title">
                 <h1>Thêm Product</h1>
-                </div>
+            </div>
+            <div class="modal-content">
                 <form action="#" id="form-input">
                     <div class="form-group">
-                        <label class="id">ID:</label>
+                        <label class="id" for="input-0">ID:</label>
                         <input type="text" readonly="readonly" class="form-control" id="input-0" name="input-0" value="1"/>
                     </div>
                     <div class="form-group">
