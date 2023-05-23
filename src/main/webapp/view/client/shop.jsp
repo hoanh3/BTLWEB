@@ -166,12 +166,12 @@
                                     <div class="slider-product__item">
                                         <img src="${url}/images/SliderQuickView/image5.png" alt="" class="item-img">
                                     </div>
-                                    <div class="slider-product__item">
+                                    <!-- <div class="slider-product__item">
                                         <img src="${url}/images/SliderQuickView/image6.png" alt="" class="item-img">
                                     </div>
                                     <div class="slider-product__item">
                                         <img src="${url}/images/SliderQuickView/image7.png" alt="" class="item-img">
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <i class="quick-view-next fa-solid fa-chevron-right"></i>
                             </div>
@@ -200,19 +200,19 @@
                                 <p>Kích Thước:</p>
                                 <form class="size-select">
                                     <label for="small" class="size-option">
-                                        <input type="radio" name="size" value="s" id="small">
+                                        <input type="radio" name="size" value="1" id="small">
                                         <span>S</span>
                                     </label>
                                     <label for="medium" class="size-option">
-                                        <input type="radio" name="size" value="s" id="medium">
+                                        <input type="radio" name="size" value="2" id="medium">
                                         <span>M</span>
                                     </label>
                                     <label for="large" class="size-option">
-                                        <input type="radio" name="size" value="L" id="large">
+                                        <input type="radio" name="size" value="3" id="large">
                                         <span>L</span>
                                     </label>
                                     <label for="x-large" class="size-option sold-out">
-                                        <input type="radio" name="size" value="XL" id="x-large">
+                                        <input type="radio" name="size" value="4" id="x-large">
                                         <span>XL</span>
                                     </label>
                                 </form>
@@ -245,8 +245,12 @@
         </div>
     </div>
 
+    <!-- message login begin-->
+    <jsp:include page="./menu/message.jsp" flush="true" />
+    <!-- message login end -->
+
     <!-- menu begin -->
-    <jsp:include page="./mobile/menu.jsp" flush="true" />
+    <jsp:include page="./menu/menu.jsp" flush="true" />
     <!-- menu end -->
 
     <div class="back-to-top">
@@ -258,6 +262,7 @@
     </div>
 
     <script src="${url}/js/app.js"></script>
+    <script src="${url}/js/quickViewSlide.js"></script>
     <script src="${url}/js/main.js"></script>
     <script src="${url}/js/shop.js"></script>
 </body>

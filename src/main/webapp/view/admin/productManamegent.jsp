@@ -16,6 +16,7 @@
             <jsp:include page="./header/mainHeader.jsp" flush="true" />
             <!-- header end -->
             <div class="content">
+                <a href="#open">Thêm sản phẩm</a>
                 <table id="render">
                     <!-- <tr>
                         <th>Id</th>
@@ -30,7 +31,6 @@
                         <th>Action</th>
                     </tr> -->
                 </table>
-                <a href="#open">Thêm sản phẩm</a>
             </div>
         </div>
     </div>
@@ -100,7 +100,8 @@
             </div>
         </div>
     </div>
-    
+
+    <script src="${url}/js/app.js"></script>
     <script src="${url}/js/product.js"></script>
 </body>
 </html>

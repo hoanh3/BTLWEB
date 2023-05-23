@@ -32,6 +32,11 @@ public class LoginController extends HttpServlet{
 			User user = _userService.findUserByEmail(username);
 			if(user != null && BCrypt.checkpw(password, user.getPassword())) {
 				HttpSession session = req.getSession();
+				if(user.getRole().getName().equals("ADMIN")) {
+					session.setAttribute("admin", user);
+					resp.sendRedirect(req.getContextPath() + "/admin/home");
+					return;
+				}
 				session.setAttribute("user", user);
 
 				resp.sendRedirect(req.getContextPath() + "/home");

@@ -37,6 +37,8 @@
 //     }
 // }
 
+var PATHAPI = "http://localhost:8080/btlweb/cart";
+
 async function render(url = "") {
     const data = await fetch(url, {
         method: "GET",
@@ -46,7 +48,6 @@ async function render(url = "") {
     });
     let response = await data.json();
 
-    console.log(response);
 
     let total_price = 0;
     let stringHTML = await response.map((product) => {
@@ -72,7 +73,7 @@ async function render(url = "") {
                         <button class="minus-btn" onclick='reduceItem(${JSON.stringify(product)})'>
                             <i class="fa-solid fa-minus"></i>
                         </button>
-                        <p class="amount" min-data="1">${product.num}</p>
+                        <p class="amount" max-data="1">${product.num}</p>
                         <button class="plus-btn" onclick='increaseItem(${JSON.stringify(product)})'>
                             <i class="fa-solid fa-plus"></i>
                         </button>
@@ -80,7 +81,7 @@ async function render(url = "") {
                     <p class="total-price__item">${price}đ</p>
                 </div>
                 <div class="cart-product__remove">
-                    <a href="#" class="remove-item" onclick='removeItem(${JSON.stringify(product)})'>Xóa sản phẩm</a>
+                    <button class="remove-item" onclick='removeItem(${JSON.stringify(product)})'>Xóa sản phẩm.</button>
                 </div>
             </div>
         `;
@@ -137,20 +138,31 @@ async function putItem(url = "", data = {}) {
         },
         body: JSON.stringify(data),
     });
-    console.log("response:", response);
+    return response.json();
+}
+
+async function deleteItem(url = "", data = {}) {
+    const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
     return response.json();
 }
 
 function reduceItem(product) {
-    let amount = document.querySelector(".amount").getAttribute("min-data");
-    if (amount == product.quantity) return;
-
     let productId = product.product.id;
     let userId = document.getElementById("user-id").value;
     let size = product.size;
     let quantity = product.num - 1;
+
+    if(quantity == 0) {
+        removeItem(product);
+        window.location.reload();
+    }
+
     let data = { pid: productId, uid: userId, num: quantity, size: size };
-    console.log({ data });
     putItem("http://localhost:8080/btlweb/cart", data);
     location.reload();
     // let url = `http://localhost:8080/btlweb/cart?uid=${userId}`;
@@ -158,12 +170,15 @@ function reduceItem(product) {
 }
 
 function increaseItem(product) {
+    let amount = document.querySelector(".amount").getAttribute("max-data");
+    console.log(amount);
+    
     let productId = product.product.id;
     let userId = document.getElementById("user-id").value;
     let size = product.size;
-    let quantity = product.num + 1;
+    let quantity = Math.min(amount, product.num + 1);
+
     let data = { pid: productId, uid: userId, num: quantity, size: size };
-    console.log({ data });
     putItem("http://localhost:8080/btlweb/cart", data);
     location.reload();
     // let url = `http://localhost:8080/btlweb/cart?uid=${userId}`;
@@ -171,7 +186,8 @@ function increaseItem(product) {
 }
 
 function removeItem(product) {
-    console.log(product);
+    deleteItem(PATHAPI + `/${product.id}`);
+    window.location.reload();
 }
 
 function start() {

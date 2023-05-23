@@ -10,7 +10,6 @@ async function getProduct(path) {
     };
     let data = await fetch(path, option);
     let response = await data.json();
-    console.log({ response });
 
     const product_html = await response.map((product) => {
         let sale = (1 - product.discount / product.price).toFixed(2) * 100;
@@ -61,7 +60,6 @@ async function getBestSeller(path) {
     };
     let data = await fetch(path, option);
     let response = await data.json();
-    console.log({ response });
 
     const product_html = await response.map((product) => {
         let sale = (1 - product.discount / product.price).toFixed(2) * 100;
@@ -120,18 +118,20 @@ function showQuickView(product) {
     for (let i = 0; i < galleries.length; i++) {
         if (product.galeries[i].thumbnail.length > 0) {
             let thumb = product.galeries[i].thumbnail;
-            console.log(thumb);
             galleries[i].setAttribute("src", thumb);
         }
     }
 
     addToCartBtn.onclick = () => {
         let uid = document.getElementById("user-id").value;
-        console.log(uid);
-        // if(uid == 0) {
-        //     location.replace("http://localhost:8080/btlweb/login");
-        //     return;
-        // }
+        // console.log(uid);
+
+
+        if(uid == 0) {
+            let message = document.querySelector(".message");
+            message.classList.add('open');
+            return;
+        }
 
         let size = document.querySelector("input[name=size]:checked");
         let quantity = document.querySelector(".quantity-select .amount");
@@ -173,6 +173,14 @@ function quickViewEvent() {
         e.stopPropagation();
     };
 
+    let listSize = document.querySelectorAll(".size-select .size-option input");
+
+    for (size in listSize) {
+        listSize[size].onchange = function () {
+            console.log(this.value);
+        };
+    }
+
     plusBtn.addEventListener("click", function () {
         if (amountValue == amount.getAttribute("data-max")) {
             return;
@@ -200,7 +208,6 @@ async function postData(url = "", data = {}) {
         },
         body: JSON.stringify(data),
     });
-    console.log("response:", response);
     return response.json();
 }
 

@@ -71,6 +71,7 @@
     </div>
 
     
+    <script src="${url}/js/app.js"></script>
     <script src="${url}/js/user.js"></script>
 </body>
 </html>

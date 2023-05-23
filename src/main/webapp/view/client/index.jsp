@@ -430,7 +430,7 @@
                                             <span>L</span>
                                         </label>
                                         <label for="x-large" class="size-option sold-out">
-                                            <input type="radio" name="size" value="XL" id="x-large" />
+                                            <input type="radio" name="size" value="4" id="x-large" />
                                             <span>XL</span>
                                         </label>
                                     </form>
@@ -464,8 +464,12 @@
             </div>
         </div>
 
+        <!-- message login begin-->
+        <jsp:include page="./menu/message.jsp" flush="true" />
+        <!-- message login end -->
+
         <!-- menu begin -->
-        <jsp:include page="./mobile/menu.jsp" flush="true" />
+        <jsp:include page="./menu/menu.jsp" flush="true" />
         <!-- menu end -->
 
         <div class="back-to-top">

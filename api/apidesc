@@ -2,17 +2,20 @@ category api {
 	GET		/category				:lấy danh sách các category có trong db
 	GET		/category?pageId=tt		:lấy danh sách các category có trong trang tt
 	GET		/category/{id}			:lấy category theo id
-	POST 	/category				:gửi category lên server
+	POST 	/category				:thêm mới category
 	PUT 	/category/{id}			:cập nhật category theo id
 	DELETE 	/category/{id}			:xóa category theo id
 }
 
 user api {
+	GET 	/user/admin				:lấy danh sách tất cả các admin trong db
 	GET 	/user					:lấy danh sách tất cả các user trong db
 	GET 	/user?pageId={id}		:lấy danh sách các user ở trang thứ {id}
 	GET 	/user/{id}				:lấy user có id = {id}
-	PUT		/user/id				:cập nhật user
+	PUT		/user/id				:cập nhật user theo userDto
+	PUT		/user/admin/id			:cập nhật admin theo adminDto
 	DELETE	/user/{id}				:xóa user có id = {id}
+	DELETE	/user/admin/{id}		:xóa admin có id = {id}
 }
 
 product api {

@@ -73,8 +73,6 @@ public class CartApi extends HttpServlet{
 		String pathInfo = req.getPathInfo();
 		
 		try {
-
-			
 			StringBuilder buffer = new StringBuilder();
 			BufferedReader reader = req.getReader();
 			String line;
@@ -85,8 +83,8 @@ public class CartApi extends HttpServlet{
 			
 			ItemDto itemDto = _gson.fromJson(payload, ItemDto.class);
 			if(itemDto.getUid() == 0) {
-				System.out.println(req.getLocalPort());
-				resp.sendRedirect(req.getContextPath() + "/login");
+				resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				return;
 			}
 			
 			Product product = _productService.getProductById(itemDto.getPid());

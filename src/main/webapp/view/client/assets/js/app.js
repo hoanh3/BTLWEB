@@ -23,12 +23,44 @@ mobileSearchBtn.onclick = () => {
 // Toggle menu
 const toggleMenu = document.querySelector(".toggle-box");
 
-toggleMenu.onclick = (event) => {
-    event.preventDefault();
-    document.querySelector(".app").classList.toggle("open");
-    document.querySelector("#menu-mobile").classList.toggle("open");
-    document.querySelector("body").classList.toggle("helper-overflow-hidden");
+// toggleMenu.onclick = (event) => {
+//     event.preventDefault();
+//     document.querySelector(".app").classList.toggle("open");
+//     document.querySelector("#menu-mobile").classList.toggle("open");
+//     document.querySelector("body").classList.toggle("helper-overflow-hidden");
+// };
+
+if (toggleMenu) {
+    toggleMenu.onclick = (event) => {
+        event.preventDefault();
+        document.querySelector(".app").classList.toggle("open");
+        document.querySelector("#menu-mobile").classList.toggle("open");
+        document.querySelector("body").classList.toggle("helper-overflow-hidden");
+    };
+}
+
+// Message
+let message = document.querySelector(".message");
+let messageContent = document.querySelector(".message__body");
+let closeMessage = document.querySelector(".message-icon");
+
+// message.classList.add('open');
+
+closeMessage.onclick = () => {
+    hideMessage();
 };
+
+message.onclick = () => {
+    hideMessage();
+};
+
+messageContent.onclick = (e) => {
+    e.stopPropagation();
+};
+
+function hideMessage() {
+    message.classList.remove("open");
+}
 
 // Count time
 function displayTime() {
@@ -50,7 +82,6 @@ if (document.querySelector(".box-time")) {
 
 // Mobile menu
 let showBtn = document.querySelector(".menu-mobile__item:nth-child(2) i");
-console.log(showBtn);
 
 showBtn.onclick = (event) => {
     event.preventDefault();

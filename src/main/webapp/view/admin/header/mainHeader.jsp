@@ -50,9 +50,9 @@
             <div class="nav">
                 <ul id="items">
                     <li id ="admin"><a href="${pageContext.request.contextPath}/admin/admin">Quản lý admin</a></li>
-                    <li><a href="${pageContext.request.contextPath}/admin/user">Quản lý người dùng</a></li>
-                    <li class="active"><a href="${pageContext.request.contextPath}/admin/product">Quản lý sản phẩm</a></li>
-                    <li><a href="${pageContext.request.contextPath}/admin/category">Quản lý danh mục</a></li>
-                    <li><a href="${pageContext.request.contextPath}/admin/order">Đơn hàng</a></li>
+                    <li id ="user"><a href="${pageContext.request.contextPath}/admin/user">Quản lý người dùng</a></li>
+                    <li id ="product"><a href="${pageContext.request.contextPath}/admin/product">Quản lý sản phẩm</a></li>
+                    <li id ="category"><a href="${pageContext.request.contextPath}/admin/category">Quản lý danh mục</a></li>
+                    <li id ="order"><a href="${pageContext.request.contextPath}/admin/order">Đơn hàng</a></li>
                 </ul>
             </div> 

@@ -17,6 +17,15 @@
   </servlet-mapping>
   
   <servlet>
+  	<servlet-name>Order API Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.api.OrderApi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Order API Servlet</servlet-name>
+  	<url-pattern>/order/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
   	<servlet-name>Cart API Servlet</servlet-name>
   	<servlet-class>btlweb.mvc.controller.api.CartApi</servlet-class>
   </servlet>

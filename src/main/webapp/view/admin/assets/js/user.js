@@ -136,4 +136,5 @@ form.addEventListener('submit',async function(e) {
 
 window.onload = function() {
     getUser(PATHAPI);
+    activeNav();
 }

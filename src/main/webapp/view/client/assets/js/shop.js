@@ -8,7 +8,6 @@ async function getProduct(path) {
     };
     let data = await fetch(path, option);
     let response = await data.json();
-    console.log({ response });
 
     const product_html = await response.map((product) => {
         let sale = (1 - product.discount / product.price).toFixed(2) * 100;
@@ -61,14 +60,22 @@ function showQuickView(product) {
     for (let i = 0; i < galleries.length; i++) {
         if (product.galeries[i].thumbnail.length > 0) {
             let thumb = product.galeries[i].thumbnail;
-            console.log(thumb);
             galleries[i].setAttribute("src", thumb);
         }
     }
 
     addToCartBtn.onclick = () => {
         let uid = document.getElementById("user-id").value;
-        console.log(uid);
+        // console.log(uid);
+
+        
+        if(uid == 0) {
+            let message = document.querySelector(".message");
+            message.classList.add('open');
+            return;
+        }
+
+
         // if(uid == 0) {
         //     location.replace("http://localhost:8080/btlweb/login");
         //     return;
@@ -87,7 +94,6 @@ function showQuickView(product) {
             num: Number(quantity.textContent),
             size: size.value,
         };
-        console.log({ data });
         postData("http://localhost:8080/btlweb/cart", data);
         hideQuickView();
     };
@@ -141,7 +147,6 @@ async function postData(url = "", data = {}) {
         },
         body: JSON.stringify(data),
     });
-    console.log("response:", response);
     return response.json();
 }
 

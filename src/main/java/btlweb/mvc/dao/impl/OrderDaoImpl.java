@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import btlweb.mvc.dao.OrderDao;
 import btlweb.mvc.dbconnect.MySQLConnect;
@@ -52,6 +54,40 @@ public class OrderDaoImpl implements OrderDao{
 
 	public static void main(String[] args) {
 		OrderDao orderDao = new OrderDaoImpl();
-		System.out.println(orderDao.addOrder(new Order(0, "test", "test", "test", "test", "test", "test", "test", "test", new Date(1200000), 0, 10, 2)));
+		System.out.println(orderDao.getAll());
+	}
+
+	@Override
+	public List<Order> getAll() {
+		List<Order> orders = new ArrayList<>();
+		
+		String query = "SELECT * FROM orders;";
+		
+		try {
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				int id = resultSet.getInt(1);
+				String firstName = resultSet.getString(2);
+				String lastName = resultSet.getString(3);
+				String email = resultSet.getString(4);
+				String phoneNumber = resultSet.getString(5);
+				String city = resultSet.getString(6);
+				String district = resultSet.getString(7);
+				String streetAddress = resultSet.getString(8);
+				String note = resultSet.getString(9);
+				java.util.Date orderDate = resultSet.getDate(10);
+				int status = resultSet.getInt(11);
+				int totalMoney = resultSet.getInt(12);
+				orders.add(new Order(id, firstName, lastName, email, phoneNumber, city, district, streetAddress, note, orderDate, status, totalMoney, id) );
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("loi get order");
+		}
+		
+		return orders;
 	}
 }

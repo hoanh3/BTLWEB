@@ -56,9 +56,13 @@
         <jsp:include page="./footer/mainFooter.jsp" flush="true" />
         <!-- footer end -->
     </div>
+    
+    <!-- message login begin-->
+    <jsp:include page="./menu/message.jsp" flush="true" />
+    <!-- message login end -->
 
     <!-- menu begin -->
-    <jsp:include page="./mobile/menu.jsp" flush="true" />
+    <jsp:include page="./menu/menu.jsp" flush="true" />
     <!-- menu end -->
 
     <div class="back-to-top">

@@ -7,8 +7,6 @@ async function render(url = "") {
     });
     let response = await data.json();
 
-    console.log(response);
-
     let total_price = 0;
     let stringHTML = await response.map((product) => {
         total_price += product.price * product.num;

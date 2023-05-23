@@ -8,7 +8,6 @@ async function putUser(url = "", data = {}) {
         },
         body: JSON.stringify(data),
     });
-    console.log("response:", response);
     return response.json();
 }
 
@@ -24,7 +23,6 @@ function updateUser() {
 
     let data = {id: uid, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber,
          city: city, district: district, streetAddress: streetAddress};
-    console.log({ data });
     putUser(`${SERVER}/${CONTEXT}/user/${uid}`, data);
     window.location.replace(`/${CONTEXT}/address`);
 }

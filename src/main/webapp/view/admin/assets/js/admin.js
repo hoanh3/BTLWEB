@@ -170,4 +170,5 @@ addBtn.addEventListener('click', async function(e) {
 
 window.onload = function() {
     getUser(PATHAPI);
+    activeNav();
 }

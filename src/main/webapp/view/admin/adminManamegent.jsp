@@ -17,10 +17,10 @@
             <jsp:include page="./header/mainHeader.jsp" flush="true" />
             <!-- header end -->
             <div class="content">
+                <a href="#open">Thêm admin</a>
                 <table id="render">
                     
                 </table>
-                <a href="#open">Thêm admin</a>
             </div>
             
         </div>
@@ -77,6 +77,7 @@
             </div>
         </div>
     </div>
+    <script src="${url}/js/app.js"></script>
     <script src="${url}/js/adminManamegent.js"></script>
     <script src="${url}/js/admin.js"></script>
 </body>

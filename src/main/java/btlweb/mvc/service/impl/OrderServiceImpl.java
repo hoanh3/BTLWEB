@@ -42,4 +42,10 @@ public class OrderServiceImpl implements OrderService{
 		OrderService orderService = new OrderServiceImpl();
 		orderService.addOrder("test", "test", "test", "test", "test", "test", "test", "test", 2);
 	}
+
+	@Override
+	public List<Order> getAll() {
+		// TODO Auto-generated method stub
+		return _orderDao.getAll();
+	}
 }

@@ -190,6 +190,16 @@ html {
     animation: modalFadeIn 0.5s ease-in-out;
 }
 
+.quick-view__img  img{
+	max-height: 350px;
+	max-width: 350px;
+}
+
+.slider-product__item img{
+	max-height: 66px;
+	max-width: 66px;
+}
+
 @keyframes modalFadeIn {
     from {
         opacity: 0;
@@ -230,4 +240,94 @@ html {
 
 .breadcrumb li i {
     font-size: 1rem;
+}
+
+/* Message */
+.message {
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    transition: 0.5s;
+}
+
+.message.open {
+    display: block;
+}
+
+.message__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(70, 55, 80, 0.5);
+}
+
+.message__content {
+    position: relative;
+    top: 40%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    background-color: var(--white-color);
+    max-width: 400px;
+    margin: auto;
+    /* padding: 14px; */
+    border-radius: 5px;
+    /* animation: modalFadeIn 0.5s ease-in-out; */
+}
+
+.message__header {
+    padding: 12px 10px;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    position: relative;
+}
+
+.message__title {
+    font-size: 1.8rem;
+    font-weight: 450;
+    line-height: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.message-icon {
+    position: absolute;
+    top: -13px;
+    right: -12px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    background-color: var(--black-color);
+    padding: 3px 5px;
+    border-radius: 50%;
+    border: 2px solid var(--white-color);
+}
+
+.message__body {
+    padding: 15px;
+}
+
+.subtext {
+    font-size: 1.4rem;
+    font-style: italic;
+    text-align: center;
+}
+
+.action-btn {
+    text-align: center;
+}
+
+.login--link {
+    display: inline-block;
+    padding: 15px 12px 10px;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    margin-top: 15px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 1.4rem;
+    border: 1px solid;
+    border-radius: 3px;
 }

@@ -16,10 +16,10 @@
             <jsp:include page="./header/mainHeader.jsp" flush="true" />
             <!-- header end -->
             <div class="content">
+                <a href="#open">Thêm chuyên mục</a>
                 <table id="render">
                     
                 </table>
-                <a href="#open">Thêm chuyên mục</a>
             </div>
         </div>
     </div>
@@ -47,6 +47,7 @@
             </div>
         </div>
     </div>
+    <script src="${url}/js/app.js"></script>
     <script src ="${url}/js/catalogManamegent.js"></script>
     <script src="${url}/js/category.js"></script>
 </body>

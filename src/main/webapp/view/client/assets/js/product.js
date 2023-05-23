@@ -5,6 +5,7 @@ let activeImg = document.getElementsByClassName("active");
 let prevBtn = document.querySelector(".prev-icon");
 let nextBtn = document.querySelector(".next-icon");
 let addToCartBtn = document.querySelector(".add-cart-btn");
+let buyBtn = document.querySelector(".buy-btn");
 
 for (let i = 0; i < slider.length; i++) {
     slider[i].addEventListener("click", () => {
@@ -24,18 +25,26 @@ nextBtn.onclick = function () {
     document.querySelector(".product-slider").scrollLeft += 85 + 6;
 };
 
+async function postData(url = "", data = {}) {
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    return response.json();
+}
 
 async function getRelatedProduct(path) {
     let option = {
         method: "GET",
         headers: {
-            "Content-Type": "application/json",
-            origin: "http://127.0.0.1:5500/",
+            "Content-Type": "application/json"
         },
     };
     let data = await fetch(path, option);
     let response = await data.json();
-    console.log({ response });
 
     const product_html = await response.map((product) => {
         return `
@@ -62,12 +71,13 @@ async function getRelatedProduct(path) {
 
 addToCartBtn.onclick = () => {
     let uid = document.getElementById("user-id").value;
-    // if(uid == 0) {
-    //     location.replace("http://localhost:8080/btlweb/login");
-    //     return;
-    // }
+    
+    if(uid == 0) {
+        let message = document.querySelector(".message");
+        message.classList.add('open');
+        return;
+    }
 
-    console.log(uid);
     let size = document.querySelector("input[name=size]:checked");
     let quantity = document.querySelector(".quantity-select .amount");
     // console.log("productId:", dataProduct.id);
@@ -75,14 +85,43 @@ addToCartBtn.onclick = () => {
     // console.log("quantity:", quantity.textContent);
     // console.log("size:", size.value);
 
+    let pid = document.getElementById("product-id").value;
+
     data = {
-        pid: Number(product.id),
+        pid: Number(pid),
         uid: Number(uid),
         num: Number(quantity.textContent),
         size: size.value,
     };
-    console.log({ data });
-    // postData("http://localhost:8080/btlweb/cart", data);
+    postData(`${pathAPI}/cart`, data);
+};
+
+buyBtn.onclick = () => {
+    let uid = document.getElementById("user-id").value;
+    
+    if(uid == 0) {
+        let message = document.querySelector(".message");
+        message.classList.add('open');
+        return;
+    }
+
+    let size = document.querySelector("input[name=size]:checked");
+    let quantity = document.querySelector(".quantity-select .amount");
+    // console.log("productId:", dataProduct.id);
+    // console.log("userId:", uid);
+    // console.log("quantity:", quantity.textContent);
+    // console.log("size:", size.value);
+
+    let pid = document.getElementById("product-id").value;
+
+    data = {
+        pid: Number(pid),
+        uid: Number(uid),
+        num: Number(quantity.textContent),
+        size: size.value,
+    };
+    postData(`${pathAPI}/cart`, data);
+    window.location.replace(`${window.location.protocol}//${window.location.host}${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/cart-view`);
 };
 
 function start() {
