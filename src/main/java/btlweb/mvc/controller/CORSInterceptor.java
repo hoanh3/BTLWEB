@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebFilter(asyncSupported = true, urlPatterns = { "/product/*", "/category/*", "/user/*", "/cart/*", "/order/*"})
+@WebFilter(asyncSupported = true, urlPatterns = { "/product/*", "/category/*", "/user/*", "/cart/*", "/order/*", "/avai/*"})
 public class CORSInterceptor implements Filter {
 
     private static final String[] allowedOrigins = {
@@ -64,6 +64,7 @@ public class CORSInterceptor implements Filter {
 	                return;
 	            }
 	        }
+	        System.out.println(requestOrigin);
 	        // pass the request along the filter chain
 	        filterChain.doFilter(request, servletResponse);
 		} catch (Exception e) {
