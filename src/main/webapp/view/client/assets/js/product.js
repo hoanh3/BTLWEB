@@ -124,6 +124,59 @@ buyBtn.onclick = () => {
     window.location.replace(`${window.location.protocol}//${window.location.host}${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/cart-view`);
 };
 
+let listSize = document.querySelectorAll(".size-select .size-option input");
+let available;
+
+for (size in listSize) {
+    listSize[size].onchange = async function () {
+        const path = `http://localhost:8080/btlweb/avai?pid=${document.getElementById("product-id").value}&sid=${this.value}`;
+        available = await getAvailable(path);
+        amount.innerHTML = "0";
+        if(available.avai == 0) {    
+            document.querySelector(".btn-form .add-cart-btn").style.pointerEvents  = "none";
+            document.querySelector(".btn-form .buy-btn").style.pointerEvents  = "none";
+        } else {
+            document.querySelector(".btn-form .add-cart-btn").style.pointerEvents  = "auto";
+            document.querySelector(".btn-form .buy-btn").style.pointerEvents  = "auto";
+        }
+    };
+}
+
+let amount = document.querySelector(".amount");
+let plusBtn = document.querySelector(".plus-btn");
+let minusBtn = document.querySelector(".minus-btn");
+let amountValue = 0;
+
+plusBtn.addEventListener("click", function () {
+    // if (amountValue == amount.getAttribute("data-max")) {
+    //     return;
+    // }
+    // if (amountValue == available.avai) {
+    //     return;
+    // }
+    amountValue = Math.min(amountValue + 1, available.avai);
+    amount.innerText = amountValue;
+});
+
+minusBtn.addEventListener("click", function () {
+    if (amountValue > 0) amountValue--;
+    amount.innerText = amountValue;
+});
+
+async function getAvailable(path) {
+    let option = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Origin: "http://127.0.0.1:5500/",
+        },
+    };
+    let data = await fetch(path, option);
+    let response = await data.json();
+    console.log({ response });
+    return response;
+}
+
 function start() {
     let cateId = document.getElementById("cate-id").value;
     getRelatedProduct(pathAPI + `/product?related=${cateId}`);

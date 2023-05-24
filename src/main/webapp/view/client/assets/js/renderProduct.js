@@ -108,17 +108,26 @@ function showQuickView(product) {
     let galleries = document.querySelectorAll(".slider-product__item img");
     let addToCartBtn = document.querySelector(".modal .quick-view__add-cart span");
 
-    quickViewEvent();
+    quickViewEvent(product.id);
 
     modal.querySelector(".quick-view__img img").setAttribute("src", img);
     modal.querySelector(".quick-view__title").innerHTML = product.title;
     modal.querySelector(".price-new").innerHTML = product.discount / 1000 + ".000đ";
     modal.querySelector(".price-old").innerHTML = product.price / 1000 + ".000đ";
 
-    for (let i = 0; i < galleries.length; i++) {
-        if (product.galeries[i].thumbnail.length > 0) {
-            let thumb = product.galeries[i].thumbnail;
-            galleries[i].setAttribute("src", thumb);
+    if(product.galeries.length > 0) {
+        for (let i = 0; i < galleries.length; i++) {
+            if (product.galeries[i].thumbnail.length > 0) {
+                let thumb = product.galeries[i].thumbnail;
+                galleries[i].setAttribute("src", thumb);
+            }
+        }
+    }
+
+    let listSize = document.querySelectorAll(".size-select .size-option input");
+    for (size in listSize) {
+        if (listSize[size].checked === true) {
+            listSize[size].checked = false;
         }
     }
 
@@ -152,7 +161,7 @@ function showQuickView(product) {
     };
 }
 
-function quickViewEvent() {
+function quickViewEvent(pid) {
     let modal = document.querySelector(".modal");
     let modalContent = document.querySelector(".modal__content");
     let closeQuickViewBtn = document.querySelector(".quick-view__close-btn");
@@ -174,18 +183,28 @@ function quickViewEvent() {
     };
 
     let listSize = document.querySelectorAll(".size-select .size-option input");
-
+    let available;
     for (size in listSize) {
-        listSize[size].onchange = function () {
-            console.log(this.value);
+        listSize[size].onchange = async function () {
+            const path = `http://localhost:8080/btlweb/avai?pid=${pid}&sid=${this.value}`;
+            available = await getAvailable(path);
+            amount.innerHTML = "0";
+            if(available.avai == 0) {    
+                document.querySelector(".modal .quick-view__add-cart").style.pointerEvents  = "none";
+            } else {
+                document.querySelector(".modal .quick-view__add-cart").style.pointerEvents  = "auto";
+            }
         };
     }
 
     plusBtn.addEventListener("click", function () {
-        if (amountValue == amount.getAttribute("data-max")) {
-            return;
-        }
-        amountValue++;
+        // if (amountValue == amount.getAttribute("data-max")) {
+        //     return;
+        // }
+        // if (amountValue == available.avai) {
+        //     return;
+        // }
+        amountValue = Math.min(amountValue + 1, available.avai);
         amount.innerText = amountValue;
     });
 
@@ -198,6 +217,20 @@ function quickViewEvent() {
 function hideQuickView() {
     let modal = document.querySelector(".modal");
     modal.classList.remove("open");
+}
+
+async function getAvailable(path) {
+    let option = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Origin: "http://127.0.0.1:5500/",
+        },
+    };
+    let data = await fetch(path, option);
+    let response = await data.json();
+    console.log({ response });
+    return response;
 }
 
 async function postData(url = "", data = {}) {
