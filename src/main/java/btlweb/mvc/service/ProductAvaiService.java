@@ -9,4 +9,5 @@ public interface ProductAvaiService {
 	int getProductSA(int productId, int productSizeId);
 	void addProductAvai(int sizeId, int productId, int avai);
 	void update(int sizeId, int productId, int avai);
+	void delete(int id);
 }

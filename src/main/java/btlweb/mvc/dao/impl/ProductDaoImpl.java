@@ -353,4 +353,20 @@ public class ProductDaoImpl implements ProductDao{
 		}
 		return pid;
 	}
+
+	@Override
+	public int deletProductByCategoryId(int cid) {
+		// TODO Auto-generated method stub
+		int rowDeleted = 0;
+	    try {
+	        Connection connection = MySQLConnect.getConnection();
+	        PreparedStatement statement = connection.prepareStatement("DELETE FROM product WHERE `category_id` = ?");
+	        statement.setInt(1, cid);
+	        rowDeleted = statement.executeUpdate();
+	        connection.close();
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+	    return rowDeleted;
+	}
 }

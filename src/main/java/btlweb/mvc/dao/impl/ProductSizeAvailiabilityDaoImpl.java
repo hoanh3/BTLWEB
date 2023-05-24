@@ -117,4 +117,20 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 	    } 
 	    return ;
 	}
+
+	@Override
+	public void deleteByProductId(int pid) {
+		String query = "DELETE FROM `product_size` "
+				+ "WHERE `product_id` = ?;";
+		try {
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement pStatement = connection.prepareStatement(query);
+			pStatement.setInt(1, pid);
+			pStatement.execute();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("loi product avai szie dao");
+		}
+		return ;
+	}
 }

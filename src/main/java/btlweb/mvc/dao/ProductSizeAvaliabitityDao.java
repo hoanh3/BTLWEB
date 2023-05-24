@@ -10,4 +10,5 @@ public interface ProductSizeAvaliabitityDao {
 	int getSizeAvaiability(int productId, int sizeId);
 	void addProductAvai(ProductSize productSize);
 	void update(ProductSize productSize);
+	void deleteByProductId(int pid);
 }

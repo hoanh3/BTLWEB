@@ -92,7 +92,12 @@ public class CORSInterceptor implements Filter {
     
     private boolean isAllowedOrigin(String origin){
         for (String allowedOrigin : allowedOrigins) {
-            if(origin.equals(allowedOrigin)) return true;
+        	try {
+        		if(origin.equals(allowedOrigin)) return true;				
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("loi origin");
+			}
         }
         return false;
     }

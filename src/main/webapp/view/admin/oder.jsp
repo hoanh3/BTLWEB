@@ -32,115 +32,26 @@
                 <h1>Chi tiết đơn hàng</h1>
             </div>
             <div class="modal-content">
-                <div class="wrap-product">
-                    <div class="product-info">
-                        <div class="product-img">
-                            <img src="https://res.cloudinary.com/dasj31isc/image/upload/v1684739332/product/nxbwj0mprcdtrr6qhi3s.webp" alt="">
+                <div class="wrapper">
+                    <div class="order">
+                        <div class="product-info">
                         </div>
-                        <div class="product-detail">
-                            <div class="title">Product name</div>
-                            <div class="price">
-                                <span>89.000đ</span>
-                                <span>200.000đ</span>
+                        <div class="user-info">
+                            <div class="user">
+                                <div class="title">Thông tin khác hàng</div>
+                                <p class="user-name">Tên: <span>Nguyen Van A</span></p>
+                                <p class="email">Email: <span>email@gmail.com</span></p>
+                                <p class="phone">Sđt: <span>0987654321</span></p>
+                                <div class="address">
+                                    Địa chỉ:
+                                    <span>Mỗ Lao</span>-
+                                    <span>Hà Đông</span>-
+                                    <span>Hà Nội</span>
+                                </div>
+                                <div class="note">Ghi chú của khách hàng: Lorem ipsum dolor sit amet consectetur adipisicing
+                                    elit. Quibusdam voluptas ipsam velit vel. Deserunt, quia autem. Hic eaque illo harum.
+                                </div>
                             </div>
-                            <div class="more">
-                                <span>L</span>,
-                                <span>1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-img">
-                            <img src="https://res.cloudinary.com/dasj31isc/image/upload/v1684739332/product/nxbwj0mprcdtrr6qhi3s.webp" alt="">
-                        </div>
-                        <div class="product-detail">
-                            <div class="title">Product name</div>
-                            <div class="price">
-                                <span>89.000đ</span>
-                                <span>200.000đ</span>
-                            </div>
-                            <div class="more">
-                                <span>L</span>,
-                                <span>1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-img">
-                            <img src="https://res.cloudinary.com/dasj31isc/image/upload/v1684739332/product/nxbwj0mprcdtrr6qhi3s.webp" alt="">
-                        </div>
-                        <div class="product-detail">
-                            <div class="title">Product name</div>
-                            <div class="price">
-                                <span>89.000đ</span>
-                                <span>200.000đ</span>
-                            </div>
-                            <div class="more">
-                                <span>L</span>,
-                                <span>1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-img">
-                            <img src="https://res.cloudinary.com/dasj31isc/image/upload/v1684739332/product/nxbwj0mprcdtrr6qhi3s.webp" alt="">
-                        </div>
-                        <div class="product-detail">
-                            <div class="title">Product name</div>
-                            <div class="price">
-                                <span>89.000đ</span>
-                                <span>200.000đ</span>
-                            </div>
-                            <div class="more">
-                                <span>L</span>,
-                                <span>1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-img">
-                            <img src="https://res.cloudinary.com/dasj31isc/image/upload/v1684739332/product/nxbwj0mprcdtrr6qhi3s.webp" alt="">
-                        </div>
-                        <div class="product-detail">
-                            <div class="title">Product name</div>
-                            <div class="price">
-                                <span>89.000đ</span>
-                                <span>200.000đ</span>
-                            </div>
-                            <div class="more">
-                                <span>L</span>,
-                                <span>1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <div class="product-img">
-                            <img src="https://res.cloudinary.com/dasj31isc/image/upload/v1684739332/product/nxbwj0mprcdtrr6qhi3s.webp" alt="">
-                        </div>
-                        <div class="product-detail">
-                            <div class="title">Product name</div>
-                            <div class="price">
-                                <span>89.000đ</span>
-                                <span>200.000đ</span>
-                            </div>
-                            <div class="more">
-                                <span>L</span>,
-                                <span>1</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="user-info">
-                    <div class="user">
-                        <div class="title">Thông tin khác hàng</div>
-                        <p class="user-name">Tên: <span>Nguyen Van A</span></p>
-                        <p class="email">Email: <span>email@gmail.com</span></p>
-                        <p class="phone">Sđt: <span>0987654321</span></p>
-                        <div class="address">
-                            Địa chỉ:
-                            <span>Mỗ Lao</span>-
-                            <span>Hà Đông</span>-
-                            <span>Hà Nội</span>
                         </div>
                     </div>
                 </div>
@@ -149,6 +60,7 @@
     </div>
     
     <script src="${url}/js/app.js"></script>
+    <script src="${url}/js/modal.js"></script>
     <script src="${url}/js/order.js"></script>
 </body>
 </html>

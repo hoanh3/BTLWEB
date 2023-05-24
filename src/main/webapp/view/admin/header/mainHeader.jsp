@@ -41,6 +41,7 @@
                         </c:when>
                         <c:otherwise>
                             <p>${sessionScope.admin.lastName} ${sessionScope.admin.firstName}</p>
+                            <a href="${pageContext.request.contextPath}/admin/logout">Logout</a>
                         </c:otherwise>
                     </c:choose>
                 </div>

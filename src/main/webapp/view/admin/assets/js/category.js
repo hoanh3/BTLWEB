@@ -54,9 +54,9 @@ async function getCategory(path) {
         <tr>
             <td>${category.id}</th>
             <td>${category.title}</th>
-            <td>
-                <button class="act-btn edit-btn" onclick='editForm(${JSON.stringify(category)})'>Sửa</button> 
-                <button class="act-btn delete-btn" onclick='deleteCategory(${JSON.stringify(category)})'>Xóa</button>
+            <td class="action">
+                <button class="act-btn edit-btn" onclick = 'editForm(${JSON.stringify(category)})'>Sửa</button> 
+                <button class="act-btn delete-btn" onclick = 'deleteCategory(${JSON.stringify(category)})'>Xóa</button>
             </td>
         </tr>
         `;
@@ -76,7 +76,9 @@ const deleteCategory = function(category) {
 }
 
 const editForm = async function(category) {
-    window.location.replace("#open");
+
+    const modal = document.querySelector(".modal");
+    modal.classList.add("open");
     document.getElementById("input-1").value = category.id;
     document.getElementById("input-2").value = category.title;
 
@@ -118,9 +120,16 @@ addBtn.addEventListener('click', async function(e) {
     console.log(data);
 
     postData(PATHAPI, data);
+    
+    window.location.reload();
 })
 
+async function addEvenClick() {
+    await getCategory(PATHAPI);
+    modalEvent();
+}
+
 window.onload = function() {
-    getCategory(PATHAPI);
+    addEvenClick();
     activeNav();
 }

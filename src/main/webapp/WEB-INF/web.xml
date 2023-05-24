@@ -90,6 +90,14 @@
   	<url-pattern>/admin/login/*</url-pattern>
   </servlet-mapping>
   <servlet>
+  	<servlet-name>AdminLogout Servlet</servlet-name>
+  	<servlet-class>btlweb.mvc.controller.admin.AdminLogoutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AdminLogout Servlet</servlet-name>
+  	<url-pattern>/admin/logout/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
   	<servlet-name>AdminHome Servlet</servlet-name>
   	<servlet-class>btlweb.mvc.controller.admin.AdminHomeController</servlet-class>
   </servlet>

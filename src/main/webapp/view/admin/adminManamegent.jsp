@@ -17,7 +17,7 @@
             <jsp:include page="./header/mainHeader.jsp" flush="true" />
             <!-- header end -->
             <div class="content">
-                <a href="#open">Thêm admin</a>
+                <a href="#">Thêm admin</a>
                 <table id="render">
                     
                 </table>
@@ -26,14 +26,16 @@
         </div>
     </div>
     <!-- modal layout -->
-    <div class="modal" id="open">
-        <a href="#" class="close"></a>
-        <div class="modal-overlay" class=""></div>
+    <div class="modal">
+        <div class="modal-overlay"></div>
         <div class="modal-body">
-            <div class="modal-inner">
-                <div class="admin-title">
-                    <h1>Thêm ADMIN</h1>
-                </div>
+            <i class="close-icon fa-solid fa-xmark"></i>
+            <div class="admin-title">
+                <h1>Thêm ADMIN</h1>
+            </div>
+            <div class="modal-content">
+                <div class="wrapper">
+                    
                 <form action="#" id="form-input">
                     <div class="form-group">
                         <label for="input-1">ID:</label>
@@ -74,11 +76,13 @@
                     <button class="Add" type="submit" id="add-btn">Thêm</button>
                     <button class="Add" type="submit" id="update-btn">Cập nhật</button>
                 </form>
+                </div>
             </div>
         </div>
     </div>
+
     <script src="${url}/js/app.js"></script>
-    <script src="${url}/js/adminManamegent.js"></script>
+    <script src="${url}/js/modal.js"></script>
     <script src="${url}/js/admin.js"></script>
 </body>
 </html>

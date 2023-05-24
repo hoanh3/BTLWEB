@@ -150,7 +150,32 @@ async function postData(url = "", data = {}) {
     return response.json();
 }
 
+async function getCategory(path) {
+    let option = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            origin: "http://127.0.0.1:5500/",
+        },
+    };
+    let data = await fetch(path, option);
+    let response = await data.json();
+
+    console.log(response);
+
+    const category_html = await response.map((category) => {
+        return `
+            <li class="navbar__item-product">
+                <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/shop?cate-id=${category.id}" class="navbar__product-link">${category.title}</a>
+            </li>
+        `;
+    });
+    document.querySelector(".category .collection").innerHTML = await category_html.join("");
+}
+
 window.onload = function() {
+    getCategory("http://localhost:8080/btlweb/category");
+
     let path = "http://localhost:8080/btlweb/product";
     let query = window.location.search;
     const urlParams = new URLSearchParams(query);

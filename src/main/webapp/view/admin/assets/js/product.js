@@ -3,6 +3,31 @@ var addBtn = document.getElementById('add-btn');
 var updateBtn = document.getElementById('update-btn');
 var PATHAPI = "http://localhost:8080/btlweb/product";
 
+var inputImg = document.querySelector(".modal .form-group .file");
+var previewImage = document.querySelector(".preview-img");
+console.log(inputImg);
+
+inputImg.addEventListener("change", function (e) {
+    var file = e.target.files[0];
+
+    console.log(file);
+
+    // Check if the file is an image
+    if (file && file.type.startsWith("image/")) {
+        // Create a FileReader object
+        var reader = new FileReader();
+
+        // Set the callback function when the file is loaded
+        reader.onload = function (event) {
+            // Set the source of the preview image
+            previewImage.src = event.target.result;
+        };
+
+        // Read the file as a data URL
+        reader.readAsDataURL(file);
+    }
+});
+
 const postData = async function (url = "", data = {}) {
     const response = await fetch(url, {
         method: "POST",
@@ -61,9 +86,9 @@ async function getProduct(path) {
             <td>${product.category.title}</td>
             <td>${product.price}</td>
             <td>${product.discount}</td>
-            <td>
-                <button class="act-btn edit-btn" onclick='editForm(${JSON.stringify(product)})'>Sửa</button> 
-                <button class="act-btn delete-btn" onclick='deleteProduct(${JSON.stringify(product)})'>Xóa</button>
+            <td class="action">
+                <button class="act-btn edit-btn" onclick = 'editForm(${JSON.stringify(product)})'>Sửa</button> 
+                <button class="act-btn delete-btn" onclick = 'deleteProduct(${JSON.stringify(product)})'>Xóa</button>
             </td>
         </tr>
         `;
@@ -88,7 +113,10 @@ const deleteProduct = function(product) {
 }
 
 const editForm = async function(product) {
-    window.location.replace("#open");
+
+    const modal = document.querySelector(".modal");
+    modal.classList.add("open");
+
     document.getElementById("input-0").value = product.id;
     document.getElementById("input-1").value = product.title;
     document.getElementById("input-2").value = product.category.id;
@@ -196,7 +224,13 @@ addBtn.addEventListener('click', async function(e) {
     postData(PATHAPI, data);
 })
 
+
+async function addEvenClick() {
+    await getProduct(PATHAPI);
+    modalEvent();
+}
+
 window.onload = function() {
-    getProduct(PATHAPI);
+    addEvenClick();
     activeNav();
 }

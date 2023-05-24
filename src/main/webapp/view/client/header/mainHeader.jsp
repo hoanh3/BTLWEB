@@ -52,7 +52,9 @@
                                 <i class="control-icon fa-solid fa-magnifying-glass"></i>
                             </div>
                             <div class="form-input">
-                                <input type="text" class="search-input" required placeholder="Search ..." />
+                                <form action="" id="form-search">
+                                    <input type="text" class="search-input" id="search-input" required placeholder="Search ..." />
+                                </form>
                                 <i class="close-icon fa-solid fa-xmark"></i>
                             </div>
                         </div>
@@ -91,7 +93,7 @@
                                 Shop
                                 <i class="fa-solid fa-chevron-down"></i>
                                 <ul class="navbar__list-product">
-                                    <li class="navbar__item-product">
+                                    <!-- <li class="navbar__item-product">
                                         <a href="${pageContext.request.contextPath}/shop?cate-id=1" class="navbar__product-link">T-SHIRTS</a>
                                     </li>
                                     <li class="navbar__item-product">
@@ -120,7 +122,7 @@
                                     </li>
                                     <li class="navbar__item-product">
                                         <a href="${pageContext.request.contextPath}/shop?cate-id=10" class="navbar__product-link">POLO</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </a>
                         </li>

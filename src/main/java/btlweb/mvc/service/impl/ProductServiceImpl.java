@@ -143,7 +143,8 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public int deleteProduct(int id) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub`
+		_productAvaiService.delete(id);
 		return _productDao.deleteProduct(id);
 	}
 
@@ -153,5 +154,11 @@ public class ProductServiceImpl implements ProductService{
 		for(Product product : products) {
 			System.out.println(product);
 		}
+	}
+
+	@Override
+	public int deleteProductByCategoryId(int cid) {
+		// TODO Auto-generated method stub
+		return _productDao.deletProductByCategoryId(cid);
 	}
 }

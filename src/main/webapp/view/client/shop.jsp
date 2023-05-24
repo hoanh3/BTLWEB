@@ -31,7 +31,7 @@
                                 <div class="category__heading">Danh mục</div>
                                 <div class="category__box">
                                     <ul class="collection">
-                                        <li class="navbar__item-product">
+                                        <!-- <li class="navbar__item-product">
                                             <a href="${pageContext.request.contextPath}/shop?cate-id=1" class="navbar__product-link">T-SHIRTS</a>
                                         </li>
                                         <li class="navbar__item-product">
@@ -60,7 +60,7 @@
                                         </li>
                                         <li class="navbar__item-product">
                                             <a href="${pageContext.request.contextPath}/shop?cate-id=10" class="navbar__product-link">POLO</a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </section>

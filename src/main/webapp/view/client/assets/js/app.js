@@ -122,4 +122,42 @@ async function getQuantity(url) {
     document.querySelector(".header__cart--notify").innerHTML = response.length;
 }
 
+async function getCategory(path) {
+    let option = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            origin: "http://127.0.0.1:5500/",
+        },
+    };
+    let data = await fetch(path, option);
+    let response = await data.json();
+
+    console.log(response);
+
+    const category_html = await response.map((category) => {
+        return `
+            <li class="navbar__item-product">
+                <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/shop?cate-id=${category.id}" class="navbar__product-link">${category.title}</a>
+            </li>
+        `;
+    });
+    document.querySelector(".navbar-item .navbar__list-product").innerHTML = await category_html.join("");
+}
+
 getQuantity(url);
+
+var formSearch = document.getElementById("form-search");
+
+formSearch.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    var inputSearch = document.getElementById("search-input").value;
+
+    window.location.replace(`${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/shop?search=${inputSearch}`);
+    console.log(inputSearch)
+})
+
+// window.onload = function () {
+    getCategory("http://localhost:8080/btlweb/category");
+// }

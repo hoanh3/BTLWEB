@@ -44,4 +44,11 @@ public class ProductAvaiServiceImpl implements ProductAvaiService{
 		_proProductSizeAvaliabitityDao.update(new ProductSize(0, sizeId, avai, productId));
 		return ;
 	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		_proProductSizeAvaliabitityDao.deleteByProductId(id);
+		return;
+	}
 }

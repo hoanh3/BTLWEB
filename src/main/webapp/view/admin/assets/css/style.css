@@ -115,11 +115,6 @@
     padding-left: 10px;
 }
 
-.Add {
-    margin: 16px 20px 20px;
-    border-radius: 5px;
-}
-
 .modal-inner .form-control {
     margin: 10px 20px;
     border: 1px solid #b3b3b3;
@@ -139,4 +134,18 @@
 
 .active {
     background-color: #32c4f0;
+}
+
+.action {
+    width: 110px;
+}
+
+.accept-btn {
+    background: #17c9ff;
+}
+
+.edit-btn,
+.accept-btn,
+.delete-btn {
+    width: 90px;
 }

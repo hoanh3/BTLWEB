@@ -40,7 +40,7 @@ async function getOrders(path) {
                         <td>${order.status}</th>
                         
                         <td class="action">
-                            <button class="act-btn edit-btn" onclick='showModal(${JSON.stringify(order)})'>Xem</button> 
+                            <button class="act-btn edit-btn" onclick = 'showModal(${JSON.stringify(order)})'>Xem</button> 
                             <button class="act-btn accept-btn" >Xác nhận</button>
                             <button class="act-btn delete-btn" >Xóa</button>
                         </td>
@@ -79,7 +79,7 @@ async function getOrderDetail(path) {
 
     const product_html = await response.map((detail) => {
         return `
-        <div class="product-info">
+        <div class="info-wrapper">
             <div class="product-img">
                 <img src="${detail.thumnailProduct}" alt="">
             </div>
@@ -89,23 +89,20 @@ async function getOrderDetail(path) {
                     <span>${detail.discount}đ</span>
                     <span>${detail.price}đ</span>
                 </div>
-                <div class="more">
-                    <span>${detail.num}</span>,
-                    <span>${detail.sizeName}</span>
-                </div>
+                <div class="size">Kích thước: ${detail.sizeName}</div>
+                <div class="quantity">Số lượng: ${detail.num}</div>
             </div>
         </div>
         `;
     });
-    document.querySelector(".modal-content .wrap-product").innerHTML = await product_html.join("");
+    document.querySelector(".modal-content .product-info").innerHTML = await product_html.join("");
 }
 
 
 
 function showModal(order) {
-    const modalBody = document.querySelector(".modal-body");
-    const closeBtn = document.querySelector(".close-icon");
     const modal = document.querySelector(".modal");
+	modal.classList.add("open");
     
     console.log(order);
 
@@ -118,25 +115,16 @@ function showModal(order) {
     modal.querySelector(".address span:nth-child(2)").innerHTML = `${order.district}`;
     modal.querySelector(".address span:nth-child(3)").innerHTML = `${order.city}`;
     
-	modal.classList.add("open");
-    closeBtn.onclick = () => {
-	    hideModal();
-	};
-	
-	modal.onclick = () => {
-	    hideModal();
-	};
-	
-	modalBody.onclick = (e) => {
-	    e.stopPropagation();
-	};
-	
-	function hideModal() {
-	    modal.classList.remove("open");
-	}
+}
+
+
+
+async function addEvenClick() {
+    await getOrders(PATHAPI);
+    modalEvent();
 }
 
 window.onload = function() {
-	getOrders(PATHAPI);
+	addEvenClick();
     activeNav();
 }

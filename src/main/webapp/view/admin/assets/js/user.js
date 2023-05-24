@@ -59,9 +59,9 @@ async function getUser(path) {
             <td>${user.streetAddress}</th>
             <td>${user.district}</th>
             <td>${user.city}</th>
-            <td>
-                <button class="act-btn edit-btn" onclick='editForm(${JSON.stringify(user)})'>Sửa</button> 
-                <button class="act-btn delete-btn" onclick='deleteProduct(${JSON.stringify(user)})'>Xóa</button>
+            <td class="action">
+                <button class="act-btn edit-btn" onclick = 'editForm(${JSON.stringify(user)})'>Sửa</button> 
+                <button class="act-btn delete-btn" onclick = 'deleteProduct(${JSON.stringify(user)})'>Xóa</button>
             </td>
         </tr>
         `;
@@ -87,7 +87,9 @@ const deleteProduct = function(user) {
 }
 
 const editForm = async function(user) {
-    window.location.replace("#open");
+
+    const modal = document.querySelector(".modal");
+    modal.classList.add("open");
     document.getElementById("input-1").value = user.id;
     document.getElementById("input-2").value = user.lastName;
     document.getElementById("input-3").value = user.firstName;
@@ -134,7 +136,12 @@ form.addEventListener('submit',async function(e) {
     
 })
 
+async function addEvenClick() {
+    await getUser(PATHAPI);
+    modalEvent();
+}
+
 window.onload = function() {
-    getUser(PATHAPI);
+    addEvenClick();
     activeNav();
 }

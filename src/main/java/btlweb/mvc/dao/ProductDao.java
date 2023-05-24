@@ -22,4 +22,5 @@ public interface ProductDao {
 	int insertProduct(Product product);
 	int updateProduct(Product product);
 	int deleteProduct(int id);
+	int deletProductByCategoryId(int cid);
 }

@@ -1,5 +1,4 @@
 
-
 function activeNav() {
     let pathInfo = window.location.pathname;
 	

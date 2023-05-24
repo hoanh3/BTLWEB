@@ -20,4 +20,5 @@ public interface ProductService {
 	int insertProduct(ProductDto product);
 	int updateProduct(ProductDto product, int pid);
 	int deleteProduct(int id);
+	int deleteProductByCategoryId(int cid);
 }
