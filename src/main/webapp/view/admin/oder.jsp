@@ -16,8 +16,7 @@
             <jsp:include page="./header/mainHeader.jsp" flush="true" />
             <!-- header end -->
             <div class="content">
-                <table id="render">
-                    
+                <table id="render-order">
                 </table>
             </div>
         </div>

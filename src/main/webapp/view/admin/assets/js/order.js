@@ -63,7 +63,7 @@ async function getOrders(path) {
                         <th>Trạng thái</th>
                         <th>Hành động</th>
                     </tr>`);
-    document.querySelector(".content #render").innerHTML = await product_html.join("");
+    document.querySelector(".content #render-order").innerHTML = await product_html.join("");
 }
 
 async function getOrderDetail(path) {
