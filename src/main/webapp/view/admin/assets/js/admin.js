@@ -11,7 +11,6 @@ const postData = async function (url = "", data = {}) {
         },
         body: JSON.stringify(data),
     });
-    console.log("response:", response);
     return response.json();
 }
 
@@ -23,7 +22,6 @@ async function putData(url = "", data = {}) {
         },
         body: JSON.stringify(data),
     });
-    console.log("response:", response);
     return response.json();
 }
 
@@ -34,7 +32,6 @@ async function deleteData(url = "", data = {}) {
             "Content-Type": "application/json",
         }
     });
-    console.log("response:", response);
     return response.json();
 }
 
@@ -47,7 +44,6 @@ async function getUser(path) {
     };
     let data = await fetch(path, option);
     let response = await data.json();
-    console.log({ response });
 
     const product_html = await response.map((user) => {
         return `
@@ -68,7 +64,7 @@ async function getUser(path) {
         `;
     });
     product_html.unshift(`<tr>
-        <th>Id</th>
+        <th class="admin-id">Id</th>
         <th>Họ</th>
         <th>Tên</th>
         <th>Email</th>
@@ -104,7 +100,6 @@ const editForm = async function(user) {
     let stt = 1;
     updateBtn.addEventListener('click', async function() {
         
-        console.log(stt++);
         let id = document.getElementById("input-1").value;
         let firstName = document.getElementById("input-2").value;
         let lastName = document.getElementById("input-3").value;
@@ -127,7 +122,6 @@ const editForm = async function(user) {
             password: password
         };
 
-        console.log(data);
 
         putData(PATHAPI + `/${user.id}`, data);
 
@@ -164,7 +158,6 @@ addBtn.addEventListener('click', async function(e) {
         password: password
     };
 
-    console.log(data);
 
     postData(PATHAPI, data);
     window.location.reload();

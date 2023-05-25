@@ -126,6 +126,7 @@ public class ProductApi extends HttpServlet{
 			String payload = buffer.toString();
 			
 			ProductDto productDto = _gson.fromJson(payload, ProductDto.class);
+//			System.out.println(productDto);
 			
 			_productService.insertProduct(productDto);
 			

@@ -90,14 +90,14 @@ public class GaleryDaoImpl implements GaleryDao{
 	}
 
 	@Override
-	public int insertGalery(Galery product) {
+	public int insertGalery(Galery galery) {
 		// TODO Auto-generated method stub
 	    int result = 0;
 	    try {
 	    	Connection connection = MySQLConnect.getConnection();
 	    	PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Galery(product_id, thumbnail) VALUES(?, ?)");
-	        preparedStatement.setInt(1, product.getProductId());
-	        preparedStatement.setString(2, product.getThumbnail());
+	        preparedStatement.setInt(1, galery.getProductId());
+	        preparedStatement.setString(2, galery.getThumbnail());
 	        result = preparedStatement.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -106,15 +106,15 @@ public class GaleryDaoImpl implements GaleryDao{
 	}
 
 	@Override
-	public int updateGalery(Galery product) {
+	public int updateGalery(Galery galery) {
 		// TODO Auto-generated method stub
 		int result = 0;
 		try {
 			Connection connection = MySQLConnect.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE galery SET product_id = ?, thumbnail = ? WHERE id = ?");
-			preparedStatement.setInt(1, product.getProductId());
-			preparedStatement.setString(2, product.getThumbnail());
-			preparedStatement.setInt(3, product.getId());
+			preparedStatement.setInt(1, galery.getProductId());
+			preparedStatement.setString(2, galery.getThumbnail());
+			preparedStatement.setInt(3, galery.getId());
 			result = preparedStatement.executeUpdate();
 		}
 		catch (SQLException e) {

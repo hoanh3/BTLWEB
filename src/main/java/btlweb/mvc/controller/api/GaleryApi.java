@@ -1,5 +1,6 @@
 package btlweb.mvc.controller.api;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -53,14 +54,60 @@ public class GaleryApi extends HttpServlet{
 			return ;
 		}
 		
-		int galeryId = Integer.parseInt(args[1]);
-		Galery galery = _galeryService.getGaleryById(galeryId);
-		if(galery == null) {
-			resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return ;
-		}
+		int pid = Integer.parseInt(args[1]);
+		List<Galery> galery = _galeryService.getGaleryByProductId(pid);
 		sendAsJson(resp, galery);
 		return ;
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String pathInfo = req.getPathInfo();
+		
+		if(pathInfo == null || pathInfo.equals("/")) {
+				StringBuffer buffer = new StringBuffer();
+				BufferedReader reader = req.getReader();
+				
+				String line = "";
+				while((line=reader.readLine()) != null) {
+					buffer.append(line);
+				}
+				
+				String payload = buffer.toString();
+				
+				Galery galery = _gson.fromJson(payload, Galery.class);
+				_galeryService.insertGalery(galery);
+				
+				sendAsJson(resp, galery);
+		} else {
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+		}
+		return;
+	}
+	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String pathInfo = req.getPathInfo();
+		
+		if(pathInfo == null || pathInfo.equals("/")) {
+				StringBuffer buffer = new StringBuffer();
+				BufferedReader reader = req.getReader();
+				
+				String line = "";
+				while((line=reader.readLine()) != null) {
+					buffer.append(line);
+				}
+				
+				String payload = buffer.toString();
+				
+				Galery galery = _gson.fromJson(payload, Galery.class);
+				_galeryService.updateGalery(galery);
+				
+				sendAsJson(resp, galery);
+		} else {
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+		}
+		return;
 	}
 	
 	@Override

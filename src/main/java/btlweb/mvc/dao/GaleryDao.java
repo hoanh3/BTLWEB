@@ -14,7 +14,7 @@ public interface GaleryDao {
 	int getNumOfGalery();
 	
 	//admin
-	int insertGalery(Galery product);
-	int updateGalery(Galery product);
+	int insertGalery(Galery galery);
+	int updateGalery(Galery galery);
 	int deleteGalery(int id);
 }

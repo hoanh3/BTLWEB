@@ -106,6 +106,32 @@
         </div>
     </div>
 
+    <!-- galery -->
+    <div class="gallery">
+        <div class="gallery-overlay"></div>
+        <div class="gallery-body">
+            <i class="close-icon fa-solid fa-xmark"></i>
+            <div class="gallery-title">
+                <h1>Thêm ảnh</h1>
+            </div>
+            <div class="gallery-content">
+                <div class="wrapper">
+                    <div class="form-group">
+                        <label class="name">Gallery1</label>
+                        <div class="box-thumb">
+                            <input type="file" multiple="multiple" class="file form-control" />
+                            <img src="" alt="" class="preview-img">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="Add" id="save-galery">Lưu</button>
+                    <button class="Add" id="add-galery">Thêm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="${url}/js/app.js"></script>
     <script src="${url}/js/modal.js"></script>
     <script src="${url}/js/product.js"></script>

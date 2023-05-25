@@ -7,7 +7,6 @@ async function deleteData(url = "", data = {}) {
             "Content-Type": "application/json",
         }
     });
-    console.log("response:", response);
     return response.json();
 }
 
@@ -20,7 +19,6 @@ async function getOrders(path) {
     };
     let data = await fetch(path, option);
     let response = await data.json();
-    console.log({ response });
 
     const product_html = await response.map((order) => {
         return `
@@ -75,7 +73,6 @@ async function getOrderDetail(path) {
     };
     let data = await fetch(path, option);
     let response = await data.json();
-    console.log({ response });
 
     const product_html = await response.map((detail) => {
         return `
@@ -104,7 +101,6 @@ function showModal(order) {
     const modal = document.querySelector(".modal");
 	modal.classList.add("open");
     
-    console.log(order);
 
     getOrderDetail(`http://localhost:8947/btlweb/order/${order.id}`);
 

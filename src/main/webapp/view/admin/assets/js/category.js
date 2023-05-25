@@ -11,7 +11,6 @@ const postData = async function (url = "", data = {}) {
         },
         body: JSON.stringify(data),
     });
-    console.log("response:", response);
     return response.json();
 }
 
@@ -23,7 +22,6 @@ async function putData(url = "", data = {}) {
         },
         body: JSON.stringify(data),
     });
-    console.log("response:", response);
     return response.json();
 }
 
@@ -34,7 +32,6 @@ async function deleteData(url = "", data = {}) {
             "Content-Type": "application/json",
         }
     });
-    console.log("response:", response);
     return response.json();
 }
 
@@ -47,7 +44,6 @@ async function getCategory(path) {
     };
     let data = await fetch(path, option);
     let response = await data.json();
-    console.log({ response });
 
     const product_html = await response.map((category) => {
         return `
@@ -85,7 +81,6 @@ const editForm = async function(category) {
     let stt = 1;
     updateBtn.addEventListener('click', async function() {
         
-        console.log(stt++);
         let id = document.getElementById("input-1").value;
         let title = document.getElementById("input-2").value;
 
@@ -94,7 +89,6 @@ const editForm = async function(category) {
             title: title
         };
 
-        console.log(data);
 
         putData(PATHAPI + `/${category.id}`, data);
 
@@ -117,7 +111,6 @@ addBtn.addEventListener('click', async function(e) {
         title: title
     };
 
-    console.log(data);
 
     postData(PATHAPI, data);
     

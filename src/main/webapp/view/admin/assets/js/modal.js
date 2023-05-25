@@ -2,8 +2,11 @@ function modalEvent() {
 
     const modal = document.querySelector(".modal");
     const modalBody = document.querySelector(".modal-body");
-    const closeBtn = document.querySelector(".close-icon");
     const add = document.querySelector(".slidebar .content > a");
+    const gallery = document.querySelector(".gallery");
+    const galleryBody = document.querySelector(".gallery-body");
+    const closeModalBtn = document.querySelector(".modal .close-icon");
+    const closeGalleryBtn = document.querySelector(".gallery .close-icon");
     
     if (add) {
         add.addEventListener("click", () => {
@@ -15,7 +18,7 @@ function modalEvent() {
         });
     }
     
-    closeBtn.onclick = () => {
+    closeModalBtn.onclick = () => {
         hideModal();
     };
     
@@ -31,4 +34,25 @@ function modalEvent() {
         modal.classList.remove("open");
     }
 
+    if (closeGalleryBtn) {
+        closeGalleryBtn.onclick = () => {
+            hideGallery();
+        };
+    }
+    
+    if (gallery) {
+        gallery.onclick = () => {
+            hideGallery();
+        };
+    }
+    
+    if (galleryBody) {
+        galleryBody.onclick = (e) => {
+            e.stopPropagation();
+        };
+    }
+    
+    function hideGallery() {
+        gallery.classList.remove("open");
+    }
 }
