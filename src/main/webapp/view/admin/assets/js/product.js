@@ -281,7 +281,7 @@ const editForm = async function(product) {
             category: category,
             price: price,
             discount: discount,
-            size: size,
+            size: (size == "") ? "0" : size,
             description: description,
             avai: avai,
             thumbnail: thumbnail

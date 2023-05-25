@@ -137,7 +137,9 @@ public class ProductServiceImpl implements ProductService{
 		product.setDescription(productDto.getDescription());
 		product.setUpdatedAt(date);
 		product.setCategory(_categoryService.getCategoryById(productDto.getCategory()));
-		_productAvaiService.update(productDto.getSize(), pid, productDto.getAvai());
+		if(productDto.getSize() != 0) {
+			_productAvaiService.update(productDto.getSize(), pid, productDto.getAvai());			
+		}
 		return _productDao.updateProduct(product);
 	}
 
