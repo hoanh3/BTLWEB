@@ -11,6 +11,7 @@ import btlweb.mvc.dao.impl.OrderDaoImpl;
 import btlweb.mvc.model.Item;
 import btlweb.mvc.model.Order;
 import btlweb.mvc.model.User;
+import btlweb.mvc.model.dto.TopCate;
 import btlweb.mvc.service.CartItemService;
 import btlweb.mvc.service.OrderDetailService;
 import btlweb.mvc.service.OrderService;
@@ -38,10 +39,6 @@ public class OrderServiceImpl implements OrderService{
 		return;
 	}
 	
-	public static void main(String[] args) {
-		OrderService orderService = new OrderServiceImpl();
-//		orderService.addOrder("test", "test", "test", "test", "test", "test", "test", "test", 2);
-	}
 
 	@Override
 	public List<Order> getAll() {
@@ -62,5 +59,48 @@ public class OrderServiceImpl implements OrderService{
 		_orderDetailService.deleteByOrderId(oid);
 		_orderDao.delete(oid);
 		return;
+	}
+
+	@Override
+	public int getRevenueInWeek() {
+		// TODO Auto-generated method stub
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DAY_OF_MONTH, -7);
+		java.sql.Date bound = new java.sql.Date(calendar.getTimeInMillis());
+		
+		return _orderDao.getRevenueInWeek(bound);
+	}
+	
+
+	public static void main(String[] args) {
+		OrderService orderService = new OrderServiceImpl();
+		System.out.println(orderService.getNumberOfOrderInWeek());
+//		orderService.addOrder("test", "test", "test", "test", "test", "test", "test", "test", 2);
+	}
+
+
+	@Override
+	public int getNumberOfOrderInWeek() {
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DAY_OF_MONTH, -7);
+		java.sql.Date bound = new java.sql.Date(calendar.getTimeInMillis());
+		
+		return _orderDao.getNumberOfOrderInWeek(bound);
+	}
+
+
+	@Override
+	public List<TopCate> getBestCategoryInWeek() {
+		// TODO Auto-generated method stub
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DAY_OF_MONTH, -7);
+		java.sql.Date bound = new java.sql.Date(calendar.getTimeInMillis());
+		return _orderDao.getBestCategoryInWeek(bound);
 	}
 }

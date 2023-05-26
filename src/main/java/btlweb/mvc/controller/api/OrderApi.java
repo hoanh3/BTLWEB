@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 
 import btlweb.mvc.model.Order;
 import btlweb.mvc.model.dto.OrderDetailDto;
+import btlweb.mvc.model.dto.ThongKeDto;
+import btlweb.mvc.model.dto.TopCate;
 import btlweb.mvc.service.OrderDetailService;
 import btlweb.mvc.service.OrderService;
 import btlweb.mvc.service.impl.OrderDetailServiceImpl;
@@ -48,6 +50,16 @@ public class OrderApi extends HttpServlet{
 		String pathInfo = req.getPathInfo();
 		
 		if(pathInfo == null || pathInfo.equals("/")) {
+			String mode = req.getParameter("mode");
+			if(mode != null && mode.equals("thongke")) {
+				int revenue = _orderService.getRevenueInWeek();
+				int numberOfOrders = _orderService.getNumberOfOrderInWeek();
+				List<TopCate> list = _orderService.getBestCategoryInWeek();
+				ThongKeDto thongKeDto = new ThongKeDto(revenue, numberOfOrders, list);
+				sendAsJson(resp, thongKeDto);
+				return;
+			}
+			
 			List<Order> orders = _orderService.getAll();
 			
 			sendAsJson(resp, orders);

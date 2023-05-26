@@ -13,6 +13,7 @@ import btlweb.mvc.dao.OrderDao;
 import btlweb.mvc.dbconnect.MySQLConnect;
 import btlweb.mvc.model.Order;
 import btlweb.mvc.model.User;
+import btlweb.mvc.model.dto.TopCate;
 
 public class OrderDaoImpl implements OrderDao{
 
@@ -123,5 +124,75 @@ public class OrderDaoImpl implements OrderDao{
 	        e.printStackTrace();
 	    }
 	    return ;
+	}
+
+	@Override
+	public int getRevenueInWeek(Date date) {
+		// TODO Auto-generated method stub
+		String query = "select sum(total_money) "
+				+ "from orders  "
+				+ "where order_date > ?;";
+		int total  = 0;
+		try {
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setDate(1, date);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+//				System.out.println(1);
+				total = resultSet.getInt(1);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return total;
+	}
+
+	@Override
+	public int getNumberOfOrderInWeek(Date date) {
+		// TODO Auto-generated method stub
+		String query = "select count(*) "
+				+ "from orders  "
+				+ "where order_date > ?;";
+		int total  = 0;
+		try {
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setDate(1, date);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+//				System.out.println(1);
+				total = resultSet.getInt(1);
+			}
+		} catch (Exception e) {
+		// TODO: handle exception
+		}
+		return total;
+	}
+
+	@Override
+	public List<TopCate> getBestCategoryInWeek(Date date) {
+		// TODO Auto-generated method stub
+		String query = "select c.title, sum(od.num) "
+				+ "from order_details as od, product as p, category as c, orders as o "
+				+ "where o.order_date > ? and od.product_id = p.id and p.category_id = c.id and o.id = od.order_id "
+				+ "group by c.title "
+				+ "limit 5;";
+		List<TopCate> lists  = new ArrayList<>();
+		try {
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setDate(1, date);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+//				System.out.println(1);
+				String title = resultSet.getString(1);
+				int num = resultSet.getInt(2);
+				lists.add(new TopCate(title, num));
+			}
+		} catch (Exception e) {
+		// TODO: handle exception
+		}
+		return lists;
 	}
 }

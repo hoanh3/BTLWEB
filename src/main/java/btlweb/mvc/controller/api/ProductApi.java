@@ -78,8 +78,8 @@ public class ProductApi extends HttpServlet{
 				} else if(filter.equals("bestseller")) {
 					try {
 						List<Product> products = _productService.getBestSeller();
-//						if(products.size() < 10) {
-//							products = _productService.getTopSale(path, galeryPath);
+//						if(products.size() < 1) {
+//							products = _productService.getTopSale();
 //						}
 						sendAsJson(resp, products);						
 					} catch (Exception e) {

@@ -328,7 +328,7 @@ public class ProductDaoImpl implements ProductDao{
 	
 	public static void main(String[] args) {
 		ProductDao abc = new ProductDaoImpl();
-		System.out.println(abc.insertProduct(new Product(0, "test", 0, 0, 0, "test", "test", new Date(0), new Date(0), new Category(1, "test"), new ArrayList<>())));
+		System.out.println(abc.getBestSeller());
 //		List<Product> productList = abc.searchProductByName("SWEATER");
 //		for (Product i : productList) {
 //		    System.out.println(i);

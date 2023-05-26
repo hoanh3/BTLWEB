@@ -41,6 +41,10 @@ public class ProductAvaiServiceImpl implements ProductAvaiService{
 	@Override
 	public void update(int sizeId, int productId, int avai) {
 		// TODO Auto-generated method stub
+		int avaiOld = _proProductSizeAvaliabitityDao.getSizeAvaiability(productId, sizeId);
+		if(avaiOld == -1) {
+			_proProductSizeAvaliabitityDao.addProductAvai(new ProductSize(0, sizeId, avai, productId));
+		}
 		_proProductSizeAvaliabitityDao.update(new ProductSize(0, sizeId, avai, productId));
 		return ;
 	}

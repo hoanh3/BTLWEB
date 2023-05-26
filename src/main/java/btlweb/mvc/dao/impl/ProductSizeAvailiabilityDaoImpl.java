@@ -47,7 +47,7 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 	@Override
 	public int getSizeAvaiability(int productId, int sizeId) {
 		// TODO Auto-generated method stub
-		int sizeAvai = 0;
+		int sizeAvai = -1;
 		String query = "SELECT `size_availability` FROM `product_size`"
 				+ "WHERE `product_id` = ? AND `size_id` = ?;";
 		try {
@@ -67,11 +67,7 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 	
 	public static void main(String[] args) {
 		ProductSizeAvaliabitityDao productSizeAvaliabitityDao = new ProductSizeAvailiabilityDaoImpl();
-		ProductService productService = new ProductServiceImpl();
-		List<Item> items = new ArrayList<>();
-		items.add(new Item(0, 2, productService.getProductById(1), 1, 9, 59000));
-		items.add(new Item(0, 2, productService.getProductById(1), 2, 9, 59000));
-		productSizeAvaliabitityDao.updateProductAvailiability(items);
+		System.out.println(productSizeAvaliabitityDao.getSizeAvaiability(10, 1));
 	}
 
 	@Override

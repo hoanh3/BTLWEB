@@ -51,6 +51,9 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> getBestSeller() {
 		// TODO Auto-generated method stub
 		List<Product> products = _productDao.getBestSeller();
+		if(products.size() < 1) {
+			products = _productDao.getTopSale();
+		}
 		for(Product product : products) {
 			product.setThumbnail(product.getThumbnail());
 			product.setGaleries(_galeryService.getGaleryByProductId(product.getId()));
@@ -152,10 +155,7 @@ public class ProductServiceImpl implements ProductService{
 
 	public static void main(String[] args) {
 		ProductService productService = new ProductServiceImpl();
-		List<Product> products = productService.getProductByCatId("1");
-		for(Product product : products) {
-			System.out.println(product);
-		}
+		System.out.println(productService.getBestSeller());
 	}
 
 	@Override

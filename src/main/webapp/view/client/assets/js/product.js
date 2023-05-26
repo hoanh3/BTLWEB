@@ -127,17 +127,17 @@ buyBtn.onclick = () => {
 let listSize = document.querySelectorAll(".size-select .size-option input");
 let available;
 
+document.querySelector(".btn-form .add-cart-btn").style.pointerEvents  = "none";
+document.querySelector(".btn-form .buy-btn").style.pointerEvents  = "none";
 for (size in listSize) {
     listSize[size].onchange = async function () {
         const path = `http://localhost:8080/btlweb/avai?pid=${document.getElementById("product-id").value}&sid=${this.value}`;
         available = await getAvailable(path);
         amount.innerHTML = "0";
-        if(available.avai == 0) {    
+        amountValue = 0;
+        if(Math.max(0, available.avai) == 0 || amount.innerHTML == 0) {    
             document.querySelector(".btn-form .add-cart-btn").style.pointerEvents  = "none";
             document.querySelector(".btn-form .buy-btn").style.pointerEvents  = "none";
-        } else {
-            document.querySelector(".btn-form .add-cart-btn").style.pointerEvents  = "auto";
-            document.querySelector(".btn-form .buy-btn").style.pointerEvents  = "auto";
         }
     };
 }
@@ -154,12 +154,24 @@ plusBtn.addEventListener("click", function () {
     // if (amountValue == available.avai) {
     //     return;
     // }
-    amountValue = Math.min(amountValue + 1, available.avai);
+    
+    amountValue = Math.min(amountValue + 1, Math.max(available.avai, 0));
+    if(amountValue > 0) {
+        document.querySelector(".btn-form .add-cart-btn").style.pointerEvents  = "auto";
+        document.querySelector(".btn-form .buy-btn").style.pointerEvents  = "auto";
+    }
     amount.innerText = amountValue;
 });
 
 minusBtn.addEventListener("click", function () {
     if (amountValue > 0) amountValue--;
+    if(amountValue > 0) {
+        document.querySelector(".btn-form .add-cart-btn").style.pointerEvents  = "auto";
+        document.querySelector(".btn-form .buy-btn").style.pointerEvents  = "auto";
+    } else {
+        document.querySelector(".btn-form .add-cart-btn").style.pointerEvents  = "none";
+        document.querySelector(".btn-form .buy-btn").style.pointerEvents  = "none";
+    }
     amount.innerText = amountValue;
 });
 

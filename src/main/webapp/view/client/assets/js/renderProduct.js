@@ -162,6 +162,7 @@ function showQuickView(product) {
 }
 
 function quickViewEvent(pid) {
+    document.querySelector(".modal .quick-view__add-cart").style.pointerEvents  = "none";
     let modal = document.querySelector(".modal");
     let modalContent = document.querySelector(".modal__content");
     let closeQuickViewBtn = document.querySelector(".quick-view__close-btn");
@@ -189,10 +190,9 @@ function quickViewEvent(pid) {
             const path = `http://localhost:8080/btlweb/avai?pid=${pid}&sid=${this.value}`;
             available = await getAvailable(path);
             amount.innerHTML = "0";
-            if(available.avai == 0) {    
+            amountValue = 0;
+            if(Math.max(0, available.avai) == 0 || amount.innerHTML == 0) {    
                 document.querySelector(".modal .quick-view__add-cart").style.pointerEvents  = "none";
-            } else {
-                document.querySelector(".modal .quick-view__add-cart").style.pointerEvents  = "auto";
             }
         };
     }
@@ -204,12 +204,20 @@ function quickViewEvent(pid) {
         // if (amountValue == available.avai) {
         //     return;
         // }
-        amountValue = Math.min(amountValue + 1, available.avai);
+        amountValue = Math.min(amountValue + 1, Math.max(available.avai, 0));
+        if(amountValue > 0) {
+            document.querySelector(".modal .quick-view__add-cart").style.pointerEvents  = "auto";
+        } 
         amount.innerText = amountValue;
     });
 
     minusBtn.addEventListener("click", function () {
         if (amountValue > 0) amountValue--;
+        if(amountValue > 0) {
+            document.querySelector(".modal .quick-view__add-cart").style.pointerEvents  = "auto";
+        } else {
+            document.querySelector(".modal .quick-view__add-cart").style.pointerEvents  = "none";
+        }
         amount.innerText = amountValue;
     });
 }
