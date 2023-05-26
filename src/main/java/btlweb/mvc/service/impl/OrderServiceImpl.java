@@ -23,13 +23,13 @@ public class OrderServiceImpl implements OrderService{
 	private ProductAvaiService _productAvaiService = new ProductAvaiServiceImpl();
 
 	@Override
-	public void addOrder(String firstName, String lastName, String email, String phoneNumber, String city, String district, String streetAddress, String note, int userID) {
+	public void addOrder(String firstName, String lastName, String email, String phoneNumber, String city, String district, String streetAddress, String note, int userID, int totalMoney) {
 		// TODO Auto-generated method stub
 		Date date = new Date();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		date = new java.sql.Date(calendar.getTimeInMillis());
-		Order order = new Order(0, firstName, lastName, email, phoneNumber, city, district, streetAddress, note, date, 0, _cartItemService.getTotalMoney(userID), userID);
+		Order order = new Order(0, firstName, lastName, email, phoneNumber, city, district, streetAddress, note, date, 0, totalMoney, userID);
 		int oid = _orderDao.addOrder(order);
 		List<Item> items = _cartItemService.getCart(userID);
 		_orderDetailService.addOrderLine(items, oid);
@@ -40,12 +40,27 @@ public class OrderServiceImpl implements OrderService{
 	
 	public static void main(String[] args) {
 		OrderService orderService = new OrderServiceImpl();
-		orderService.addOrder("test", "test", "test", "test", "test", "test", "test", "test", 2);
+//		orderService.addOrder("test", "test", "test", "test", "test", "test", "test", "test", 2);
 	}
 
 	@Override
 	public List<Order> getAll() {
 		// TODO Auto-generated method stub
 		return _orderDao.getAll();
+	}
+
+	@Override
+	public void updateStatus(int oid, int status) {
+		// TODO Auto-generated method stub
+		_orderDao.updateStatus(status, oid);
+		return;
+	}
+
+	@Override
+	public void delete(int oid) {
+		// TODO Auto-generated method stub
+		_orderDetailService.deleteByOrderId(oid);
+		_orderDao.delete(oid);
+		return;
 	}
 }

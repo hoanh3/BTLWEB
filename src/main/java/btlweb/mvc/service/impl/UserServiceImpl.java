@@ -1,9 +1,11 @@
 package btlweb.mvc.service.impl;
 
+import java.io.Console;
 import java.util.List;
 
 import btlweb.mvc.dao.UserDao;
 import btlweb.mvc.dao.impl.UserDaoImpl;
+import btlweb.mvc.hashalgorithm.BCrypt;
 import btlweb.mvc.model.Role;
 import btlweb.mvc.model.User;
 import btlweb.mvc.model.dto.AdminDto;
@@ -72,8 +74,9 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int insertAdmin(AdminDto adminDto) {
 		User user = new User(0, adminDto.getFirstName(), adminDto.getLastName(), adminDto.getEmail(),
-				adminDto.getPassword(), adminDto.getPhoneNumber(), adminDto.getCity(),
+				BCrypt.hashpw(adminDto.getPassword(), BCrypt.gensalt(12)) , adminDto.getPhoneNumber(), adminDto.getCity(),
 				adminDto.getDistrict(), adminDto.getStreetAddress(), new Role(1, "ADMIN"));
+//		System.out.println(user);
 		return _userDao.insertUser(user);
 	}
 }

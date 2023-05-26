@@ -31,9 +31,10 @@ public class CheckoutController extends HttpServlet{
 		String streetAddress = req.getParameter("street-address");
 		String note = req.getParameter("note");
 		String userId = req.getParameter("user-id");
+		int totalMoney = Integer.parseInt(req.getParameter("total-money"));
 		
 		try {
-			_orderService.addOrder(firstName, lastName, email, phoneNumber, city, district, streetAddress, note, Integer.parseInt(userId));
+			_orderService.addOrder(firstName, lastName, email, phoneNumber, city, district, streetAddress, note, Integer.parseInt(userId), totalMoney);
 			resp.sendRedirect(req.getContextPath() + "/home");
 		} catch (Exception e) {
 			// TODO: handle exception

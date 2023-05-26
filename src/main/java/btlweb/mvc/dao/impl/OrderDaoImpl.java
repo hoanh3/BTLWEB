@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,5 +90,38 @@ public class OrderDaoImpl implements OrderDao{
 		}
 		
 		return orders;
+	}
+
+	@Override
+	public void updateStatus(int status, int oid) {
+		// TODO Auto-generated method stub
+		String query = "UPDATE orders SET status = ? WHERE id = ?";
+		try {
+	    	Connection conn = MySQLConnect.getConnection();
+	        PreparedStatement ps = conn.prepareStatement(query);
+	        ps.setInt(1, status);
+	        ps.setInt(2, oid);
+	        int row = ps.executeUpdate();
+	    } catch (SQLException e) {
+	    	System.out.println("loi update order");
+	        e.printStackTrace();
+	    }
+	    return ;
+	}
+
+	@Override
+	public void delete(int oid) {
+		// TODO Auto-generated method stub
+		String query = "DELETE FROM orders WHERE id = ?";
+		try {
+	    	Connection conn = MySQLConnect.getConnection();
+	        PreparedStatement ps = conn.prepareStatement(query);
+	        ps.setInt(1, oid);
+	        int row = ps.executeUpdate();
+	    } catch (SQLException e) {
+	    	System.out.println("loi delete order");
+	        e.printStackTrace();
+	    }
+	    return ;
 	}
 }

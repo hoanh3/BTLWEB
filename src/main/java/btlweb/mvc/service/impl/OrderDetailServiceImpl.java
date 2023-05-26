@@ -36,4 +36,11 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 		}
 		return res;
 	}
+
+	@Override
+	public void deleteByOrderId(int oid) {
+		// TODO Auto-generated method stub
+		_orderDetailDao.deleteByOrderId(oid);
+		return;
+	}
 }

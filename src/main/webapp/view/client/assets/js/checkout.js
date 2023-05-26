@@ -54,6 +54,7 @@ async function render(url = "") {
     }
     document.querySelector(".total-subtotal .price").innerHTML = partition(priceStr).join(".") + "đ";
     document.querySelector(".total-price .price").innerHTML = partition(total).join(".") + "đ";
+    document.getElementById("total-money").value = total;
 }
 
 function start() {

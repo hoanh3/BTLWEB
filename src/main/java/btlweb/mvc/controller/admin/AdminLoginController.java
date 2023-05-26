@@ -47,6 +47,7 @@ public class AdminLoginController extends HttpServlet{
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			System.out.println("Loi admin login");
 		}
 	}

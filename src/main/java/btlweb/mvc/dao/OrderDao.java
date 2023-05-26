@@ -8,4 +8,6 @@ import btlweb.mvc.model.User;
 public interface OrderDao {
 	public int addOrder(Order order);
 	public List<Order> getAll();
+	void updateStatus(int status, int oid);
+	void delete(int oid);
 }

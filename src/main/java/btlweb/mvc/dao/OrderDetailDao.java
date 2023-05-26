@@ -9,4 +9,5 @@ public interface OrderDetailDao {
 	public void addOrderLine(List<Item> items, int oid);
 	
 	List<OrderDetail> getOrderDetailInOrder(int oid);
+	void deleteByOrderId(int oid);
 }

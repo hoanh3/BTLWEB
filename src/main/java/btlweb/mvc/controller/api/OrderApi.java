@@ -1,5 +1,6 @@
 package btlweb.mvc.controller.api;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -64,6 +65,54 @@ public class OrderApi extends HttpServlet{
 			return;
 		} else {
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+		}
+		return;
+	}
+	
+	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String pathInfo = req.getPathInfo();
+		
+		if(pathInfo == null || pathInfo.equals("/")) {
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		} else {
+			String[] splits = pathInfo.split("/");
+			if(splits.length == 2) {
+				int oid = Integer.parseInt(splits[1]);
+				_orderService.updateStatus(oid, 1);
+
+				sendAsJson(resp, splits);
+				return;
+			} else {
+				resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			}
+				
+		}
+		return;
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String pathInfo = req.getPathInfo();
+		
+		if(pathInfo == null || pathInfo.equals("/")) {
+			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		} else {
+			String[] splits = pathInfo.split("/");
+			if(splits.length == 2) {
+				int oid = Integer.parseInt(splits[1]);
+				_orderService.delete(oid);
+				
+				sendAsJson(resp, splits);
+				return;
+			} else {
+				resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			}
 		}
 		return;
 	}

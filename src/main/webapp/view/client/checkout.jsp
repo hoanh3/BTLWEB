@@ -247,7 +247,7 @@
                                                 <label for="note" class="form-label">Ghi chú đơn hàng</label>
                                                 <span class="form-message"></span>
                                             </div>
-                                            
+                                            <input type="hidden" id="total-money" name = "total-money"/>
                                             <input type="hidden" id="user-id" value="${sessionScope.user != null ? sessionScope.user.id : 0}" name = "user-id"/>
                                         </form>
 

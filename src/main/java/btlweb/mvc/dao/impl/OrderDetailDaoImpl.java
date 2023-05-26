@@ -76,4 +76,21 @@ public class OrderDetailDaoImpl implements OrderDetailDao{
 		System.out.println(orderDetailDao.getOrderDetailInOrder(8));
 	}
 
+	@Override
+	public void deleteByOrderId(int oid) {
+		// TODO Auto-generated method stub
+		String query = "DELETE FROM order_details WHERE order_id = ?;";
+		try {
+			Connection connection = MySQLConnect.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, oid);
+			int row = preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("loi delete order detail");
+		}
+		
+		return;
+	}
+
 }

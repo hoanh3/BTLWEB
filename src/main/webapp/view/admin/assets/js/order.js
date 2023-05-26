@@ -1,5 +1,16 @@
 var PATHAPI = "http://localhost:8080/btlweb/order";
 
+async function putData(url = "", data = {}) {
+    const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    });
+    return response.json();
+}
+
 async function deleteData(url = "", data = {}) {
     const response = await fetch(url, {
         method: "DELETE",
@@ -24,7 +35,6 @@ async function getOrders(path) {
         return `
         <tr>
                         <td>${order.id}</th>
-                        <td>${order.userId}</th>
                         <td>${order.lastName}</th>
                         <td>${order.firstName}</th>
                         <td>${order.email}</th>
@@ -35,19 +45,18 @@ async function getOrders(path) {
                         <td>${order.note == undefined ? "" : order.note}...</th>
                         <td>${order.orderDate}</th>
                         <td>${order.totalMoney}</th>
-                        <td>${order.status}</th>
+                        <td>${order.status == 0 ? "Chờ xác nhận" : "Đang giao hàng"}</th>
                         
                         <td class="action">
                             <button class="act-btn edit-btn" onclick = 'showModal(${JSON.stringify(order)})'>Xem</button> 
-                            <button class="act-btn accept-btn" >Xác nhận</button>
-                            <button class="act-btn delete-btn" >Xóa</button>
+                            <button class="act-btn accept-btn" onclick= 'confirm(${order.id})'>Xác nhận</button>
+                            <button class="act-btn delete-btn" onclick = 'deleteOrder(${order.id})'>Xóa</button>
                         </td>
                     </tr>
         `;
     });
     product_html.unshift(`<tr>
                         <th>ID</th>
-                        <th>Tài khoản user</th>
                         <th>Họ</th>
                         <th>Tên</th>
                         <th>Email</th>
@@ -95,7 +104,18 @@ async function getOrderDetail(path) {
     document.querySelector(".modal-content .product-info").innerHTML = await product_html.join("");
 }
 
+function confirm(oid) {
+    // console.log(oid);
+    putData(`${PATHAPI}/${oid}`);
+    window.location.reload();
+}
 
+function deleteOrder(oid) {
+    // console.log(oid);
+    deleteData(`${PATHAPI}/${oid}`);
+    window.location.reload();
+
+}
 
 function showModal(order) {
     const modal = document.querySelector(".modal");
@@ -107,6 +127,7 @@ function showModal(order) {
     modal.querySelector(".user-name span").innerHTML = `${order.lastName} ${order.firstName}`;
     modal.querySelector(".email span").innerHTML = `${order.email}`;
     modal.querySelector(".phone span").innerHTML = `${order.phoneNumber}`;
+    modal.querySelector(".note").innerHTML = `${order.note}`;
     modal.querySelector(".address span:nth-child(1)").innerHTML = `${order.streetAddress}`;
     modal.querySelector(".address span:nth-child(2)").innerHTML = `${order.district}`;
     modal.querySelector(".address span:nth-child(3)").innerHTML = `${order.city}`;
