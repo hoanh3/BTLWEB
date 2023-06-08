@@ -1,41 +1,16 @@
-// let func = function () {
-//     let totalPriceCheckout = Number(document.querySelector(".total-price").textContent.trim().slice(0, -5));
-//     let productItem = document.querySelectorAll(".cart-product__item");
-//     for (let i = 0; i < productItem.length; i++) {
-//         let plusBtn = productItem[i].querySelector(".quantity-select .plus-btn");
-//         let minusBtn = productItem[i].querySelector(".quantity-select .minus-btn");
-//         let amount = productItem[i].querySelector(".quantity-select .amount");
-//         let amountValue = productItem[i].querySelector(".amount").textContent.trim();
-//         plusBtn.addEventListener("click", function (e) {
-//             // update quantity
-//             e.preventDefault();
-//             amountValue++;
-//             amount.innerHTML = amountValue;
-//             // update total price one product
-//             let priceOneProduct = productItem[i].querySelector(".price-item span").textContent.trim();
-//             let totalPrice = amountValue * Number(priceOneProduct.slice(0, -5));
-//             productItem[i].querySelector(".total-price__item").innerHTML = totalPrice + ".000đ";
-//             // update total price all product
-//             totalPriceCheckout += Number(priceOneProduct.slice(0, -5));
-//             document.querySelector(".total-price").innerHTML = totalPriceCheckout + ".000đ";
-//         });
-//         minusBtn.addEventListener("click", function (e) {
-//             // update quantity
-//             e.preventDefault();
-//             if (amountValue > 1) {
-//                 amountValue--;
-//                 amount.innerHTML = amountValue;
-//                 // update total price one product
-//                 let priceOneProduct = productItem[i].querySelector(".price-item span").textContent.trim();
-//                 let totalPrice = amountValue * Number(priceOneProduct.slice(0, -5));
-//                 productItem[i].querySelector(".total-price__item").innerHTML = totalPrice + ".000đ";
-//                 // update total price all product
-//                 totalPriceCheckout -= Number(priceOneProduct.slice(0, -5));
-//                 document.querySelector(".total-price").innerHTML = totalPriceCheckout + ".000đ";
-//             }
-//         });
-//     }
-// }
+async function getAvailable(path) {
+    let option = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Origin: "http://127.0.0.1:5500/",
+        },
+    };
+    let data = await fetch(path, option);
+    let response = await data.json();
+    console.log({ response });
+    return response;
+}
 
 var PATHAPI = "http://localhost:8080/btlweb/cart";
 
@@ -56,12 +31,12 @@ async function render(url = "") {
         return `
             <div class="cart-product__item">
                 <div class="cart-product__img">
-                    <a href="product.html" class="cart-product__link">
+                    <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/product-detail?pid=${product.product.id}" class="cart-product__link">
                         <img src="${product.product.thumbnail}" alt="">
                     </a>
                 </div>
                 <div class="cart-product__info">
-                    <a href="product.html" class="cart-product__link">
+                    <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/product-detail?pid=${product.product.id}" class="cart-product__link">
                         <strong class="cart-product__name">${product.product.title}</strong>
                         <span class="cart-product__size">${product.size}</span>
                     </a>
@@ -153,20 +128,20 @@ function reduceItem(product) {
     let size = product.size;
     let quantity = product.num - 1;
 
-    if(quantity == 0) {
+    if(quantity <= 0) {
         removeItem(product);
-        window.location.reload();
     }
 
     let data = { pid: productId, uid: userId, num: quantity, size: size };
     putItem("http://localhost:8080/btlweb/cart", data);
-    location.reload();
-    // let url = `http://localhost:8080/btlweb/cart?uid=${userId}`;
-    // render(url);
+    window.location.reload();
 }
 
-function increaseItem(product) {
-    let amount = document.querySelector(".amount").getAttribute("max-data");
+async function increaseItem(product) {
+    const path = `http://localhost:8080/btlweb/avai?pid=${product.product.id}&sid=${product.size}`;
+    let available = await getAvailable(path);
+    let amount = available.avai;
+    console.log(available);
     console.log(amount);
     
     let productId = product.product.id;
@@ -176,15 +151,18 @@ function increaseItem(product) {
 
     let data = { pid: productId, uid: userId, num: quantity, size: size };
     putItem("http://localhost:8080/btlweb/cart", data);
-    location.reload();
-    // let url = `http://localhost:8080/btlweb/cart?uid=${userId}`;
-    // render(url);
+    window.location.reload();
 }
 
 function removeItem(product) {
     deleteItem(PATHAPI + `/${product.id}`);
     window.location.reload();
 }
+
+const formCart = document.getElementById("form-cart");
+formCart.addEventListener("submit", function (e) {
+	e.preventDefault()();
+})
 
 function start() {
     getItemCart();

@@ -98,15 +98,12 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 	        Connection connection = MySQLConnect.getConnection();
 	        String sql = "UPDATE `product_size` "
 	        		+ "SET "
-	        		+ "`size_id` = ?, "
-	        		+ "`size_availability` = ?, "
-	        		+ "`product_id` = ? "
-	        		+ "WHERE `id` = ?;";
+	        		+ "`size_availability` = ? "
+	        		+ "WHERE `size_id` = ? and `product_id` = ?;";
 	        PreparedStatement statement = connection.prepareStatement(sql);
-	        statement.setInt(1, productSize.getSizeId());
-	        statement.setInt(2, productSize.getSizeAvailability());
+	        statement.setInt(1, productSize.getSizeAvailability());
+	        statement.setInt(2, productSize.getSizeId());
 	        statement.setInt(3, productSize.getProductId());
-	        statement.setInt(4, productSize.getId());
 	        statement.execute();
 	    } catch (SQLException ex) {
 	        ex.printStackTrace();

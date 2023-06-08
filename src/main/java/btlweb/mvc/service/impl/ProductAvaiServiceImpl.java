@@ -28,8 +28,10 @@ public class ProductAvaiServiceImpl implements ProductAvaiService{
 	}
 	
 	public static void main(String[] args) {
+		ProductSizeAvaliabitityDao productSizeAvaliabitityDao = new ProductSizeAvailiabilityDaoImpl();
+//		productSizeAvaliabitityDao.update(new ProductSize(0, 1, 2, 3));
 		ProductAvaiService productAvaiService = new ProductAvaiServiceImpl();
-		System.out.println(productAvaiService.getProductSA(1, 1));
+		productAvaiService.update(1, 3, 1);
 	}
 
 	@Override

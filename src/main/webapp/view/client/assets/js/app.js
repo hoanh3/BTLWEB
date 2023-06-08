@@ -142,7 +142,15 @@ async function getCategory(path) {
             </li>
         `;
     });
+    const menu_html = response.map((category) => {
+        return `
+            <li class="menu__product">
+                <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/shop?cate-id=${category.id}" class="navbar__product-link">${category.title}</a>
+            </li>
+        `;
+    });
     document.querySelector(".navbar-item .navbar__list-product").innerHTML = await category_html.join("");
+    document.querySelector(".menu-mobile .list-product").innerHTML = await menu_html.join("");
 }
 
 getQuantity(url);

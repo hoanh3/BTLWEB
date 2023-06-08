@@ -10,63 +10,34 @@
         </div>
         <div class="account-text">
             <div class="account-login">
-                <a href="./login.html">Login</a>
+                <a href="${pageContext.request.contextPath}/login">Login</a>
             </div>
             <div class="account-register">
-                <a href="./login.html">Register</a>
+                <a href="${pageContext.request.contextPath}/login">Register</a>
             </div>
         </div>
     </div>
     <ul class="menu-mobile">
         <li class="menu-mobile__item">
-            <a href="./index.html" class="menu-mobile__link">Home</a>
+            <a href="${pageContext.request.contextPath}/" class="menu-mobile__link">Home</a>
         </li>
         <li class="menu-mobile__item">
-            <a href="./shop.html" class="menu-mobile__link">
+            <a href="${pageContext.request.contextPath}/shop" class="menu-mobile__link">
                 Shop
                 <i class="fa-solid fa-chevron-down"></i>
             </a>
             <ul class="list-product">
-                <li class="menu__product">
-                    <a href="#" class="menu__product-link">T-SHIRTS</a>
-                </li>
-                <li class="menu__product">
-                    <a href="#" class="menu__product-link">SHIRTS</a>
-                </li>
-                <li class="menu__product">
-                    <a href="#" class="menu__product-link">SWEATERS</a>
-                </li>
-                <li class="menu__product">
-                    <a href="#" class="menu__product-link">HOODIES</a>
-                </li>
-                <li class="menu__product">
-                    <a href="#" class="menu__product-link">SHORTS</a>
-                </li>
-                <li class="menu__product">
-                    <a href="#" class="menu__product-link">BAGS</a>
-                </li>
-                <li class="menu__product">
-                    <a href="#" class="menu__product-link">PERFUME</a>
-                </li>
-                <li class="menu__product">
-                    <a href="#" class="menu__product-link">JACKET</a>
-                </li>
-                <li class="menu__product">
-                    <a href="#" class="menu__product-link">ACCESSORIES</a>
-                </li>
-                <li class="menu__product">
-                    <a href="#" class="menu__product-link">POLO</a>
-                </li>
+                
             </ul>
         </li>
         <li class="menu-mobile__item">
-            <a href="./blog.html" class="menu-mobile__link">Blog</a>
+            <a href="${pageContext.request.contextPath}/blog" class="menu-mobile__link">Blog</a>
         </li>
         <li class="menu-mobile__item">
-            <a href="./contact.html" class="menu-mobile__link">Contact</a>
+            <a href="${pageContext.request.contextPath}/contact" class="menu-mobile__link">Contact</a>
         </li>
         <li class="menu-mobile__item">
-            <a href="./about.html" class="menu-mobile__link">About</a>
+            <a href="${pageContext.request.contextPath}/about" class="menu-mobile__link">About</a>
         </li>
         <li class="menu-mobile__item">
             <a href="#" class="menu-mobile__link">Group</a>

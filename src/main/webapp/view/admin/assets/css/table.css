@@ -131,7 +131,7 @@ body::-webkit-scrollbar {
 #render-order {
     /* margin-left: 500px; */
     position: relative;
-    left: 215px;
+    /* left: 215px; */
 }
 
 td {

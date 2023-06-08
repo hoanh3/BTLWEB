@@ -34,15 +34,10 @@ async function getOrders(path) {
     const product_html = await response.map((order) => {
         return `
         <tr>
-                        <td>${order.id}</th>
-                        <td>${order.lastName}</th>
-                        <td>${order.firstName}</th>
+                        <td>${order.lastName} ${order.firstName}</th>
                         <td>${order.email}</th>
                         <td>${order.phoneNumber}</th>
-                        <td>${order.city}</th>
-                        <td>${order.district}</th>
-                        <td>${order.streetAddress}</th>
-                        <td>${order.note == undefined ? "" : order.note}...</th>
+                        <td>${order.streetAddress}, ${order.district}, ${order.city}</th>
                         <td>${order.orderDate}</th>
                         <td>${order.totalMoney}</th>
                         <td>${order.status == 0 ? "Chờ xác nhận" : "Đang giao hàng"}</th>
@@ -56,15 +51,10 @@ async function getOrders(path) {
         `;
     });
     product_html.unshift(`<tr>
-                        <th>ID</th>
-                        <th>Họ</th>
                         <th>Tên</th>
                         <th>Email</th>
-                        <th>Sđt</th>
-                        <th>Tỉnh/Thành phố</th>
-                        <th>Quân/Huyện</th>
-                        <th>Phường/Đường/Xã</th>
-                        <th>Ghi chú</th>
+                        <th>SĐT</th>
+                        <th>Địa chỉ</th>
                         <th>Ngày đặt</th>
                         <th>Tổng tiền</th>
                         <th>Trạng thái</th>

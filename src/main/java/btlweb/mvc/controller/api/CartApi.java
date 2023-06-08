@@ -120,6 +120,8 @@ public class CartApi extends HttpServlet{
 			String payload = buffer.toString();
 			ItemDto itemDto = _gson.fromJson(payload, ItemDto.class);
 			
+//			System.out.println(itemDto);
+			
 			Product product = _productService.getProductById(itemDto.getPid());
 			
 			Item item = new Item(0, itemDto.getUid(), product, itemDto.getSize(), itemDto.getNum(), product.getDiscount());
