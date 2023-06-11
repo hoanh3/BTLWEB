@@ -28,29 +28,37 @@
                                         <i class="fa-solid fa-envelope"></i>
                                         <span>Để lại lời nhắn cho chúng tôi</span>
                                     </div>
-                                    <form action="" class="contact-form">
+                                    <form action="${pageContext.request.contextPath}/contact" class="contact-form" method="post">
                                         <div class="row">
                                             <div class="col l-6 m-6 c-12">
                                                 <div class="form-group">
-                                                    <input type="text" name="username" class="form-control" placeholder=" ">
-                                                    <label for="username" class="form-label">Họ và tên</label>
+                                                    <input type="text" name="last-name" class="form-control" placeholder=" ">
+                                                    <label for="last-name" class="form-label">Họ</label>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" name="username" class="form-control" placeholder=" ">
-                                                    <label for="username" class="form-label">Email</label>
+                                                    <input type="text" name="first-name" class="form-control" placeholder=" ">
+                                                    <label for="first-name" class="form-label">Tên</label>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" name="username" class="form-control" placeholder=" ">
-                                                    <label for="username" class="form-label">Số điện thoại</label>
+                                                    <input type="text" name="email" class="form-control" placeholder=" ">
+                                                    <label for="email" class="form-label">Email</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="phone-number" class="form-control" placeholder=" ">
+                                                    <label for="phone-number" class="form-label">Số điện thoại</label>
                                                 </div>
                                             </div>
                                             <div class="col l-6 m-6 c-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="subject" class="form-control" placeholder=" ">
+                                                    <label for="subject" class="form-label">Tiêu đề</label>
+                                                </div>
                                                 <div class="m-l-r-12">
-                                                    <textarea name="" placeholder="Viết lời nhắn"></textarea>
+                                                    <textarea name="note" placeholder="Viết lời nhắn"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col l-12 m-12 c-12">
-                                                <button class="send-btn">Gửi lời nhắn</button>
+                                                <button type="submit" class="send-btn">Gửi lời nhắn</button>
                                             </div>
                                         </div>
                                     </form>

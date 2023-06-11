@@ -39,4 +39,5 @@ function activeNav() {
 	let currentPage = pathInfo.substring(pathInfo.lastIndexOf("/") + 1);
 	
 	let nav = document.getElementById(currentPage).classList.add("active");
+    console.log(currentPage);
 }

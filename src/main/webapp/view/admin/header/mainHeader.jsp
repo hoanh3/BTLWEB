@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="${url}/css/style.css">
     <link rel="stylesheet" href="${url}/css/table.css">
     <link rel="stylesheet" href="${url}/css/modal.css">
+    <link rel="stylesheet" href="${url}/css/feedback.css">
 </head>
 <body>
     <%
@@ -58,5 +59,6 @@
                     <li id ="product"><a href="${pageContext.request.contextPath}/admin/product">Quản lý sản phẩm</a></li>
                     <li id ="category"><a href="${pageContext.request.contextPath}/admin/category">Quản lý danh mục</a></li>
                     <li id ="order"><a href="${pageContext.request.contextPath}/admin/order">Đơn hàng</a></li>
+                    <li id ="feedback"><a href="${pageContext.request.contextPath}/admin/feedback">Phản hồi khách hàng</a></li>
                 </ul>
             </div> 

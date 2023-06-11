@@ -63,7 +63,8 @@ public class OrderDaoImpl implements OrderDao{
 	public List<Order> getAll() {
 		List<Order> orders = new ArrayList<>();
 		
-		String query = "SELECT * FROM orders;";
+		String query = "select * from orders "
+				+ "order by order_date desc;";
 		
 		try {
 			Connection connection = MySQLConnect.getConnection();

@@ -112,7 +112,7 @@ function showModal(order) {
 	modal.classList.add("open");
     
 
-    getOrderDetail(`http://localhost:8947/btlweb/order/${order.id}`);
+    getOrderDetail(`${PATHAPI}/${order.id}`);
 
     modal.querySelector(".user-name span").innerHTML = `${order.lastName} ${order.firstName}`;
     modal.querySelector(".email span").innerHTML = `${order.email}`;
