@@ -1,3 +1,5 @@
+const sizeName = ["S", "M", "L"];
+
 async function getAvailable(path) {
     let option = {
         method: "GET",
@@ -38,7 +40,7 @@ async function render(url = "") {
                 <div class="cart-product__info">
                     <a href="${window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2))}/product-detail?pid=${product.product.id}" class="cart-product__link">
                         <strong class="cart-product__name">${product.product.title}</strong>
-                        <span class="cart-product__size">${product.size}</span>
+                        <span class="cart-product__size">${sizeName[product.size - 1]}</span>
                     </a>
                     <p class="price-item">
                         <span>${product.product.discount / 1000}.000đ</span>

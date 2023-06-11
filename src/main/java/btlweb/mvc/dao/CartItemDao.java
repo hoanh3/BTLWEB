@@ -7,7 +7,7 @@ import btlweb.mvc.model.Item;
 public interface CartItemDao {
 	List<Item> getCart(int userId);
 	
-	Item getItem(int userId, int productId);
+	Item getItem(int userId, int productId, int sizeId);
 	
 	void addItem(Item item);
 	void removeItem(int id);

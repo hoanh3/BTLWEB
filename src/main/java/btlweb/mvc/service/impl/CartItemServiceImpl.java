@@ -7,11 +7,13 @@ import btlweb.mvc.dao.impl.CartItemDaoImpl;
 import btlweb.mvc.model.Item;
 import btlweb.mvc.model.Product;
 import btlweb.mvc.service.CartItemService;
+import btlweb.mvc.service.ProductAvaiService;
 import btlweb.mvc.service.ProductService;
 
 public class CartItemServiceImpl implements CartItemService{
 	private CartItemDao _cartItemDao = new CartItemDaoImpl();
 	private ProductService _productService = new ProductServiceImpl();
+	private ProductAvaiService _proAvaiService = new ProductAvaiServiceImpl();
 
 	@Override
 	public List<Item> getCart(int userId) {
@@ -26,11 +28,13 @@ public class CartItemServiceImpl implements CartItemService{
 	@Override
 	public void addItem(Item item) {
 		// TODO Auto-generated method stub
-		Item itemInDB = _cartItemDao.getItem(item.getUserId(), item.getProduct().getId());
+		Item itemInDB = _cartItemDao.getItem(item.getUserId(), item.getProduct().getId(), item.getSize());
 		if(itemInDB == null) {
 			_cartItemDao.addItem(item);
 		} else {
 			int nNum = item.getNum() + itemInDB.getNum();
+			int maxNum = _proAvaiService.getProductSA(item.getProduct().getId(), item.getSize());
+			nNum = Math.min(maxNum, nNum);
 			item.setNum(nNum);
 			_cartItemDao.updateItem(item);
 		}

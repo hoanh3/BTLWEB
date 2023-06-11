@@ -1,3 +1,5 @@
+const sizeName = ["S", "M", "L"];
+
 async function render(url = "") {
     const data = await fetch(url, {
         method: "GET",
@@ -25,9 +27,9 @@ async function render(url = "") {
                 </td>
                 <td class="product-description">
                     <span class="product-name">${product.product.title}</span>
-                    <span class="product-size">${product.size}</span>
+                    <span class="product-size">${sizeName[product.size - 1]}</span>
                 </td>
-                <td class="product-price">${product.price}đ</td>
+                <td class="product-price">${product.price * product.num}đ</td>
             </tr>
         `;
     });

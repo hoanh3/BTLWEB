@@ -21,7 +21,7 @@ public class ProductSizeAvailiabilityDaoImpl implements ProductSizeAvaliabitityD
 	@Override
 	public void updateProductAvailiability(List<Item> items) {
 		// TODO Auto-generated method stub
-		String query = "UPDATE `btl`.`product_size` "
+		String query = "UPDATE `product_size` "
 				+ "SET "
 				+ "`size_availability` = ? "
 				+ "WHERE `product_id` = ? AND `size_id` = ?;";

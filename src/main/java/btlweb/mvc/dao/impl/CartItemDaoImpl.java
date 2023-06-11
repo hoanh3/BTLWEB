@@ -90,7 +90,7 @@ public class CartItemDaoImpl implements CartItemDao{
 	@Override
 	public void updateItem(Item item) {
 		// TODO Auto-generated method stub
-		String query = "UPDATE `btl`.`cart_item`\r\n"
+		String query = "UPDATE `cart_item`\r\n"
 				+ "SET\r\n"
 				+ "`num` = ?\r\n"
 				+ "WHERE `user_id` = ? AND  `product_id` = ? AND `size_id` = ?;\r\n";
@@ -157,16 +157,17 @@ public class CartItemDaoImpl implements CartItemDao{
 	}
 
 	@Override
-	public Item getItem(int userId, int productId) {
+	public Item getItem(int userId, int productId, int sizeId) {
 		Item item = null;
 		String query = "SELECT *  FROM `cart_item`"
-				+ "where `user_id` = ? and `product_id` = ?;";
+				+ "where `user_id` = ? and `product_id` = ? and `size_id` = ?;";
 
 	    try {
 	    	Connection connection = MySQLConnect.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, userId);
 			preparedStatement.setInt(2, productId);
+			preparedStatement.setInt(3, sizeId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 	        while (resultSet.next()) {
